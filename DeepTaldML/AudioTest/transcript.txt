@@ -1,37 +1,13 @@
 
-CLINICIAN 0:00:02 0:00:06
-Allora, cosa vuolevi fare da grande quando eri giovane? 
-PATIENT 0:00:08 0:00:09
-Volevo fare un militare. 
-CLINICIAN 0:00:10 0:00:13
-E per quanto tempo hai desiderato di fare un militare? 
-PATIENT 0:00:14 0:00:20
-Fina che non ho fatto le scuole medie. 
-CLINICIAN 0:00:22 0:00:24
-Ok, e adesso ti piacerebbe ancora farlo? 
-PATIENT 0:00:25 0:00:38
-L'ho fatto il militare di volontario per 6 anni nell'esersito. 
-CLINICIAN 0:00:40 0:00:40
-Come è stato? 
-PATIENT 0:00:41 0:00:46
-L'anno trovò meglio a fare un operatorio, un operatorio in neurologia. 
-CLINICIAN 0:00:49 0:00:51
-Se potessi andare per il difficile 17. Ok. Se potessi andare ovunque nel mondo, dove andresti? 
-PATIENT 0:01:00 0:01:01
-Dove andrei? Una sola località negli Stati Uniti. 
-CLINICIAN 0:01:10 0:01:11
-Perché? 
-PATIENT 0:01:18 0:01:23
-Per frequenti di grattaccia e di potenti blu-flee. 
-CLINICIAN 0:01:26 0:01:30
-Che cosa faresti se avessi il potere dell'invisibilità per un giorno? 
-PATIENT 0:01:32 0:01:32
-Che cosa farei? Il potere dell'invisibilità? E non lo so. 
-CLINICIAN 0:01:52 0:01:57
-E se invece potessi essere un personaggio di un film o di un libro? Chi saresti? Sì. 
-PATIENT 0:02:06 0:02:08
-Il primatore? 
-CLINICIAN 0:02:09 0:02:10
-Il personaggio. Sì. 
-PATIENT 0:02:12 0:02:13
-Il personaggio? Il dottore? 
+CLINICIAN 0:00:00 0:00:03
+Qual è il tuo libro preferito? Ce l'hai? 
+PATIENT 0:00:04 0:00:08
+A me di solito piacciono i libri quelli lì sull'orrore. Libri horror, thriller, gialli. Mi piacciono un sacco. Tipo, una volta ho letto un libro a sfondo religioso, si chiama il Vangelo, secondo Satano. Mi è piaciuto molto proprio il tipo di scrittura, come scrivevo, fluiva molto. Mi è piaciuto particolarmente. Sennò mi piacciono i libri quelli li per bambini, gli atlanti, i libri di scienze. Ad esempio io da piccola leggevo Geronimo Stilton, che mi piaceva molto. Però di solito io non leggo, da piccola leggevo di più. Adesso ci sai internet. 
+CLINICIAN 0:01:02 0:01:05
+Nei libri di Geronimo Stilton c'erano le parole quelle? 
+PATIENT 0:01:05 0:01:14
+Sì, erano molto divertenti. Io il primo libro che ho preso, aspetta qual era? La famiglia Tene Brax. Geronimo Stilton è la famiglia Tene Brax. Mi piaceva molto. Poi nel Regno della Fantasia sempre Geronimo Stilton. Mi ho comprato i due. Erano molto belli. Si sentivano tutte le puzze, i profumi, ogni regno, il suo profumo, molto bello. 
+CLINICIAN 0:01:43 0:01:45
+Hai una pizza preferita? 
+PATIENT 0:01:47 0:01:51
+Allora, in particolare mi piace la pizza senza la mozzarella. Quella lì in Apoletana, però senza lì. Io sono fissata con la dieta, essere vegetariana, cos'è il genere. La mozzarella ha sempre un formaggio che non mangio molto. Mangio alcuni tipi di pizza, ma che mi piacciono sono quelle con il pomodoro frisco, con la rucola, il pomodoro frisco e il parmigiano. Quello pure mi piace un sacco. Però, ad esempio, io non mangio carne, quindi scelgo questo tipo di pizza. 
