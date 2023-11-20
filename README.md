@@ -1,0 +1,2 @@
+# DeepTald
+Progetto di Emad
