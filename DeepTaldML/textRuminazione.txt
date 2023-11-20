@@ -1,0 +1,219 @@
+Ruminazione
+
+23. Ruminazione (s)
+
+Il PATIENT è costantemente occupato con argomenti per lo più spiacevoli. Questi pensieri sono incentrati sugli stessi argomenti senza portare a nessuna conclusione. Per il PATIENT è difficile interrompere questi processi di pensiero negativo. La ruminazione è vissuta come sgradevole e in alcuni casi anche tortuosa.
+
+Esempio:
+
+“Non posso più pagare l'affitto. Sono sempre preoccupato di non poter pagare le bollette. Non so davvero come possa andare avanti. Non so pensare ad altro".
+Domande:
+"Ti senti come se dovessi pensare a certi argomenti più spesso di quanto facevi prima?"
+"A volte ti senti spinto a pensare a un argomento in particolare, anche se vuoi pensare a qualcos'altro, o vuoi addormentarti?"
+
+
+Fenomeni differenziati:
+Pensiero ristretto (o)
+Povertà di pensiero (s)
+
+La valutazione:
+
+0 = non presente
+1 = dubbioso
+2 = lieve: si verifica ruminazione e il PATIENT è leggermente colpito, ma è ancora in grado di gestire le sue responsabilità quotidiane.
+3 = moderato: Il PATIENT è turbato dalle sue ruminazioni. Le sue responsabilità quotidiane e il suo benessere ne risentono.
+4 = grave: Il PATIENT è notevolmente tormentato dalle sue ruminazioni. Le sue responsabilità quotidiane e il suo benessere sono gravemente compromessi.
+
+0 = non presente 
+
+"Ieri è andata a lavoro?"
+"Certo, ho lavorato tutta la giornata. Ci sono stati molti problemi a lavoro ma alla fine io e i miei colleghi abbiamo risolto tutto.",
+"Problemi di che tipo?",
+"È stato difficile gestire dei clienti ma poi è andato tutto bene, il mio team riesce sempre a superare tutto.",
+"Si trova bene nel suo team?",
+"Certo, siamo un bel gruppo di lavoro."
+
+1 = dubbioso
+
+"Com’è stato questo fine settimana?", 
+"Non male, o meglio, era iniziato male perché mi sentivo agitato, anche un po' stanco. Poi, è venuta a trovarmi mia cugina e mi sono ripresa. Abbiamo parlato di tante cose e mi sono tranquillizzata.",
+"Cosa la faceva sentire agitata?",
+"Non lo so, non mi sentivo molto bene ed ero abbastanza preoccupata per la mia salute ma mia cugina mi ha aiutata.", 
+"E ora come sta?",
+"Meglio, dopo rivedo mia cugina per un caffè per distrarmi un po'" 
+
+
+2 = lieve
+Si verifica ruminazione e il PATIENT è leggermente colpito, ma è ancora in grado di gestire le sue responsabilità quotidiane.
+
+"Ieri notte ho fatto molti incubi, ho sognato la mia morte più volte con un incidente stradale. Sono stata molto male e mi sono svegliata con la paura di uscire di casa.", 
+"Alla fine, è riuscito ad uscire?", 
+"Si, di mattina presto sono andato a fare la spesa per mia figlia ma sono stato così male che ho preso l’autobus. Avevo troppa paura di uscire di casa con la macchina…",
+"Durante la giornata si è ripreso?", 
+"Si, ho avuto tante cose da fare e sono stata meglio. Mia figlia è piccola, ha bisogno di me quindi mi faccio forza per prendermi cura di lei. Ogni tanto ci ripensavo, mi preoccupavo ma poi mi riprendevo per mia figlia." 
+
+3 = moderato
+Il PATIENT è turbato dalle sue ruminazioni. Le sue responsabilità quotidiane e il suo benessere ne risentono.
+
+"Penso spesso alla mia malattia. Quasi ogni giorno mi sveglio e mi preoccupo perché ho paura di ammalarmi ancora di più.", 
+"Riesce a non pensarci ogni tanto?", 
+"È difficile…in alcuni giorni riesco a lavorare, altri giorni no perché sento di essere molto malato.", 
+"Anche se prova a pensare ad altro, non ci riesce?", 
+"Dipende…a volte dormo per non pensarci, altre volte mi sveglio perché inizio a sentire dei dolori in ogni parte del corpo", 
+"Si sente turbato?", 
+"Mi sento molto turbato, anche se lavoro o faccio sport ci penso spesso e il mio umore si rovina d’improvviso. Ci penso spesso" 
+
+4 = grave
+Il PATIENT è notevolmente tormentato dalle sue ruminazioni. Le sue responsabilità quotidiane e il suo benessere sono gravemente compromessi.
+  
+"Non so come fare. Penso costantemente al fatto di rimanere solo, senza nessuno. Ho paura di essere abbandonato",
+"Perché ti preoccupa così tanto? Ti limita nelle azioni quotidiane?",
+"Ho paura che mi abbandonano, non so perché né come risolvere. Non riesco nemmeno a dormire. Ho paura.", 
+"Non pensi ad altro?",
+"No, ho paura che mi lasciano solo. Ho paura."
+
+
+
+
+corpus = [
+    "SPEAKER 1: A cosa pensi di solito durante la giornata?",
+    "SPEAKER 2: Penso spesso alla mia malattia e a quanto mi faccia stare male", 
+    "SPEAKER 2: Quasi ogni giorno mi sveglio ed ho paura di ammalarmi ancora di più", 
+    "SPEAKER 1: Qual è un esperienza in particolare che ricordi della tua infanzia?", 
+    "SPEAKER 2: Quando ero piccolo ricordo i pomeriggi passati a casa di mia nonna", 
+    "SPEAKER 1: Un ricordo in particolare?", 
+    "SPEAKER 2: Sento che la malattia cresce di giorno in giorno e non so veramente come fare",
+    "SPEAKER 2: Non riesco a stare bene, passo le mie giornate pensando solo a questo",
+    "SPEAKER 1: Hai qualche passione?",
+    "SPEAKER 2: Di solito mi piace leggere",
+    "SPEAKER 2: Anche se nell'ultimo periodo anche se provo a distrarmi leggendo, finisco sempre a pensare alla mia malattia" 
+]
+
+corpus = [
+
+    "SPEAKER 1: Come hai passato questo fine settimana?", Ne
+    "SPEAKER 2: Sono stata a casa, mi sentivo agitata e anche un pò stanca", N
+    "SPEAKER 2: Poi, è venuta a trovarmi mia cugina e mi sono ripresa, abbiamo parlato di tante cose insieme", P
+    "SPEAKER 1: Cosa ti faceva sentire agitata?", Ne
+    "SPEAKER 2: Non lo so, non mi sentivo molto bene ed ero abbastanza preoccupata per la mia salute", N
+    "SPEAKER 2: Appena è arrivata mia cugina sono stata meglio", P
+    "SPEAKER 1: Ora come sta?", Ne
+    "SPEAKER 2: Ora sto molto meglio", P
+    "SPEAKER 2: Dopo rivedo mio cugina per prendere un caffè insieme", Ne
+    "SPEAKER 1: Le piace leggere?", Ne
+    "SPEAKER 2: Si mi piace tanto leggere, lo faccio spesso con mia cugina, di solito leggiamo insieme"
+
+]
+
+
+
+
+----------------------------------------------------------------- TEST ----------------------------------------------------------------- 
+
+
+#Ruminazione Grave -> 3
+
+corpus = [
+
+    CLINICIAN 
+    A cosa pensi di solito durante la giornata?,
+    PATIENT 
+    Penso spesso alla mia malattia e a quanto mi faccia stare male, 
+    PATIENT
+    Quasi ogni giorno mi sveglio ed ho paura di ammalarmi ancora di più, 
+    CLINICIAN 
+    Hai qualche ricordo di quando eri piccolo?, 
+    PATIENT 
+    Quando ero piccolo ricordo i pomeriggi passati a casa di mia nonna, 
+    CLINICIAN 
+    Un ricordo in particolare?, 
+    PATIENT 
+    Sento che la malattia cresce di giorno in giorno e questo non mi fa vivere bene,
+    PATIENT 
+    Non riesco a stare bene, passo le mie giornate pensando solo a questo,
+    CLINICIAN
+    Pratichi qualche sport?,
+    PATIENT 
+    La malattia continua giorno per giorno a farmi sentire sempre più debole
+
+]
+
+#Ruminazione quasi assente -> 1
+
+corpus = [
+
+    CLINICIAN
+    Cos'hai fatto questo fine settimana?,
+    PATIENT
+    Non ho fatto nulla questo fine settimana, sono stata a casa perchè ero molto agitata e stanca,
+    PATIENT
+    Poi, è venuta a trovarmi mia cugina e mi sono ripresa, abbiamo parlato di tante cose insieme,
+    CLINICIAN
+    Perchè eri agitata?,
+    PATIENT
+    Non lo so, non mi sentivo molto bene, avevo un forte mal di testa ed ero molto preoccupata,
+    CLINICIAN
+    So che hai un cane, me ne puoi parlare?,
+    PATIENT
+    Si è un labrador, è un cane molto giocherellone e lo accudisco io tutti i giorni,
+    PATIENT
+    Anche se nell'ultimo periodo mi sento tanto agitata e quindi non ci gioco spesso,
+    CLINICIAN
+    Pratichi qualche sport o hai qualche hobby in particolare?,
+    PATIENT
+    Un mio hobby è la lettura, lo faccio spesso con mia cugina, di solito leggiamo insieme
+
+]
+
+
+--------------------- Inglese -------------------------------------------
+
+corpus = [
+
+    CLINICIAN 
+    What do you usually think about during the day?,
+    PATIENT 
+    I often think about my illness and how bad it makes me feel, 
+    PATIENT
+    Almost every day I wake up and I'm afraid of getting even sicker, 
+    CLINICIAN 
+    Do you have any memories of when you were little?, 
+    PATIENT 
+    When I was little I remember the afternoons spent at my grandmother's house,
+    CLINICIAN 
+    A memory in particular?, 
+    PATIENT 
+    I feel that the disease is growing day by day and this does not make me live well,
+    PATIENT 
+    I can't feel good, I spend my days just thinking about this,
+    CLINICIAN
+    Did you practise any sport?,
+    PATIENT 
+    The disease continues day by day to make me feel weaker and weaker
+
+]
+
+corpus = [
+
+    CLINICIAN
+    What did you do this weekend?,
+    PATIENT
+    I didn't do anything this weekend, I stayed at home because I was very restless and tired,
+    PATIENT
+    Then, my cousin came to see me and I recovered, we talked about many things together,
+    CLINICIAN
+    Why were you upset?
+    PATIENT
+    I don't know, I didn't feel very well, I had a bad headache and I was very worried,
+    CLINICIAN
+    I know you have a dog, can you tell me about it?,
+    PATIENT
+    Yes, he is a labrador, he is a very playful dog and I take care of him every day,
+    PATIENT
+    Even though lately I've been feeling very agitated and therefore I don't play it often,
+    CLINICIAN
+    Do you play any sports or do you have any particular hobbies?,
+    PATIENT
+    A hobby of mine is reading, I often do it with my cousin, we usually read together
+
+]

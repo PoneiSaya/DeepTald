@@ -1,0 +1,36 @@
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+[2023-11-02 17:26:48,374] ERROR in app: Exception on /start_transcription [POST]
+Traceback (most recent call last):
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "c:\Users\Benedetto\Desktop\Back_End_Tald\routes.py", line 73, in start_transcription
+    segments, duration, result, word_count, n_words_doctor, n_words_patient, first_speaker = transcribe_audio(path)
+  File "c:\Users\Benedetto\Desktop\Back_End_Tald\audio_transcript.py", line 72, in transcribe_audio
+    model = whisper.load_model(model_size, device = 'cuda')
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\whisper\__init__.py", line 154, in load_model
+    return model.to(device)
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\torch\nn\modules\module.py", line 1160, in to
+    return self._apply(convert)
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\torch\nn\modules\module.py", line 810, in _apply
+    module._apply(fn)
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\torch\nn\modules\module.py", line 810, in _apply
+    module._apply(fn)
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\torch\nn\modules\module.py", line 810, in _apply
+    module._apply(fn)
+  [Previous line repeated 2 more times]
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\torch\nn\modules\module.py", line 833, in _apply
+    param_applied = fn(param)
+  File "C:\Users\Benedetto\Desktop\Back_End_Tald\newenv\lib\site-packages\torch\nn\modules\module.py", line 1158, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 16.00 MiB. GPU 0 has a total capacty of 4.00 GiB of which 0 bytes is free. Of the allocated memory 3.46 GiB is allocated by PyTorch, and 4.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+127.0.0.1 - - [02/Nov/2023 17:26:48] "POST /start_transcription HTTP/1.1" 500 -

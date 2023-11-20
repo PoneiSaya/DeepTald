@@ -1,0 +1,366 @@
+---Perseveranza---
+
+corpus = [
+    "Che ti piace fare?",
+    "Adoro andare a cavallo, mi rilassa",
+    "Mi piace andare a mangiare la pizza",
+    "che bello galoppare sul cavallo",
+    "conosco un tizio che ha un maneggio di cavalli",
+    "ci vado spesso",
+    "I prati sono verdi e pieni di fiori e piante",
+    "Il mio matrimonio, è stato bello",
+    "Poi siamo andati in città e abbiamo girato su una Mercedes",
+    "Comunque bellissimo il cavallo",
+    "Troppo bello il mio matrimonio"
+]
+
+
+corpus = ['La mia passione per la musica mi ha spinto a imparare a suonare la chitarra',
+'Mi piace cucinare piatti nuovi e sperimentare sapori diversi',
+'Non vedo ora di andare in vacanza al mare e rilassarmi sulla spiaggia',
+'Ho sempre sognato di viaggiare per il mondo e scoprire culture diverse',
+'La montagna è il mio posto preferito, amo passeggiare tra i boschi e godere della natura',
+'Sono appassionato di fotografia e mi piace catturare momenti speciali con la mia macchina fotografica',
+'Il cinema è la mia grande passione, adoro guardare film di ogni genere',
+'Mi piace leggere libri di fantasia e viaggiare con la mente in mondi immaginari',
+'La cucina italiana è la mia preferita, adoro preparare pasta fatta in casa e piatti tradizionali',
+'Sono sempre stato interessato alla tecnologia e mi piace sperimentare nuovi dispositivi'
+]
+
+
+corpus = [
+    "Quale pizza mangi di solito?",
+    "Di solito mangio la margherita, mi piace il sapore che ha",
+    "Anche la pizza con le patatine è molto buona",
+    "Qual è il tuo sport preferito?",
+    "Anche se pensandoci anche la diavola è una pizza che mangio spesso",
+    "Tifi qualche squadra di calcio?",
+    "La diavola è una pizza particolare perchè ha il salame piccante sopra che è molto buono"
+
+]
+
+corpus = [
+    "Qual è il ricordo più bello che hai della tua infanzia?",
+    "Ricordo che un giorno in bicicletta caddi e mia mamma corse verso di me per abbracciarmi e consolarmi con un gelato",
+    "A che gusto era il gelato?",
+    "Mia mamma mi abbracciò molto, ricordo che odorava tantissimo",
+    "E il gelato? Era a cioccolato?"
+    "Il suo profumo era quasi un profumo di rosa"
+]
+
+corpus = [
+    "SPEAKER 2: Ieri ho incontrato un amico che non vedevo da molto tempo, ci siamo abbracciati."
+    "SPEAKER 1: E oggi come sta?"
+    "SPEAKER 2: Non ricordo bene come si chiama però ieri ho incontrato questa persona e quando ci siamo visti ci siamo abbracciati."
+    "SPEAKER 1: Ho capito. E oggi invece come si sente?"
+    "SPEAKER 2: Non lo so...questo amico forse ha fatto le scuole con me...l'ho incontrato ieri...ci siamo abbracciati. Michele forse si chiama Michele"
+    "SPEAKER 1: Ed è stato bello incontrare Michele?"
+    "SPEAKER 2: Si è stato molto bello…quanto ci siamo abbracciati forte"
+]
+
+corpus = [
+    "Qual è stato il momento che ricordi meglio?",
+    "Il mio matrimonio è la cosa che ricordo meglio",
+    "Ho adorato passeggiare nei campi, ho visto tanti animali e tante piante. Abbiamo mangiato i frutti dall'albero.",
+    "che bello il mio matrimonio",
+    "Il paesaggio era molto suggestivo, ho fatto delle foto ma non sono uscite benissimo perché la luce era scarsa",
+]
+
+corpus = [
+    "SPEAKER 1: Quale pizza mangi di solito?",
+    "SPEAKER 2: Di solito mangio la margherita, mi piace il sapore che ha",
+    "SPEAKER 2: Anche quella con le patatine è buona e la mangio ogni tanto",
+    "SPEAKER 1: Qual è il tuo sport preferito?",
+    "SPEAKER 2: Anche se pensandoci anche la diavola è una pizza che mangio spesso",
+    "SPEAKER 1: Tifi qualche squadra di calcio?",
+    "SPEAKER 2: La diavola è una pizza particolare perchè ha il salame piccante sopra che è molto buono",
+    "SPEAKER 1: Potresti dirmi per favore se segui qualche squadra di calcio?",
+    "SPEAKER 2: Vado sempre ad una pizzeria che si trova giù da me, lì la fanno molto buona",
+    "SPEAKER 2: Una pizzeria che è aperta da quando sono piccolo",
+    "SPEAKER 1: Hai animali in casa?",
+    "SPEAKER 2: Si ho un cane ed un gatto",
+    "SPEAKER 2: Il cane si chiama Pablo, il gatto Leo",
+    "SPEAKER 2: Anche a loro piace mangiare la pizza, spesso quando la compro gliene do sempre un pezzo",
+    "SPEAKER 1: So che è sposato, mi racconta del suo matrimonio?",
+    "SPEAKER 2: Il mio matrimonio è stato un bel momento, c'era la musica e tante persone che ballavano e cantavano",
+    "SPEAKER 2: C'era anche il buffet, c'era anche tanta pizza da mangiare"
+]
+
+corpus_cleaned = [
+    "Quale pizza mangi di solito?",
+    "Di solito mangio la margherita, mi piace il sapore che ha",
+    "Anche quella con le patatine è buona e la mangio ogni tanto",
+    "Qual è il tuo sport preferito?",
+    "Anche se pensandoci anche la diavola è una pizza che mangio spesso",
+    "Tifi qualche squadra di calcio?",
+    "La diavola è una pizza particolare perchè ha il salame piccante sopra che è molto buono",
+    "Potresti dirmi per favore se segui qualche squadra di calcio?",
+    "Vado sempre ad una pizzeria che si trova giù da me, lì la fanno molto buona",
+    "Una pizzeria che è aperta da quando sono piccolo",
+    "Hai animali in casa?",
+    "Si ho un cane ed un gatto",
+    "Il cane si chiama Pablo, il gatto Leo",
+    "Anche a loro piace mangiare la pizza, spesso quando la compro gliene do sempre un pezzo",
+    "So che è sposato, mi racconta del suo matrimonio?",
+    "Il mio matrimonio è stato un bel momento, c'era la musica e tante persone che ballavano e cantavano",
+    "C'era anche il buffet, c'era anche tanta pizza da mangiare"
+]
+
+corpus = [
+
+    "SPEAKER 1: Riesce a raccontarmi qualcosa che riguarda la sua infanzia?",
+    "SPEAKER 2: Non ho molto da raccontare riguardo la mia infanzia, la situazione che vivevo in famiglia quando ero piccolo mi ha costretto a crescere in fretta.",
+    "SPEAKER 1: Perché, cosa le è successo da piccolo?",
+    "SPEAKER 2: Ho perso mio padre quando e mia madre non riusciva a crescere da sola 5 figli con un misero stipendio…ho iniziato a lavorare da subito, erano altri tempi e lo potevo fare.",
+    "SPEAKER 1: Quindi mi sta dicendo che ha cancellato tutta la sua infanzia?",
+    "SPEAKER 2: Cancellato no, ma ho pochi ricordi",
+    "SPEAKER 1: Me ne sa dire uno tra questi pochi ricordi?",
+    "SPEAKER 2: Un bel ricordo è quando andavo in bici a scuola con i miei fratelli",
+    "SPEAKER 2: Oppure ricordo quando la domenica andavo a mangiare da mia nonna",
+    "SPEAKER 1: E della sua adolescenza riesce a raccontarmi qualcosa?",
+    "SPEAKER 2: Ero un ragazzo responsabile che cercava di lavorare per aiutare mia madre e i miei fratelli",
+    "SPEAKER 1: Non ha momenti di divertimento che ricorda di questo periodo adolescenziale?",
+    "SPEAKER 2: Si, un momento divertente era quando restavo in piazza con i miei amici a bere qualcosa e a parlare di calcio",
+    "SPEAKER 1: Le piaceva il calcio quando era un ragazzo?",
+    "SPEAKER 2: Si, mi piace ancora a dire il vero, è una passione che ho da quando sono bambino",
+]
+
+corpus_cleaned = [
+
+    "Riesce a raccontarmi qualcosa che riguarda la sua infanzia?",
+    "Non ho molto da raccontare riguardo la mia infanzia, la situazione che vivevo in famiglia mi ha costretto a crescere in fretta.",
+    "Perché, cosa le è successo?",
+    "Beh…ho perso mio padre quando ero piccolo e mia madre non riusciva a crescere da sola 5 figli con un misero stipendio…ho iniziato a lavorare sin da piccolo, erano altri tempi e lo potevo fare.",
+    "Quindi mi sta dicendo che ha cancellato tutta la sua infanzia?",
+    "Cancellato no, ma ho pochi ricordi",
+    "Me ne sa dire uno tra questi pochi ricordi?",
+    "Un bel ricordo è l’odore del latte che mamma mi preparava la mattina prima di portare a scuola me e i miei fratelli"
+]
+
+
+corpus = [
+
+    "SPEAKER 1: Qual è stato un momento che ricorda meglio del suo matrimonio?", 
+    "SPEAKER 2: In generale tutto il mio matrimonio è un momento che ricordo con piacere, è stato in piena estate, ad agosto mi sembra",
+    "SPEAKER 2: C'erano tante persone, i parenti e gli amici",
+    "SPEAKER 2: Eravamo in una grande villa piena di fiori e con i tavoli all'esterno per gli invitati",
+    "SPEAKER 1: Ricorda qualche episodio in particolare del suo matrimonio?",
+    "SPEAKER 2: Ricordo quando tagliammo la torta a fine serata, lì fu molto bello",
+    "SPEAKER 1: Cosa le piaceva fare da bambino?",
+    "SPEAKER 2: Da piccolo mi piaceva giocare con i miei cugini in cortile, giocavamo con il pallone",
+    "SPEAKER 2: C'era anche la band musicale al mio matrimonio, abbiamo cantato e ballato per tutta la giornata",
+    "SPEAKER 1: Giocava solo con i suoi cugini o aveva anche altri amici?",
+    "SPEAKER 2: No giocavamo solo tra i cugini perchè abitavamo nello stesso cortile",
+    "SPEAKER 2: A volte passavamo il pomeriggio tutti insieme a casa di mia zia, la mamma di mio cugino",
+    "SPEAKER 1: Oltre al calcio facevate qualche altro gioco tutti insieme?",
+    "SPEAKER 2: Si spesso giocavamo anche a nascondino fino a sera",
+    "SPEAKER 2: E ricordo anche che mangiammo tante case buone al matrimonio, c'era tanta roba da mangiare quel giorno",
+    "SPEAKER 1: Oggi segue qualche sport?",
+    "SPEAKER 2: Si oggi mi piace seguire molto il calcio e le macchine...la formula 1",
+    "SPEAKER 2: Anche al mio matrimonio ricordo che dopo il pranzo giocammo tutti nel giardino della villa con la palla"
+
+]
+
+
+
+
+----------------------------------------------------------------- TEST ----------------------------------------------------------------- 
+
+# Perseveranza grave -> 4
+
+corpus = [
+    
+    CLINICIAN 
+    Quale pizza mangi di solito?
+    PATIENT 
+    Di solito mangio la margherita, mi piace il sapore che ha
+    PATIENT 
+    Anche quella con le patatine è buona e la mangio ogni tanto
+    CLINICIAN
+    Qual è il tuo sport preferito?
+    PATIENT 
+    Anche se pensandoci anche la diavola è una pizza che mangio spesso
+    CLINICIAN
+    Tifi qualche squadra di calcio?
+    PATIENT 
+    La diavola è una pizza particolare perchè ha il salame piccante sopra che è molto buono
+    CLINICIAN 
+    Potresti dirmi per favore se segui qualche squadra di calcio?
+    PATIENT 
+    Vado sempre ad una pizzeria che si trova giù da me, lì la fanno molto buona
+    PATIENT 
+    Una pizzeria che è aperta da quando sono piccolo
+    CLINICIAN 
+    Hai animali in casa?
+    PATIENT 
+    Si ho un cane ed un gatto
+    PATIENT 
+    Il cane si chiama Pablo, il gatto Leo
+    PATIENT 
+    Anche a loro piace mangiare la pizza, spesso quando la compro gliene do sempre un pezzo
+    CLINICIAN 
+    So che è sposato, mi racconta del suo matrimonio?
+    PATIENT 
+    Il mio matrimonio è stato un bel momento, c'era la musica e tante persone che ballavano e cantavano
+    PATIENT 
+    C'era anche il buffet, c'era anche tanta pizza da mangiare
+]
+
+# Perseveranza media -> 2
+
+corpus_cleaned = [
+
+    CLINICIAN
+    Qual è stato un momento che ricorda meglio del suo matrimonio?, 
+    PATIENT
+    In generale tutto il mio matrimonio è un momento che ricordo con piacere, è stato in piena estate, ad agosto mi sembra,
+    PATIENT
+    C'erano tante persone, i parenti e gli amici,
+    PATIENT
+    Eravamo in una grande villa piena di fiori e con i tavoli all'esterno per gli invitati,
+    CLINICIAN
+    Ricorda qualche episodio in particolare del suo matrimonio?,
+    PATIENT
+    Ricordo quando tagliammo la torta a fine serata, lì fu molto bello,
+    CLINICIAN
+    A cosa le piaceva giocare da piccolo?,
+    PATIENT
+    Da piccolo mi piaceva giocare con i miei cugini in cortile, giocavamo con il pallone, 
+    PATIENT
+    C'era anche la band musicale al mio matrimonio, abbiamo cantato e ballato per tutta la giornata,
+    CLINICIAN
+    Giocava solo con i suoi cugini o aveva anche altri amici?,
+    PATIENT
+    No giocavamo solo tra i cugini perchè abitavamo nello stesso cortile,
+    PATIENT
+    A volte passavamo il pomeriggio tutti insieme a casa di mia zia, la mamma di mio cugino,
+    CLINICIAN
+    Oltre al calcio giocavate a qualche altro gioco tutti insieme?,
+    PATIENT
+    Si spesso giocavamo anche a nascondino fino a sera,
+    PATIENT
+    E ricordo anche che mangiammo tante case buone al matrimonio, c'era tanta roba da mangiare quel giorno,
+    CLINICIAN
+    Oggi segue qualche sport?,
+    PATIENT
+    Si oggi mi piace seguire molto il calcio e le macchine...la formula 1,
+    PATIENT
+    Anche al mio matrimonio ricordo che dopo il pranzo giocammo tutti nel giardino della villa con la palla
+	
+]
+
+
+# Perseveranza nulla -> 0
+
+corpus_cleaned = [
+
+    CLINICIAN
+    Riesce a raccontarmi qualcosa che riguarda la sua infanzia?,
+    PATIENT
+    Non ho molto da raccontare riguardo la mia infanzia, la situazione che vivevo in famiglia quando ero piccolo 
+    mi ha costretto a crescere in fretta,
+    CLINICIAN
+    Perchè, cosa le è successo da piccolo?,
+    PATIENT
+    Ho perso mio padre quando e mia madre non riusciva a crescere da sola 5 figli con un misero stipendio…ho iniziato a lavorare da subito, 
+    erano altri tempi e lo potevo fare,
+    CLINICIAN
+    Quindi mi sta dicendo che ha cancellato tutta la sua infanzia?,
+    PATIENT
+    Cancellato no, ma ho pochi ricordi,
+    CLINICIAN
+    Me ne sa dire uno tra questi pochi ricordi?,
+    PATIENT
+    Un bel ricordo è quando andavo in bici a scuola con i miei fratelli,
+    PATIENT
+    Oppure ricordo quando la domenica andavo a mangiare da mia nonna,
+    CLINICIAN
+    E della sua adolescenza riesce a raccontarmi qualcosa?,
+    PATIENT
+    Ero un ragazzo responsabile che cercava di lavorare per aiutare mia madre e i miei fratelli,
+    CLINICIAN
+    Non ha momenti di divertimento che ricorda di questo periodo adolescenziale?,
+    PATIENT
+    Si, un momento divertente era quando restavo in piazza con i miei amici a bere qualcosa e a parlare di calcio,
+    CLINICIAN
+    Le piaceva il calcio quando era un ragazzo?,
+    PATIENT
+    Si, mi piace ancora a dire il vero, è una passione che ho da quando sono bambino
+
+]
+
+
+-------------------------------- Inglese ---------------------------------
+
+corpus = [
+    
+    CLINICIAN 
+    Which pizza do you usually eat?,
+    PATIENT 
+    I usually eat margherita, I like the taste it has,
+    PATIENT 
+    The one with fries is also good and I eat it from time to time,
+    CLINICIAN
+    What is your favorite sport?,
+    PATIENT 
+    Even if thinking about it, even the diavola is a pizza that I eat often,
+    CLINICIAN
+    Do you support any soccer team?,
+    PATIENT 
+    Diavola is a particular pizza because it has spicy salami on top which is very good,
+    CLINICIAN 
+    Could you please tell me if you follow any football team?,
+    PATIENT 
+    I always go to a pizzeria downstairs from where they do it very well,
+    PATIENT 
+    A pizzeria that has been open since I was little,
+    CLINICIAN 
+    Do you have pets at home?,
+    PATIENT 
+    Yes, I have a dog and a cat,
+    PATIENT 
+    The dog is called Pablo, the cat Leo,
+    PATIENT 
+    They also like to eat pizza, often when I buy it I always give them a piece,
+    CLINICIAN 
+    I know you are married, can you tell me about your marriage?,
+    PATIENT 
+    My wedding was a great moment, there was music and lots of people dancing and singing,
+    PATIENT 
+    There was also a buffet, there was also a lot of pizza to eat
+]
+
+corpus_cleaned = [
+
+    CLINICIAN
+    Can you tell me something about your childhood?,
+    PATIENT
+    I don't have much to tell about my childhood, the situation I lived in my family when I was little forced me to grow up fast,
+    CLINICIAN
+    Why, what happened as a child?,
+    PATIENT
+    I lost my father when my mother was unable to raise 5 children alone on a meager salary…I started working right away those were different times and I could do it,
+    CLINICIAN
+    So you're telling me that he erased all of his childhood?,
+    PATIENT
+    Canceled no, but I have few memories,
+    CLINICIAN
+    Can you tell me one of these few memories?,
+    PATIENT
+    A good memory is when I cycled to school with my brothers,
+    PATIENT
+    Or I remember when on Sunday I went to eat at my grandmother's,
+    CLINICIAN
+    And can you tell me something about your adolescence?,
+    PATIENT
+    I was a responsible boy trying to work to help my mother and siblings,
+    CLINICIAN
+    Don't you have any fun moments that you remember from this teenage period?,
+    PATIENT
+    Yes, a fun moment was when I stayed in the square with my friends to have a drink and talk about football,
+    CLINICIAN
+    Did you like soccer when you were a boy?,
+    PATIENT
+    Yes, I still like it actually, it's a passion I've had since I was a child
+
+]

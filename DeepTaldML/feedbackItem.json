@@ -1,0 +1,260 @@
+{
+    "item": [
+        {
+            "nome": "Logorrea",
+            "domande": [
+                {
+                    "testo": "Domanda 1",
+                    "risposte": [
+                        {
+                            "testo": "Si",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "No",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Non so",
+                            "contatore": 1
+                        }
+                    ]
+                },
+                {
+                    "testo": "Domanda 2",
+                    "risposte": [
+                        {
+                            "testo": "Si",
+                            "contatore": 2
+                        },
+                        {
+                            "testo": "No",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Non so",
+                            "contatore": 0
+                        }
+                    ]
+                },
+                {
+                    "testo": "Domanda 3",
+                    "risposte": [
+                        {
+                            "testo": "Completamente in disaccordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "In disaccordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Neutro",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "D'accordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Molto d'accordo",
+                            "contatore": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nome": "Pensiero rallentato",
+            "domande": [
+                {
+                    "testo": "Domanda 1",
+                    "risposte": [
+                        {
+                            "testo": "Si",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "No",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "Non so",
+                            "contatore": 1
+                        }
+                    ]
+                },
+                {
+                    "testo": "Domanda 2",
+                    "risposte": [
+                        {
+                            "testo": "Si",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "No",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "Non so",
+                            "contatore": 0
+                        }
+                    ]
+                },
+                {
+                    "testo": "Domanda 3",
+                    "risposte": [
+                        {
+                            "testo": "Completamente in disaccordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "In disaccordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Neutro",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "D'accordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Molto d'accordo",
+                            "contatore": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nome": "Perseveranza",
+            "domande": [
+                {
+                    "testo": "Domanda 1",
+                    "risposte": [
+                        {
+                            "testo": "Si",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "No",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "Non so",
+                            "contatore": 1
+                        }
+                    ]
+                },
+                {
+                    "testo": "Domanda 2",
+                    "risposte": [
+                        {
+                            "testo": "Si",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "No",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "Non so",
+                            "contatore": 0
+                        }
+                    ]
+                },
+                {
+                    "testo": "Domanda 3",
+                    "risposte": [
+                        {
+                            "testo": "Completamente in disaccordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "In disaccordo",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "Neutro",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "D'accordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Molto d'accordo",
+                            "contatore": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nome": "Ruminazione",
+            "domande": [
+                {
+                    "testo": "Domanda 1",
+                    "risposte": [
+                        {
+                            "testo": "Si",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "No",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "Non so",
+                            "contatore": 0
+                        }
+                    ]
+                },
+                {
+                    "testo": "Domanda 2",
+                    "risposte": [
+                        {
+                            "testo": "Si",
+                            "contatore": 1
+                        },
+                        {
+                            "testo": "No",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Non so",
+                            "contatore": 0
+                        }
+                    ]
+                },
+                {
+                    "testo": "Domanda 3",
+                    "risposte": [
+                        {
+                            "testo": "Completamente in disaccordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "In disaccordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Neutro",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "D'accordo",
+                            "contatore": 0
+                        },
+                        {
+                            "testo": "Molto d'accordo",
+                            "contatore": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
