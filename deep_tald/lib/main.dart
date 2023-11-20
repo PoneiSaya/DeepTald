@@ -5,25 +5,11 @@ import 'firebase_options.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  aggiungiDatiAlDatabase('Mario', 'Rossi', 25);
   runApp(const MyApp());
-}
-
-Future<void> aggiungiDatiAlDatabase(
-    String nome, String cognome, int eta) async {
-  try {
-    await db.collection('utenti').add({
-      'nome': nome,
-      'cognome': cognome,
-      'eta': eta,
-    });
-    print('Dati aggiunti con successo.');
-  } catch (e) {
-    print('Errore durante l\'aggiunta dei dati: $e');
-  }
 }
 
 class MyApp extends StatelessWidget {
