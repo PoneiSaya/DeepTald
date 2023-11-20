@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "759981236251",
+    "project_id": "deeptaldapp",
+    "storage_bucket": "deeptaldapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759981236251:android:ec42daffc3611b952618be",
+        "android_client_info": {
+          "package_name": "com.example.deep_tald"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8tZPWvHBPn54_ePeyJSGGa5lh7rPwYm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

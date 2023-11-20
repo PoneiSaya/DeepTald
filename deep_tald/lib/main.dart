@@ -1,7 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+FirebaseFirestore db = FirebaseFirestore.instance;
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  aggiungiDatiAlDatabase('Mario', 'Rossi', 25);
   runApp(const MyApp());
+}
+
+Future<void> aggiungiDatiAlDatabase(
+    String nome, String cognome, int eta) async {
+  try {
+    await db.collection('utenti').add({
+      'nome': nome,
+      'cognome': cognome,
+      'eta': eta,
+    });
+    print('Dati aggiunti con successo.');
+  } catch (e) {
+    print('Errore durante l\'aggiunta dei dati: $e');
+  }
 }
 
 class MyApp extends StatelessWidget {
