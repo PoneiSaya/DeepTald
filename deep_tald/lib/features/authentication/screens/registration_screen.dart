@@ -6,7 +6,7 @@ import 'package:deep_tald/repository/paziente_repository.dart';
 
 class RegistrationScreen extends StatelessWidget {
   final AuthController authController = Get.find();
-  final PazienteRepostitory pazienteRepository = Get
+  final PazienteRepository pazienteRepository = Get
       .find(); // Aggiungi questa linea per ottenere l'istanza di PazienteRepository
 
   final TextEditingController emailController = TextEditingController();
@@ -30,11 +30,6 @@ class RegistrationScreen extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Email'),
             ),
             SizedBox(height: 8.0),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
             SizedBox(height: 8.0),
             TextField(
               controller: nomeController,
@@ -53,24 +48,13 @@ class RegistrationScreen extends StatelessWidget {
                 String nome = nomeController.text.trim();
                 String cognome = cognomeController.text.trim();
 
-                if (email.isNotEmpty &&
-                    password.isNotEmpty &&
-                    nome.isNotEmpty &&
-                    cognome.isNotEmpty) {
+                if (email.isNotEmpty && nome.isNotEmpty && cognome.isNotEmpty) {
                   // Crea un'istanza di Paziente
-                  /*  Paziente paziente = Paziente(
-                    nome: nome,
-                    cognome: cognome,
-                    codFiscale:
-                        '', // Aggiungi un valore appropriato se necessario
-                    email: email,
-                    password: password,
-                    dataDiNascita: DateTime
-                        .now(), // Aggiungi una data di nascita appropriata
-                  );
+                  Paziente paziente = Paziente("ciao", nome, cognome, "dio",
+                      email, "suca", DateTime.now());
 
                   // Chiamare il metodo di registrazione del repository Paziente
-                  await pazienteRepository.createPaziente(paziente);*/
+                  await pazienteRepository.createPaziente(paziente);
 
                   // Puoi implementare la logica di navigazione o feedback all'utente qui
                 } else {

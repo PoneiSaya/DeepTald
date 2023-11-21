@@ -1,18 +1,19 @@
-import 'package:deep_tald/features/authentication/screens/registration.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:deep_tald/features/authentication/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:deep_tald/features/authentication/screens/auth_controller.dart'; // Assicurati che il percorso sia corretto
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:deep_tald/features/authentication/screens/auth_controller.dart';
+import 'package:deep_tald/repository/paziente_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  WidgetsFlutterBinding
-      .ensureInitialized(); // Necessario per inizializzare alcuni servizi prima dell'esecuzione dell'app
-  Get.put(AuthController()); // Inizializza e registra il tuo AuthController
+  Get.put(AuthController());
+  Get.put(
+      PazienteRepository()); // Aggiungi questa riga per registrare PazienteRepository
   runApp(MyApp());
 }
 
@@ -24,8 +25,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:
-          Registrazione(), // Utilizza il widget principale della tua applicazione
+      // Utilizza il widget principale della tua applicazione
+      home: RegistrationScreen(),
     );
   }
 }

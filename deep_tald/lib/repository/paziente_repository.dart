@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../features/authentication/model/entities/paziente.dart';
 
-class PazienteRepostitory extends GetxController {
-  static PazienteRepostitory get instance => Get.find();
+class PazienteRepository extends GetxController {
+  static PazienteRepository get instance => Get.find();
 
   final _db = FirebaseFirestore.instance;
 
