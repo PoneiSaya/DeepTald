@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:deep_tald/model/entity/utente.dart';
+import 'package:deep_tald/features/authentication/model/entities/utente.dart';
 import 'package:deep_tald/model/entity/medico.dart';
 import 'package:deep_tald/model/entity/report.dart';
 
@@ -31,7 +31,14 @@ class Paziente extends Utente {
     // Crea un'istanza di Paziente
     Paziente paziente =
         Paziente(id, nome, cognome, codFiscale, email, password, dataDiNascita);
-
     return paziente;
+  }
+
+  toJson() {
+    return {
+      "Nome": super.getNome,
+      "Cognome": super.getCognome,
+      "email": super.getEmail,
+    };
   }
 }
