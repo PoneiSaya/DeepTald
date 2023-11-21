@@ -46,15 +46,25 @@ import numpy as np
 
 #Conversione del file audio nel caso in cui non sia in formato WAV
 
-
+#apri file di configurazione
+f = open("config.txt", "r")
+choice = f.readline()[9:]
+#se device = cpu allora la variabile device viene posta a cpu, altrimenti a cuda
+if choice == 'cpu':
+  chosenDevice = 'cpu'
+elif choice == 'cuda':
+  chosenDevice = 'cuda'
+else:
+  raise Exception("Errore nella lettura del file di configurazione")
+  
 def transcribe_audio(path):
 
-  print(torch.cuda.is_available())
+  #print(torch.cuda.is_available())
 
 
   embedding_model = PretrainedSpeakerEmbedding( 
     "speechbrain/spkrec-ecapa-voxceleb",
-    device = "cuda"
+    device = chosenDevice
 )
   
 
@@ -63,11 +73,11 @@ def transcribe_audio(path):
     path = 'audio.wav'
 
   # Libera la memoria GPU prima di eseguire model.transcribe()
-  torch.cuda.empty_cache()  
+  #torch.cuda.empty_cache()  
 
   #Carico il modello di speech recognition
 
-  model = whisper.load_model(model_size, device = 'cuda')
+  model = whisper.load_model(model_size, device = chosenDevice)
 
   #Eseguo la trascrizione del file audio utilizzando il modello caricato
 
@@ -94,7 +104,7 @@ def transcribe_audio(path):
     clip = Segment(start, end)
     waveform, sample_rate = audio.crop(path, clip)
     #return embedding_model(waveform[None])
-    return embedding_model(waveform.to('cuda')[None])
+    return embedding_model(waveform.to(chosenDevice)[None])
 
   embeddings = np.zeros(shape=(len(segments), 192))
   for i, segment in enumerate(segments):
