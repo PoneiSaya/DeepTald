@@ -9,8 +9,8 @@ abstract class Utente {
   late String _password;
   late DateTime _dataDiNascita;
 
-  Utente(this._id, this.cognome, this.nome, this._codFiscale, this._email,
-      this._password, this._dataDiNascita);
+  Utente(this.nome, this.cognome, this._codFiscale, this._email, this._password,
+      this._dataDiNascita);
 
   @protected
   get getNome {
@@ -25,5 +25,20 @@ abstract class Utente {
   @protected
   get getEmail {
     return _email;
+  }
+
+  @protected
+  get getCodiceFiscale {
+    return _codFiscale;
+  }
+
+  @protected
+  get getDataDiNascita {
+    return _dataDiNascita;
+  }
+
+  @protected
+  get getPassword {
+    return _password;
   }
 }

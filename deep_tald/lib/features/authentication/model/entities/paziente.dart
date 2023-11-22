@@ -8,9 +8,9 @@ class Paziente extends Utente {
   late Medico _medico;
   late List<Report> _report;
 
-  Paziente(String id, String nome, String cognome, String codFiscale,
-      String email, String password, DateTime dataDiNascita)
-      : super(id, nome, cognome, codFiscale, email, password, dataDiNascita);
+  Paziente(String nome, String cognome, String codFiscale, String email,
+      String password, DateTime dataDiNascita)
+      : super(nome, cognome, codFiscale, email, password, dataDiNascita);
 
   get medico => _medico;
   set setMedico(Medico m) => _medico = m;
@@ -30,7 +30,7 @@ class Paziente extends Utente {
 
     // Crea un'istanza di Paziente
     Paziente paziente =
-        Paziente(id, nome, cognome, codFiscale, email, password, dataDiNascita);
+        Paziente(nome, cognome, codFiscale, email, password, dataDiNascita);
     return paziente;
   }
 
@@ -38,7 +38,10 @@ class Paziente extends Utente {
     return {
       "Nome": super.getNome,
       "Cognome": super.getCognome,
-      "email": super.getEmail,
+      "CodiceFiscale": super.getCodiceFiscale,
+      "Email": super.getEmail,
+      "Password": super.getPassword,
+      "DataDiNascita": super.getDataDiNascita
     };
   }
 }
