@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import '../../controllers/auth_controller.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 
+import '../widget/Button.dart';
+
 class RegistrationScreen extends StatelessWidget {
   final AuthController authController = Get.find();
   final UserRepository userRepository = Get.find();
@@ -121,7 +123,8 @@ class RegistrationScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
+            Button(
+              buttonText: "Registrati",
               onPressed: () async {
                 String email = emailController.text.trim();
                 String codiceFiscale = codiceFiscaleController.text.trim();
@@ -175,7 +178,6 @@ class RegistrationScreen extends StatelessWidget {
                   );
                 }
               },
-              child: Text('Registrati'),
             ),
           ],
         ),
