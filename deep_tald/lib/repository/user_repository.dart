@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../features/authentication/model/entities/paziente.dart';
+import '../model/entity/paziente.dart';
+import '../model/entity/medico.dart';
 
-class PazienteRepository extends GetxController {
-  static PazienteRepository get instance => Get.find();
+class UserRepository extends GetxController {
+  static UserRepository get instance => Get.find();
 
   final _db = FirebaseFirestore.instance;
 
@@ -12,6 +13,23 @@ class PazienteRepository extends GetxController {
     await _db
         .collection("Pazienti")
         .add(paziente.toJson())
+        .whenComplete(() => Get.snackbar("Success", "Tutto ok",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.green))
+        .catchError((error, stackTrace) {
+      Get.snackbar("Errore", "Ops",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.red);
+      print(error.toString());
+    });
+  }
+
+  createMedico(Medico medico) async {
+    await _db
+        .collection("Medico")
+        .add(medico.toJson())
         .whenComplete(() => Get.snackbar("Success", "Tutto ok",
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green,

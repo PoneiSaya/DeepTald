@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:deep_tald/features/authentication/screens/auth_controller.dart';
-import 'package:deep_tald/repository/paziente_repository.dart';
+import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
+import 'package:deep_tald/repository/user_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ void main() async {
   );
   Get.put(AuthController());
   Get.put(
-      PazienteRepository()); // Aggiungi questa riga per registrare PazienteRepository
+      UserRepository()); // Aggiungi questa riga per registrare PazienteRepository
   runApp(MyApp());
 }
 

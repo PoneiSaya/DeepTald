@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
-import 'package:deep_tald/features/authentication/model/entities/paziente.dart';
+import '../../../model/entity/paziente.dart';
+import '../../../model/entity/medico.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'auth_controller.dart';
-import 'package:deep_tald/repository/paziente_repository.dart';
+import '../controllers/auth_controller.dart';
+import 'package:deep_tald/repository/user_repository.dart';
 
 class RegistrationScreen extends StatelessWidget {
   final AuthController authController = Get.find();
-  final PazienteRepository pazienteRepository = Get
-      .find(); // Aggiungi questa linea per ottenere l'istanza di PazienteRepository
+  final UserRepository userRepository = Get.find();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -138,10 +138,9 @@ class RegistrationScreen extends StatelessWidget {
                     selectedDate != null &&
                     isValidEmail(email) &&
                     isValidCodiceFiscale(codiceFiscale)) {
-                  bool isEmailTaken =
-                      await pazienteRepository.isEmailTaken(email);
-                  bool isCodiceFiscaleTaken = await pazienteRepository
-                      .isCodiceFiscaleTaken(codiceFiscale);
+                  bool isEmailTaken = await userRepository.isEmailTaken(email);
+                  bool isCodiceFiscaleTaken =
+                      await userRepository.isCodiceFiscaleTaken(codiceFiscale);
 
                   if (isEmailTaken) {
                     Get.snackbar(
@@ -165,7 +164,7 @@ class RegistrationScreen extends StatelessWidget {
                       email, hashedPassword, selectedDate!);
 
                   // Chiamare il metodo di registrazione del repository Paziente
-                  await pazienteRepository.createPaziente(paziente);
+                  await userRepository.createPaziente(paziente);
 
                   // Puoi implementare la logica di navigazione o feedback all'utente qui
                 } else {
