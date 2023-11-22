@@ -1,4 +1,4 @@
-import 'package:deep_tald/features/authentication/screens/registration_screen.dart';
+import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
