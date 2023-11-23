@@ -10,8 +10,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
-  Get.put(AuthController());
+  ).then((value) => Get.put(AuthController())); //Get.put è dependency injection
+
   Get.put(
       UserRepository()); // Aggiungi questa riga per registrare PazienteRepository
   runApp(MyApp());
@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // Utilizza il widget principale della tua applicazione
-      home: RegistrationScreen(),
+      home:
+          RegistrationScreen(), //anzichè regitration dovremo mettere una gif che carica
     );
   }
 }

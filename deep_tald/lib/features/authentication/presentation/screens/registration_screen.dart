@@ -141,10 +141,11 @@ class RegistrationScreen extends StatelessWidget {
                     selectedDate != null &&
                     isValidEmail(email) &&
                     isValidCodiceFiscale(codiceFiscale)) {
-                  bool isEmailTaken = await userRepository.isEmailTaken(email);
+                  //bool isEmailTaken = await userRepository.isEmailTaken(email);
                   bool isCodiceFiscaleTaken =
                       await userRepository.isCodiceFiscaleTaken(codiceFiscale);
 
+                  /**
                   if (isEmailTaken) {
                     Get.snackbar(
                       'Email già registrata',
@@ -152,7 +153,7 @@ class RegistrationScreen extends StatelessWidget {
                       snackPosition: SnackPosition.BOTTOM,
                     );
                     return;
-                  }
+                  } */
 
                   if (isCodiceFiscaleTaken) {
                     Get.snackbar(
@@ -167,7 +168,9 @@ class RegistrationScreen extends StatelessWidget {
                       email, hashedPassword, selectedDate!);
 
                   // Chiamare il metodo di registrazione del repository Paziente
-                  await userRepository.createPaziente(paziente);
+                  //await userRepository.createPaziente(paziente);
+                  await authController.registerWithEmailAndPassword(
+                      email, password);
 
                   // Puoi implementare la logica di navigazione o feedback all'utente qui
                 } else {
