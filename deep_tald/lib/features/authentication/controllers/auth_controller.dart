@@ -1,5 +1,6 @@
 import 'package:deep_tald/features/authentication/presentation/screens/login_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
+import 'package:deep_tald/model/entity/medico.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,11 +34,16 @@ class AuthController extends GetxController {
   }
 
   Future<void> registerWithEmailAndPassword(
-      String email, String password) async {
-    final Paziente pz =
-        Paziente("michele", "arturo", "ELIO", email, password, DateTime.now());
+      String nome,
+      String cognome,
+      String codiceFiscale,
+      String email,
+      String password,
+      DateTime dataDiNascita) async {
     //try {
     // Registra l'utente con Firebase Authentication
+    final Paziente pz =
+        Paziente(nome, cognome, codiceFiscale, email, password, dataDiNascita);
     var result = await auth
         .createUserWithEmailAndPassword(
           email: email,
@@ -45,7 +51,7 @@ class AuthController extends GetxController {
         )
         .then((registeredUser) => {
               firestore
-                  .collection("usersCollection")
+                  .collection("Pazienti")
                   .add(pz.toJson(registeredUser.user?.uid))
             });
   }

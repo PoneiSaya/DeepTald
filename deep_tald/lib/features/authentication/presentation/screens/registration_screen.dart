@@ -170,7 +170,12 @@ class RegistrationScreen extends StatelessWidget {
                   // Chiamare il metodo di registrazione del repository Paziente
                   //await userRepository.createPaziente(paziente);
                   await authController.registerWithEmailAndPassword(
-                      email, password);
+                      nome,
+                      cognome,
+                      codiceFiscale,
+                      email,
+                      hashedPassword,
+                      selectedDate!);
 
                   // Puoi implementare la logica di navigazione o feedback all'utente qui
                 } else {
