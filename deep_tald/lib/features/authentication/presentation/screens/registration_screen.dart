@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/auth_controller.dart';
 import 'package:deep_tald/repository/user_repository.dart';
+import 'home_screen.dart';
+import '../../../../routes/routes.dart';
 
 import '../widget/Button.dart';
 
@@ -163,12 +165,10 @@ class RegistrationScreen extends StatelessWidget {
                     );
                     return;
                   }
-                  // Crea un'istanza di Paziente
-                  Paziente paziente = Paziente(nome, cognome, codiceFiscale,
-                      email, hashedPassword, selectedDate!);
 
                   // Chiamare il metodo di registrazione del repository Paziente
                   //await userRepository.createPaziente(paziente);
+
                   await authController.registerWithEmailAndPassword(
                       nome,
                       cognome,
@@ -177,6 +177,7 @@ class RegistrationScreen extends StatelessWidget {
                       hashedPassword,
                       selectedDate!);
 
+                  Get.toNamed(Routes.getHomeRoute());
                   // Puoi implementare la logica di navigazione o feedback all'utente qui
                 } else {
                   Get.snackbar(

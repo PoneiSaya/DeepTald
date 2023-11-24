@@ -1,3 +1,4 @@
+import 'package:deep_tald/features/authentication/presentation/screens/home_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/login_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
 import 'package:deep_tald/model/entity/medico.dart';
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../model/entity/paziente.dart';
+import '../../../routes/routes.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -28,8 +30,7 @@ class AuthController extends GetxController {
       Get.offAll(() =>
           RegistrationScreen()); //se al posto di login metti home ti porta alla home
     } else {
-      print("TI SEI LOGGATO");
-      //Get.offAll(() => HomePage()); quando avremo una home
+      Get.toNamed(Routes.getHomeRoute()); //quando avremo una home
     }
   }
 
@@ -40,20 +41,27 @@ class AuthController extends GetxController {
       String email,
       String password,
       DateTime dataDiNascita) async {
-    //try {
-    // Registra l'utente con Firebase Authentication
-    final Paziente pz =
-        Paziente(nome, cognome, codiceFiscale, email, password, dataDiNascita);
-    var result = await auth
-        .createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        )
-        .then((registeredUser) => {
-              firestore
-                  .collection("Pazienti")
-                  .add(pz.toJson(registeredUser.user?.uid))
-            });
+    print("sono nel metodo di registrazione");
+    try {
+      // Registra l'utente con Firebase Authentication
+      final Paziente pz = Paziente(
+          nome, cognome, codiceFiscale, email, password, dataDiNascita);
+      var result = await auth
+          .createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          )
+          .then((registeredUser) => {
+                firestore
+                    .collection("Pazienti")
+                    .add(pz.toJson(registeredUser.user?.uid))
+              });
+
+      _user = Rx<User?>(auth.currentUser);
+    } catch (e) {
+      print("\n\nECCEZIONE FALLISCE LA REGISRRAZIONE\n\n");
+      print(e.toString());
+    }
   }
 
   Future<void> loginWithEmailPassword(String email, String password) async {
