@@ -1,3 +1,4 @@
+import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       ),
       // Utilizza il widget principale della tua applicazione
       home:
-          RegistrationScreen(), //anzichè regitration dovremo mettere una gif che carica
+          const InitialScreen(), //anzichè regitration dovremo mettere una gif che carica
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/login_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
 import 'package:deep_tald/model/entity/medico.dart';
@@ -26,7 +27,7 @@ class AuthController extends GetxController {
   _initialScreen(User? user) {
     if (user == null) {
       Get.offAll(() =>
-          RegistrationScreen()); //se al posto di login metti home ti porta alla home
+          InitialScreen()); //se al posto di login metti home ti porta alla home
     } else {
       print("TI SEI LOGGATO");
       //Get.offAll(() => HomePage()); quando avremo una home
