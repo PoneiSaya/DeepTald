@@ -1,14 +1,14 @@
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
 import 'package:flutter/material.dart';
 
-class MedicoScreen extends StatefulWidget {
-  const MedicoScreen({Key? key}) : super(key: key);
+class PazienteScreen extends StatefulWidget {
+  const PazienteScreen({Key? key}) : super(key: key);
 
   @override
-  State<MedicoScreen> createState() => _MedicoScreenState();
+  State<PazienteScreen> createState() => _PazienteScreenState();
 }
 
-class _MedicoScreenState extends State<MedicoScreen> {
+class _PazienteScreenState extends State<PazienteScreen> {
   final int currentPageIndex = 0;
 
   @override
@@ -46,7 +46,7 @@ class _MedicoScreenState extends State<MedicoScreen> {
               padding: //padding sopra e a sinistra
                   EdgeInsets.only(left: 30, top: 30),
               child: Text(
-                'Ciao Dr. Lambiase!  \u{1F44B}',
+                'Ciao Paolo!  \u{1F44B}',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
@@ -55,24 +55,16 @@ class _MedicoScreenState extends State<MedicoScreen> {
                 children: [
                   CardDeepTald(
                     'assets/images/mindfullness.png',
-                    'Usa IA!',
+                    'Parla con Bob!',
                     'Inizia',
                     () {
                       // ...
                     },
                   ),
                   CardDeepTald(
-                    'assets/images/grafico.png',
-                    'Monitora i pazienti!',
-                    'Monitora',
-                    () {
-                      // ...
-                    },
-                  ),
-                  CardDeepTald(
                     'assets/images/gestire.png',
-                    'Gestisci i Pazienti!',
-                    'Gestisci',
+                    'Controlla il tuo Andamento!',
+                    'Controlla',
                     () {
                       // ...
                     },

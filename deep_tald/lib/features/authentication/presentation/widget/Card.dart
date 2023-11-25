@@ -42,7 +42,15 @@ class CardDeepTald extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
+                      //round the edges
                       style: const ButtonStyle(
+                        shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(18),
+                            ),
+                          ),
+                        ),
                         backgroundColor:
                             MaterialStatePropertyAll<Color>(Colors.blue),
                       ),
