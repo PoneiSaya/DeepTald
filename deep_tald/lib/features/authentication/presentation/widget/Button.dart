@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Button extends StatelessWidget {
   final String buttonText;
@@ -11,12 +12,16 @@ class Button extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFF599BFF),
+          backgroundColor: const Color(0xFF599BFF),
           foregroundColor: Colors.white,
-          fixedSize: Size(259, 65)),
+          fixedSize: const Size(259, 65)),
       child: Text(
         buttonText,
-        style: TextStyle(fontSize: 24),
+        style: GoogleFonts.rubik(
+            color: Color.fromRGBO(255, 255, 255, 1),
+            decoration: TextDecoration.none,
+            fontWeight: FontWeight.bold,
+            fontSize: 24),
       ),
     );
   }

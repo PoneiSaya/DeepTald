@@ -1,3 +1,4 @@
+import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // Utilizza il widget principale della tua applicazione
+
       initialRoute: Routes.getRegistrationRoute(),
       getPages: Routes
           .routes, //anzichè regitration dovremo mettere una gif che carica
