@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../controllers/auth_controller.dart';
 import 'package:get/get.dart';
 import '../widget/Button.dart';
+import '../widget/custom_textfield.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -20,17 +21,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
+            CustomTextfield(control: _emailController, hintString: "Email"),
             SizedBox(height: 8.0),
             SizedBox(height: 8.0),
             TextField(
