@@ -182,7 +182,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
             }
           },
           buttonText: 'Registrati',
-
+        ),
       ],
     );
   }
