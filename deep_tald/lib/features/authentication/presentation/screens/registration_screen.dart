@@ -9,6 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
+import 'home_screen.dart';
+import '../../../../routes/routes.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -180,7 +182,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
             }
           },
           buttonText: 'Registrati',
-        ),
+
       ],
     );
   }
