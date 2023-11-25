@@ -27,7 +27,7 @@ class AuthController extends GetxController {
   _initialScreen(User? user) {
     if (user == null) {
       Get.offAll(() =>
-          LoginScreen()); //se al posto di login metti home ti porta alla home
+          RegistrationScreen()); //se al posto di login metti home ti porta alla home
     } else {
       print("TI SEI LOGGATO");
       //Get.offAll(() => HomePage()); quando avremo una home
