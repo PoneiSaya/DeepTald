@@ -39,7 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 )),
             const SizedBox(height: 10),
             CustomTextfield(
-                control: _emailController, hintString: "Inserisci email"),
+              control: _emailController,
+              hintString: "Inserisci email",
+              isObscureText: false,
+            ),
             const SizedBox(height: 35),
             SizedBox(
                 width: 317,
@@ -53,7 +56,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 )),
             const SizedBox(height: 10),
             CustomTextfield(
-                control: _passwordController, hintString: "Inserisci password"),
+              control: _passwordController,
+              hintString: "Inserisci password",
+              isObscureText: true,
+            ),
             const Spacer(),
             Padding(
                 padding: const EdgeInsets.only(bottom: 100.0),
