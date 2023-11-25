@@ -1,12 +1,16 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
-import '../../../model/entity/paziente.dart';
-import '../../../model/entity/medico.dart';
+import '../../../../model/entity/paziente.dart';
+import '../../../../model/entity/medico.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/auth_controller.dart';
+import '../../controllers/auth_controller.dart';
 import 'package:deep_tald/repository/user_repository.dart';
+import 'home_screen.dart';
+import '../../../../routes/routes.dart';
+
+import '../widget/Button.dart';
 
 class RegistrationScreen extends StatelessWidget {
   final AuthController authController = Get.find();
@@ -121,7 +125,8 @@ class RegistrationScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
+            Button(
+              buttonText: "Registrati",
               onPressed: () async {
                 String email = emailController.text.trim();
                 String codiceFiscale = codiceFiscaleController.text.trim();
@@ -138,10 +143,11 @@ class RegistrationScreen extends StatelessWidget {
                     selectedDate != null &&
                     isValidEmail(email) &&
                     isValidCodiceFiscale(codiceFiscale)) {
-                  bool isEmailTaken = await userRepository.isEmailTaken(email);
+                  //bool isEmailTaken = await userRepository.isEmailTaken(email);
                   bool isCodiceFiscaleTaken =
                       await userRepository.isCodiceFiscaleTaken(codiceFiscale);
 
+                  /**
                   if (isEmailTaken) {
                     Get.snackbar(
                       'Email già registrata',
@@ -149,7 +155,7 @@ class RegistrationScreen extends StatelessWidget {
                       snackPosition: SnackPosition.BOTTOM,
                     );
                     return;
-                  }
+                  } */
 
                   if (isCodiceFiscaleTaken) {
                     Get.snackbar(
@@ -159,13 +165,19 @@ class RegistrationScreen extends StatelessWidget {
                     );
                     return;
                   }
-                  // Crea un'istanza di Paziente
-                  Paziente paziente = Paziente(nome, cognome, codiceFiscale,
-                      email, hashedPassword, selectedDate!);
 
                   // Chiamare il metodo di registrazione del repository Paziente
-                  await userRepository.createPaziente(paziente);
+                  //await userRepository.createPaziente(paziente);
 
+                  await authController.registerWithEmailAndPassword(
+                      nome,
+                      cognome,
+                      codiceFiscale,
+                      email,
+                      hashedPassword,
+                      selectedDate!);
+
+                  Get.toNamed(Routes.getHomeRoute());
                   // Puoi implementare la logica di navigazione o feedback all'utente qui
                 } else {
                   Get.snackbar(
@@ -175,7 +187,6 @@ class RegistrationScreen extends StatelessWidget {
                   );
                 }
               },
-              child: Text('Registrati'),
             ),
           ],
         ),

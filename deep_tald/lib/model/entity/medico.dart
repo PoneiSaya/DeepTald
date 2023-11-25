@@ -17,8 +17,9 @@ class Medico extends Utente {
     this._elencoPazienti.add(pz);
   }
 
-  toJson() {
+  toJson(String? id) {
     return {
+      'uid': id,
       "Nome": super.getNome,
       "Cognome": super.getCognome,
       "CodiceFiscale": super.getCodiceFiscale,

@@ -34,8 +34,9 @@ class Paziente extends Utente {
     return paziente;
   }
 
-  toJson() {
+  toJson(String? id) {
     return {
+      'uid': id,
       "Nome": super.getNome,
       "Cognome": super.getCognome,
       "CodiceFiscale": super.getCodiceFiscale,

@@ -12,7 +12,7 @@ class UserRepository extends GetxController {
   createPaziente(Paziente paziente) async {
     await _db
         .collection("Pazienti")
-        .add(paziente.toJson())
+        .add(paziente.toJson(null))
         .whenComplete(() => Get.snackbar("Success", "Tutto ok",
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green,
@@ -29,7 +29,7 @@ class UserRepository extends GetxController {
   createMedico(Medico medico) async {
     await _db
         .collection("Medico")
-        .add(medico.toJson())
+        .add(medico.toJson(null))
         .whenComplete(() => Get.snackbar("Success", "Tutto ok",
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green,
