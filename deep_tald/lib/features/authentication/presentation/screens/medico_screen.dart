@@ -85,6 +85,15 @@ class _MedicoScreenState extends State<MedicoScreen> {
                       // ...
                     },
                   ),
+                  CardDeepTald(
+                    'assets/images/gestire.png',
+                    'Prova Logout!',
+                    'LogOut',
+                    //logout
+                    () {
+                      _controller.logout();
+                    },
+                  ),
                 ],
               ),
             ),

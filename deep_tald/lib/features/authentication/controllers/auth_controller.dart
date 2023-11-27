@@ -34,6 +34,15 @@ class AuthController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+
+    //vedi se c'è un utente loggato con shared preferences
+    _prefs.then((SharedPreferences prefs) {
+      String? email = prefs.getString('email');
+      String? password = prefs.getString('password');
+      if (email != null && password != null) {
+        loginWithEmailPassword(email, password);
+      }
+    });
     _user = Rx<User?>(auth.currentUser);
     //pensalo come lo stato dell'utente che se cambia hai "notifiche"
     _user.bindStream(auth.userChanges());
@@ -47,7 +56,6 @@ class AuthController extends GetxController {
     //Cerca nel database se l'utente è nella collection pazienti
     //se si allora vai alla home paziente
     //se no vai alla home medico
-
     if (user != null) {
       Future<Map> data = userRepository.searchPazientiForUID(user.uid);
       data.then((value) => {
@@ -116,6 +124,10 @@ class AuthController extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(
           email: email, password: hashPassword(password));
+      await _prefs.then((SharedPreferences prefs) {
+        prefs.setString('email', email);
+        prefs.setString('password', password);
+      });
     } catch (e) {
       Get.snackbar(
         'Errore nel login',
@@ -128,6 +140,10 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       await auth.signOut();
+      await _prefs.then((SharedPreferences prefs) {
+        prefs.remove('email');
+        prefs.remove('password');
+      });
     } catch (e) {
       Get.snackbar(
         'Errore nel logout',
