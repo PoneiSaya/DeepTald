@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       ),
       // Utilizza il widget principale della tua applicazione
 
-      initialRoute: Routes.getRegistrationRoute(),
+      initialRoute: Routes.getInitialScren(),
       getPages: Routes
           .routes, //anzichè regitration dovremo mettere una gif che carica
     );
