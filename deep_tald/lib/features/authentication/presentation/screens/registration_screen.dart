@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
 import '../../../../routes/routes.dart';
 
@@ -99,45 +100,271 @@ class RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   Widget _buildStep1(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextfield(control: nomeController, hintString: "Nome"),
-        CustomTextfield(control: cognomeController, hintString: "Cognome"),
-        Button(
-          onPressed: () => _goToNextStep(),
-          buttonText: 'Avanti',
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+      // QUI CI VA APPBAR QUANDO SARA PRONTA
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 182.0),
+            SizedBox(
+              width: 317,
+              child: Text(
+                "Nome",
+                style: GoogleFonts.rubik(
+                  color: const Color.fromARGB(255, 24, 24, 23),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            CustomTextfield(
+              control: nomeController,
+              hintString: "Inserisci nome",
+              isObscureText: false,
+            ),
+            const SizedBox(height: 35),
+            SizedBox(
+              width: 317,
+              child: Text(
+                "Cognome",
+                style: GoogleFonts.rubik(
+                  color: const Color.fromARGB(255, 24, 24, 23),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            CustomTextfield(
+              control: cognomeController,
+              hintString: "Inserisci cognome",
+              isObscureText: false,
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 100.0),
+              // alignment: Alignment.bottomCenter,
+              child: Column(
+                children: [
+                  Button(
+                    onPressed: () {
+                      String nome = nomeController.text.trim();
+                      String cognome = cognomeController.text.trim();
+                      if (nome.isNotEmpty && cognome.isNotEmpty) {
+                        _goToNextStep();
+                      } else {
+                        Get.snackbar(
+                          'Campi vuoti',
+                          'Compila tutti i campi',
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                      }
+                    },
+                    buttonText: 'Avanti',
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
   Widget _buildStep2(BuildContext context) {
-    return Column(
-      children: [
-        Text('Data di Nascita:'),
-        ElevatedButton(
-          onPressed: () => _selectDate(context),
-          child: Text('Seleziona Data'),
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+      // QUI CI VA APPBAR QUANDO SARA PRONTA
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 182.0),
+            SizedBox(
+              width: 317,
+              child: Text(
+                "Data di nascita",
+                style: GoogleFonts.rubik(
+                  color: const Color.fromARGB(255, 24, 24, 23),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => _selectDate(context),
+              child: Text('Seleziona Data'),
+            ),
+            const SizedBox(height: 35),
+            SizedBox(
+              width: 317,
+              child: Text(
+                "Codice Fiscale",
+                style: GoogleFonts.rubik(
+                  color: const Color.fromARGB(255, 24, 24, 23),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            CustomTextfield(
+              control: codiceFiscaleController,
+              hintString: "Inserisci Codice Fiscale",
+              isObscureText: false,
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 100.0),
+              // alignment: Alignment.bottomCenter,
+              child: Column(
+                children: [
+                  Button(
+                    onPressed: () async {
+                      String codiceFiscale =
+                          codiceFiscaleController.text.trim();
+                      if (codiceFiscale.isNotEmpty &&
+                          selectedDate != null &&
+                          isValidCodiceFiscale(codiceFiscale)) {
+                        bool isCodiceFiscaleTaken =
+                            await user.isCodiceFiscaleTaken(codiceFiscale);
+                        if (isCodiceFiscaleTaken) {
+                          Get.snackbar(
+                            'Codice fiscale già in uso',
+                            'Ricompila',
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                          currentStep = currentStep - 1;
+                        }
+                        _goToNextStep();
+                      } else {
+                        Get.snackbar(
+                          'Campi vuoti',
+                          'Compila tutti i campi',
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                      }
+                    },
+                    buttonText: 'Avanti',
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        CustomTextfield(
-            control: codiceFiscaleController, hintString: "Codice fiscale"),
-        Button(
-          onPressed: () => _goToNextStep(),
-          buttonText: 'Avanti',
-        ),
-      ],
+      ),
     );
   }
 
   Widget _buildStep3(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextfield(control: emailController, hintString: "Email"),
-        TextField(
-          controller: passwordController,
-          decoration: InputDecoration(labelText: 'Password'),
-          obscureText: true,
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+      // QUI CI VA APPBAR QUANDO SARA PRONTA
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 182.0),
+            SizedBox(
+              width: 317,
+              child: Text(
+                "Email",
+                style: GoogleFonts.rubik(
+                  color: const Color.fromARGB(255, 24, 24, 23),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            CustomTextfield(
+              control: emailController,
+              hintString: "Inserisci email",
+              isObscureText: false,
+            ),
+            const SizedBox(height: 35),
+            SizedBox(
+              width: 317,
+              child: Text(
+                "Password",
+                style: GoogleFonts.rubik(
+                  color: const Color.fromARGB(255, 24, 24, 23),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            CustomTextfield(
+              control: passwordController,
+              hintString: "Inserisci password",
+              isObscureText: true,
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 100.0),
+              // alignment: Alignment.bottomCenter,
+              child: Column(
+                children: [
+                  Button(
+                    onPressed: () async {
+                      String email = emailController.text.trim();
+                      String codiceFiscale =
+                          codiceFiscaleController.text.trim();
+                      String password = passwordController.text.trim();
+                      String nome = nomeController.text.trim();
+                      String hashedPassword = hashPassword(password);
+                      String cognome = cognomeController.text.trim();
+
+                      if (email.isNotEmpty &&
+                          nome.isNotEmpty &&
+                          cognome.isNotEmpty &&
+                          codiceFiscale.isNotEmpty &&
+                          password.isNotEmpty &&
+                          selectedDate != null &&
+                          isValidEmail(email) &&
+                          isValidCodiceFiscale(codiceFiscale)) {
+                        Paziente paziente = Paziente(
+                          nome,
+                          cognome,
+                          codiceFiscale,
+                          email,
+                          hashedPassword,
+                          selectedDate!,
+                        );
+
+                        await authController.registerWithEmailAndPassword(
+                          nome,
+                          cognome,
+                          codiceFiscale,
+                          email,
+                          hashedPassword,
+                          selectedDate!,
+                        );
+                      } else {
+                        Get.snackbar(
+                          'Campi vuoti',
+                          'Compila tutti i campi',
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                      }
+                    },
+                    buttonText: 'Registrati',
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
+
+      ),
         Button(
           onPressed: () async {
             String email = emailController.text.trim();
@@ -184,6 +411,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
           buttonText: 'Registrati',
         ),
       ],
+
     );
   }
 }

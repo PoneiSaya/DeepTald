@@ -4,9 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTextfield extends StatefulWidget {
   final TextEditingController control;
   final String hintString;
+  final bool isObscureText;
 
   const CustomTextfield(
-      {super.key, required this.control, required this.hintString});
+      {super.key,
+      required this.control,
+      required this.hintString,
+      required this.isObscureText});
 
   @override
   State<CustomTextfield> createState() => _CustomTextfieldState();
@@ -20,6 +24,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       width: 317,
       child: TextField(
           controller: widget.control,
+          obscureText: widget.isObscureText,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.never,
             border: OutlineInputBorder(
