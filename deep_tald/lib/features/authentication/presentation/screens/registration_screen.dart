@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Button.dart';
+import 'package:deep_tald/features/authentication/presentation/widget/Tab.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/custom_textfield.dart';
 import 'package:deep_tald/model/entity/paziente.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -105,8 +106,20 @@ class RegistrationScreenState extends State<RegistrationScreen> {
       // QUI CI VA APPBAR QUANDO SARA PRONTA
       body: Center(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 182.0),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Text(
+                "Come ti chiami?",
+                style: GoogleFonts.rubik(
+                    color: const Color.fromARGB(255, 24, 24, 23),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30),
+              ),
+            ),
             SizedBox(
               width: 317,
               child: Text(
@@ -183,6 +196,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
         child: Column(
           children: [
             const SizedBox(height: 182.0),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Text(
+                "Dati Personali",
+                style: GoogleFonts.rubik(
+                    color: const Color.fromARGB(255, 24, 24, 23),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30),
+              ),
+            ),
             SizedBox(
               width: 317,
               child: Text(
@@ -270,6 +294,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
         child: Column(
           children: [
             const SizedBox(height: 182.0),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Text(
+                "Credenziali",
+                style: GoogleFonts.rubik(
+                    color: const Color.fromARGB(255, 24, 24, 23),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30),
+              ),
+            ),
             SizedBox(
               width: 317,
               child: Text(
