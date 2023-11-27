@@ -361,56 +361,6 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                 ],
               ),
             ),
-            Button(
-              onPressed: () async {
-                String email = emailController.text.trim();
-                String codiceFiscale = codiceFiscaleController.text.trim();
-                String password = passwordController.text.trim();
-                String nome = nomeController.text.trim();
-                String hashedPassword = hashPassword(password);
-                String cognome = cognomeController.text.trim();
-
-                if (email.isNotEmpty &&
-                    nome.isNotEmpty &&
-                    cognome.isNotEmpty &&
-                    codiceFiscale.isNotEmpty &&
-                    password.isNotEmpty &&
-                    selectedDate != null &&
-                    isValidEmail(email) &&
-                    isValidCodiceFiscale(codiceFiscale)) {
-                  //bool isEmailTaken = await userRepository.isEmailTaken(email);
-                  bool isCodiceFiscaleTaken =
-                      await user.isCodiceFiscaleTaken(codiceFiscale);
-                  if (isCodiceFiscaleTaken) {
-                    Get.snackbar(
-                      'Codice Fiscale già registrato',
-                      'Questo Codice Fiscale è già associato a un account.',
-                      snackPosition: SnackPosition.BOTTOM,
-                    );
-                    return;
-                  }
-                  // Crea un'istanza di Paziente
-                  Paziente paziente = Paziente(nome, cognome, codiceFiscale,
-                      email, hashedPassword, selectedDate!);
-                  // Chiamare il metodo di registrazione del repository Paziente
-                  //await userRepository.createPaziente(paziente);
-                  await authController.registerWithEmailAndPassword(
-                      nome,
-                      cognome,
-                      codiceFiscale,
-                      email,
-                      hashedPassword,
-                      selectedDate!);
-                } else {
-                  Get.snackbar(
-                    'Campi vuoti',
-                    'Compila tutti i campi',
-                    snackPosition: SnackPosition.BOTTOM,
-                  );
-                }
-              },
-              buttonText: 'Registrati',
-            ),
           ],
         ),
       ),
