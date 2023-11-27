@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       String password = _passwordController.text.trim();
                       if (email.isNotEmpty && password.isNotEmpty) {
                         authController.loginWithEmailPassword(email, password);
-                        // Puoi implementare la logica di navigazione o feedback all'utente qui
+                        // Ti porta sulla home a perchè c'è un observer in auth controller
                       } else {
                         Get.snackbar(
                           'Campi vuoti',

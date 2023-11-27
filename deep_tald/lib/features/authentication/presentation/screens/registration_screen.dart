@@ -6,12 +6,10 @@ import 'package:deep_tald/features/authentication/presentation/widget/Button.dar
 import 'package:deep_tald/features/authentication/presentation/widget/Tab.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/custom_textfield.dart';
 import 'package:deep_tald/model/entity/paziente.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home_screen.dart';
 import '../../../../routes/routes.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -366,15 +364,6 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           selectedDate != null &&
                           isValidEmail(email) &&
                           isValidCodiceFiscale(codiceFiscale)) {
-                        Paziente paziente = Paziente(
-                          nome,
-                          cognome,
-                          codiceFiscale,
-                          email,
-                          hashedPassword,
-                          selectedDate!,
-                        );
-
                         await authController.registerWithEmailAndPassword(
                           nome,
                           cognome,
@@ -383,6 +372,8 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           hashedPassword,
                           selectedDate!,
                         );
+
+                        Get.toNamed(Routes.getHomePazienteRoute());
                       } else {
                         Get.snackbar(
                           'Campi vuoti',

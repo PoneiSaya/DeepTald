@@ -1,10 +1,10 @@
+import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/medico_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/paziente_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
 import 'package:get/get.dart';
 
 import '../features/authentication/presentation/screens/profile_screen.dart';
-import '../features/authentication/presentation/screens/home_screen.dart';
 import '../features/authentication/presentation/screens/login_screen.dart';
 
 class Routes {
@@ -15,6 +15,7 @@ class Routes {
   static String profile = "/profile";
   static String homeMedico = "/homeMedico";
   static String homePaziente = "/homePaziente";
+  static String initialScreen = "/initialScreen";
 
   //qui crea i getter
   static String getHomeRoute() => home;
@@ -23,13 +24,11 @@ class Routes {
   static String getRegistrationRoute() => registration;
   static String getHomeMedicoRoute() => homeMedico;
   static String getHomePazienteRoute() => homePaziente;
+  static String getInitialScren() => initialScreen;
 
   // lista di tutte le routes
   static List<GetPage> routes = [
-    GetPage(
-        page: () => const HomeScreen(),
-        name: home,
-        transition: Transition.circularReveal),
+    GetPage(page: () => const InitialScreen(), name: initialScreen),
     GetPage(page: () => const LoginScreen(), name: login),
     GetPage(page: () => const ProfileScreen(), name: profile),
     GetPage(page: () => RegistrationScreen(), name: registration),

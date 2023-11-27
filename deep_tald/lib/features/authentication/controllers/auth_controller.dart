@@ -1,8 +1,4 @@
 import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
-import 'package:deep_tald/features/authentication/presentation/screens/home_screen.dart';
-import 'package:deep_tald/features/authentication/presentation/screens/login_screen.dart';
-import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
-import 'package:deep_tald/model/entity/medico.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,9 +25,9 @@ class AuthController extends GetxController {
   _initialScreen(User? user) {
     if (user == null) {
       Get.offAll(() =>
-          RegistrationScreen()); //se al posto di login metti home ti porta alla home
+          const InitialScreen()); //se al posto di login metti home ti porta alla home
     } else {
-      Get.toNamed(Routes.getHomeRoute()); //quando avremo una home
+      Get.toNamed(Routes.getHomePazienteRoute()); //quando avremo una home
     }
   }
 
@@ -42,12 +38,11 @@ class AuthController extends GetxController {
       String email,
       String password,
       DateTime dataDiNascita) async {
-    print("sono nel metodo di registrazione");
     try {
       // Registra l'utente con Firebase Authentication
       final Paziente pz = Paziente(
           nome, cognome, codiceFiscale, email, password, dataDiNascita);
-      var result = await auth
+      await auth
           .createUserWithEmailAndPassword(
             email: email,
             password: password,
@@ -67,7 +62,6 @@ class AuthController extends GetxController {
 
   Future<void> loginWithEmailPassword(String email, String password) async {
     try {
-      print("password = " + password);
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
       Get.snackbar(
