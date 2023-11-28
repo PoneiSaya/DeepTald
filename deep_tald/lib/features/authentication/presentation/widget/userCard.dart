@@ -21,9 +21,9 @@ class userCard extends StatelessWidget{
       child: ListTile(
           leading: CircleAvatar(backgroundImage: AssetImage(imagePath)),
           title: Text("$nome $cognome"),
-          trailing:  ElevatedButton(
+          trailing:  IconButton(
+            icon: Icon(Icons.delete),
             onPressed: () {},
-            child: const Text("Info")
           )
       ),
     );

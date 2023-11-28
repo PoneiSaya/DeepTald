@@ -13,7 +13,9 @@ class AdminHomeScreen extends StatefulWidget{
 }
 
 class AdminHomeScreenState extends State<AdminHomeScreen>{
+  TextEditingController _textController = TextEditingController();
   bool visualizzaMedici = true;
+  late List<Utente> utentiVisualizzati; 
 
   @override
   Widget build(BuildContext context) {
@@ -29,32 +31,46 @@ class AdminHomeScreenState extends State<AdminHomeScreen>{
         margin: const EdgeInsets.only(top: 30.0, bottom: 10.0, left: 10.0, right: 10.0),
         child: Column(
           children: [
-            const SearchBar(),
+            TextField(
+              controller: _textController,
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                suffixIcon: IconButton(icon: Icon(Icons.clear), onPressed: _clearText,),
+                labelText: visualizzaMedici? "Cerca Medico" : "Cerca Paziente",
+                border: OutlineInputBorder()
+                ),
+              onChanged: (value) => {
+                setState(() {
+                  leggiUtenti(value);
+                })
+              },
+            ),
             ElevatedButton(onPressed: () => {
               onClickButton()
             }, child: Text(visualizzaMedici? "Visualizza Pazienti" : "Visualizza Medici")),
             Align(
               alignment: Alignment.centerLeft,
-              child: Text("Medici presenti nel sistema", 
+              child: Text(visualizzaMedici? "Medici Presenti Nel Sistema" : "Pazienti Presenti Nel Sistema", 
               style: TextStyle(
                 fontWeight: FontWeight.bold
               ))
               ),
             FutureBuilder(
-              future: leggiUtenti(),
+              future: leggiUtenti(_textController.text),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Errore: ${snapshot.error}');
                 } else{
-                  List<Utente> utenti = snapshot.data ?? [];
-                  return Expanded( 
-                    child: ListView.builder(
-                    itemCount: utenti.length,
-                    itemBuilder: (context, index) {
-                    return userCard(ruolo: ruolo, nome: utenti[index].nome, cognome: utenti[index].cognome);
-                    },
+                    utentiVisualizzati = snapshot.data ?? [];
+                    return Expanded( 
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: utentiVisualizzati.length,
+                        itemBuilder: (context, index) {
+                          return userCard(ruolo: ruolo, nome: utentiVisualizzati[index].nome, cognome: utentiVisualizzati[index].cognome);
+                      },
                   ));
                 }
               },
@@ -70,18 +86,32 @@ class AdminHomeScreenState extends State<AdminHomeScreen>{
     });
   }
 
-  Future<List<Utente>> leggiUtenti() async {
+  void _clearText() {
+    _textController.clear();
+  }
+
+  Future<List<Utente>> leggiUtenti(String searchText) async {
     CollectionReference collection;
+    QuerySnapshot querySnapshot;
+
     if(visualizzaMedici){
       collection = FirebaseFirestore.instance.collection('Medico');
     }
     else{
       collection = FirebaseFirestore.instance.collection('Pazienti');
     }
-    QuerySnapshot querySnapshot = await collection.get();
-    
-    List<Utente> medici =
+
+    if(searchText.isEmpty){
+      querySnapshot = await collection.get();
+    }else{
+      querySnapshot = await collection
+      .where('Nome', isGreaterThanOrEqualTo: searchText)
+      .where('Nome', isLessThanOrEqualTo: searchText + '\uf8ff')
+      .get();
+    }
+    List<Utente> utenti =
         querySnapshot.docs.map((doc) => Paziente.fromDocumentSnapshot(doc)).toList();
-    return medici;
+
+    return utenti;
   }
 }
