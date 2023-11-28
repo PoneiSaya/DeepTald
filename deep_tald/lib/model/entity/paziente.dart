@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import './utente.dart';
 import './medico.dart';
 import './report.dart';
@@ -44,5 +46,17 @@ class Paziente extends Utente {
       "Password": super.getPassword,
       "DataDiNascita": super.getDataDiNascita
     };
+  }
+
+  factory Paziente.fromDocumentSnapshot(DocumentSnapshot doc){
+    Map<String, dynamic> dati = doc.data() as Map<String, dynamic>;
+    return Paziente(
+      dati['Nome'],
+      dati['Cognome'],
+      dati['CodiceFiscale'],
+      dati['Email'],
+      dati['Password'],
+      DateTime.now()
+    );
   }
 }
