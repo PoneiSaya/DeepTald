@@ -1,4 +1,3 @@
-import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,20 +14,6 @@ class AuthController extends GetxController {
   void onReady() {
     super.onReady();
     _user = Rx<User?>(auth.currentUser);
-    //pensalo come lo stato dell'utente che se cambia hai "notifiche"
-    _user.bindStream(auth.userChanges());
-    // è un metodo che serve a lanciare il metodo _initialScreen basandosi sullo stato dell'user
-    ever(_user, _initialScreen);
-  }
-
-  ///metodo privato che fa da route per la prima pagina
-  _initialScreen(User? user) {
-    if (user == null) {
-      Get.offAll(() =>
-          const InitialScreen()); //se al posto di login metti home ti porta alla home
-    } else {
-      Get.toNamed(Routes.getHomePazienteRoute()); //quando avremo una home
-    }
   }
 
   Future<void> registerWithEmailAndPassword(
@@ -75,6 +60,7 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       await auth.signOut();
+      Get.toNamed(Routes.initialScreen);
     } catch (e) {
       Get.snackbar(
         'Errore nel logout',

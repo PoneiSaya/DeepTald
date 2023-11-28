@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:crypto/crypto.dart';
 import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Button.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/custom_textfield.dart';
-import 'package:deep_tald/model/entity/paziente.dart';
 import 'package:flutter/material.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
@@ -12,6 +10,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../routes/routes.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({super.key});
+
   @override
   RegistrationScreenState createState() => RegistrationScreenState();
 }
@@ -74,7 +74,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
   String hashPassword(String password) {
     var hash = sha256.convert(utf8.encode(password));
     String hashedPassword = hash.toString();
-    return hashedPassword;
+    return password;
   }
 
   @override
@@ -338,7 +338,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           selectedDate!,
                         );
 
-                        Get.toNamed(Routes.getHomePazienteRoute());
+                        Get.toNamed(Routes.getNavbar());
                       } else {
                         Get.snackbar(
                           'Campi vuoti',
