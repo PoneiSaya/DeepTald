@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,6 +20,7 @@ class AuthController extends GetxController {
   late String cognome;
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final GetStorage userStorage = GetStorage();
 
   final UserRepository userRepository = UserRepository();
 
@@ -36,13 +38,20 @@ class AuthController extends GetxController {
     super.onReady();
 
     //vedi se c'è un utente loggato con shared preferences
-    _prefs.then((SharedPreferences prefs) {
+    //prendi email e password da user storage
+    //se c'è un utente loggato allora fai login
+    dynamic email = userStorage.read("email");
+    dynamic password = userStorage.read("password");
+    if (email != null && password != null) {
+      loginWithEmailPassword(email, password);
+    }
+    /* _prefs.then((SharedPreferences prefs) {
       String? email = prefs.getString('email');
       String? password = prefs.getString('password');
       if (email != null && password != null) {
         loginWithEmailPassword(email, password);
       }
-    });
+    }); */
     _user = Rx<User?>(auth.currentUser);
     //pensalo come lo stato dell'utente che se cambia hai "notifiche"
     _user.bindStream(auth.userChanges());
@@ -124,10 +133,12 @@ class AuthController extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(
           email: email, password: hashPassword(password));
-      await _prefs.then((SharedPreferences prefs) {
+      userStorage.write("email", email);
+      userStorage.write("password", password);
+      /* await _prefs.then((SharedPreferences prefs) {
         prefs.setString('email', email);
         prefs.setString('password', password);
-      });
+      }); */
     } catch (e) {
       Get.snackbar(
         'Errore nel login',
@@ -140,10 +151,12 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       await auth.signOut();
-      await _prefs.then((SharedPreferences prefs) {
+      userStorage.remove("email");
+      userStorage.remove("password");
+      /* await _prefs.then((SharedPreferences prefs) {
         prefs.remove('email');
         prefs.remove('password');
-      });
+      }); */
     } catch (e) {
       Get.snackbar(
         'Errore nel logout',
