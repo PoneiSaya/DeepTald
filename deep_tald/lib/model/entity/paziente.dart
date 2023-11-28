@@ -50,7 +50,7 @@ class Paziente extends Utente {
 
   factory Paziente.fromDocumentSnapshot(DocumentSnapshot doc){
     Map<String, dynamic> dati = doc.data() as Map<String, dynamic>;
-    return Paziente(
+    Paziente paziente = Paziente(
       dati['Nome'],
       dati['Cognome'],
       dati['CodiceFiscale'],
@@ -58,5 +58,7 @@ class Paziente extends Utente {
       dati['Password'],
       DateTime.now()
     );
+    paziente.setid(doc.id);
+    return paziente;
   }
 }

@@ -69,7 +69,12 @@ class AdminHomeScreenState extends State<AdminHomeScreen>{
                         scrollDirection: Axis.vertical,
                         itemCount: utentiVisualizzati.length,
                         itemBuilder: (context, index) {
-                          return userCard(ruolo: ruolo, nome: utentiVisualizzati[index].nome, cognome: utentiVisualizzati[index].cognome);
+                          return userCard(ruolo: ruolo, utente: utentiVisualizzati[index],
+                            onDelete: (){
+                              setState(() {
+                                utentiVisualizzati.removeAt(index);
+                              });
+                            });
                       },
                   ));
                 }
@@ -110,7 +115,7 @@ class AdminHomeScreenState extends State<AdminHomeScreen>{
       .get();
     }
     List<Utente> utenti =
-        querySnapshot.docs.map((doc) => Paziente.fromDocumentSnapshot(doc)).toList();
+        querySnapshot.docs.map((doc) => Medico.fromDocumentSnapshot(doc)).toList();
 
     return utenti;
   }

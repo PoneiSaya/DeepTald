@@ -14,6 +14,16 @@ abstract class Utente {
       this._dataDiNascita);
 
   @protected
+  void setid(String id){
+    _id = id;
+  }
+
+  @protected
+  get getId{
+    return _id;
+  }
+
+  @protected
   get getNome {
     return nome;
   }
