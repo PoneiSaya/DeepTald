@@ -9,14 +9,6 @@ class UserRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  Future<Map> searchPazientiForUID(String uid) async {
-    return await _db
-        .collection("Pazienti")
-        .where("uid", isEqualTo: uid)
-        .get()
-        .then((value) => value.docs[0].data());
-  }
-
   createPaziente(Paziente paziente) async {
     await _db
         .collection("Pazienti")

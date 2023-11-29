@@ -1,8 +1,5 @@
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../controllers/auth_controller.dart';
 
 class MedicoScreen extends StatefulWidget {
   const MedicoScreen({Key? key}) : super(key: key);
@@ -14,12 +11,8 @@ class MedicoScreen extends StatefulWidget {
 class _MedicoScreenState extends State<MedicoScreen> {
   final int currentPageIndex = 0;
 
-  final AuthController _controller = Get.find<AuthController>();
-
   @override
   Widget build(BuildContext context) {
-    String nome = _controller.getNome();
-    String cognome = _controller.getCognome();
     return MaterialApp(
       home: Scaffold(
         //CI STA LA NAVIGATION BAR QUI GIUSTO PER PROVARE
@@ -49,13 +42,12 @@ class _MedicoScreenState extends State<MedicoScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
+            const Padding(
               padding: //padding sopra e a sinistra
-                  const EdgeInsets.only(left: 30, top: 30),
+                  EdgeInsets.only(left: 30, top: 30),
               child: Text(
-                'Ciao, Dr. $nome $cognome',
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                'Ciao Dr. Lambiase!  \u{1F44B}',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
@@ -83,15 +75,6 @@ class _MedicoScreenState extends State<MedicoScreen> {
                     'Gestisci',
                     () {
                       // ...
-                    },
-                  ),
-                  CardDeepTald(
-                    'assets/images/gestire.png',
-                    'Prova Logout!',
-                    'LogOut',
-                    //logout
-                    () {
-                      _controller.logout();
                     },
                   ),
                 ],
