@@ -16,6 +16,6 @@ class NavbarController extends GetxController {
 
   /**
    * TODO 
-   * Fare metodo che restituisce l'array di elementi della navbar vedendo che tipo di utente sei
+   * Fare metodo che restituisce l'array di elementi della navbar vedendo che tipo di user
    */
 }

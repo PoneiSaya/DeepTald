@@ -1,9 +1,7 @@
 import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
-import 'package:deep_tald/navbar/navbar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../widget/Button.dart';
 
 class PazienteScreen extends StatefulWidget {

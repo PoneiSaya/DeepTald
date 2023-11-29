@@ -28,8 +28,7 @@ class MyApp extends GetMaterialApp {
       // Utilizza il widget principale della tua applicazione
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.getNavbar(),
-      getPages: Routes
-          .routes, //anzichè regitration dovremo mettere una gif che carica
+      getPages: Routes.routes, //anzichè regitration dovremo mettere una gif
     );
   }
 }

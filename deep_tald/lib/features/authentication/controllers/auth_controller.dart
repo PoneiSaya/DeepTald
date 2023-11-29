@@ -40,7 +40,7 @@ class AuthController extends GetxController {
 
       _user = Rx<User?>(auth.currentUser);
     } catch (e) {
-      print("\n\nECCEZIONE FALLISCE LA REGISRRAZIONE\n\n");
+      print("\n\nECCEZIONE FALLISCE LA REGISTRAZIONE\n\n"); //fare get.snack
       print(e.toString());
     }
   }

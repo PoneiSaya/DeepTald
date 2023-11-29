@@ -9,7 +9,7 @@ import '../features/authentication/presentation/screens/profile_screen.dart';
 import '../features/authentication/presentation/screens/login_screen.dart';
 
 class Routes {
-  // per aggiungere nuove routes aggiungi qui le stringhe corrispondenti
+  // per aggiungere nuove routes aggiungi qui le stringhe corrispondenti.
 
   static String login = "/login";
   static String registration = "/registration";
