@@ -14,6 +14,7 @@ class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   UserRepository userRepository = UserRepository();
+  // ignore: unused_field
   late Rx<User?> _user = Rx<User?>(auth.currentUser);
   Utente? utente;
   NavbarController navbarController = Get.put(NavbarController());
@@ -22,18 +23,13 @@ class AuthController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    ever<User?>(_user, (_user) {
-      if (_user != null && _user.displayName == "medico") {
-        Get.toNamed(Routes.homeMedico);
-      }
-    });
     _user = Rx<User?>(auth.currentUser);
     if (auth.currentUser != null) {
       utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
           as Utente;
     }
     if (utente != null && auth.currentUser?.displayName == "paziente") {
-      //Rebuild all GetX from previous route
+      //Rebuild all GetX from previous routes
       navbarController.setUpForPaziente();
     } else if (utente != null && auth.currentUser?.displayName == "medico") {
       navbarController.setUpForMedico();
