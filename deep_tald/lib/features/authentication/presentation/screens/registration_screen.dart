@@ -104,11 +104,10 @@ class RegistrationScreenState extends State<RegistrationScreen> {
       // QUI CI VA APPBAR QUANDO SARA PRONTA
       body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 182.0),
             Padding(
-              padding: const EdgeInsets.only(bottom: 50),
+              padding: const EdgeInsets.only(right: 80, bottom: 50),
               child: Text(
                 "Come ti chiami?",
                 style: GoogleFonts.rubik(
@@ -195,7 +194,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
           children: [
             const SizedBox(height: 182.0),
             Padding(
-              padding: const EdgeInsets.only(bottom: 50),
+              padding: const EdgeInsets.only(right: 80, bottom: 50),
               child: Text(
                 "Dati Personali",
                 style: GoogleFonts.rubik(
@@ -293,7 +292,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
           children: [
             const SizedBox(height: 182.0),
             Padding(
-              padding: const EdgeInsets.only(bottom: 50),
+              padding: const EdgeInsets.only(right: 80, bottom: 50),
               child: Text(
                 "Credenziali",
                 style: GoogleFonts.rubik(
