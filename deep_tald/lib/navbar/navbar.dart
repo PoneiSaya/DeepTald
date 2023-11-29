@@ -28,10 +28,7 @@ class _NavbarState extends State<Navbar> {
           selectedItemColor: const Color(0xFF599BFF),
           currentIndex: navbarController.tabIndex,
           onTap: navbarController.changeTabIndex,
-          items: [
-            _bottombarItem(Icons.home, "Home"),
-            _bottombarItem(Icons.manage_accounts_sharp, "Profilo")
-          ],
+          items: navbarController.items,
         ),
       );
     });

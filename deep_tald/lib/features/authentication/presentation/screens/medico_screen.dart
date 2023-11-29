@@ -15,30 +15,6 @@ class _MedicoScreenState extends State<MedicoScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        //CI STA LA NAVIGATION BAR QUI GIUSTO PER PROVARE
-        bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int index) {},
-          indicatorColor: Colors.blue,
-          selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              selectedIcon: Icon(Icons.home),
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: Badge(child: Icon(Icons.notifications_sharp)),
-              label: 'Notifiche',
-            ),
-            NavigationDestination(
-              icon: Badge(
-                label: Text('2'),
-                child: Icon(Icons.man),
-              ),
-              label: 'Profilo',
-            ),
-          ],
-        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

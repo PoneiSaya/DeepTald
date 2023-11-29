@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:deep_tald/model/entity/medico.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -87,8 +88,9 @@ class AuthController extends GetxController {
           as Utente;
       //se il display name è medico vai alla home medico
       if (auth.currentUser?.displayName == "medico") {
+        print('sono nel lato giusto');
         navbarController.setUpForMedico();
-        Get.toNamed(Routes.navbar);
+        Get.toNamed(Routes.homeMedico);
       } else if (auth.currentUser?.displayName == "paziente") {
         navbarController.setUpForPaziente();
         Get.toNamed(Routes.navbar);
