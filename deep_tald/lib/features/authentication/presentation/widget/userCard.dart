@@ -16,21 +16,34 @@ class userCard extends StatelessWidget{
        imagePath = "assets/images/doctor.png";
     }
     else {
-      imagePath = "assets/images/patient.png";
+      imagePath = "assets/images/patient2.png";
     }
       
-    return Card(
-      child: ListTile(
-          leading: CircleAvatar(backgroundImage: AssetImage(imagePath)),
-          title: Text(utente.getNome + " " +utente.getCognome),
-          trailing:  IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              eliminaOggetto(utente.getId);
-              onDelete();
-            },
-          )
+    return Container(
+      margin: EdgeInsets.only(left: 8.0, right: 8.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
       ),
+      child: Card(
+        shadowColor: Colors.black,
+        color: Color.fromRGBO(191,223,225, 1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: EdgeInsets.all(0.2),
+          child: ListTile(
+            leading: CircleAvatar(backgroundImage: AssetImage(imagePath)),
+            title: Text(utente.getNome + " " +utente.getCognome),
+            trailing:  IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                eliminaOggetto(utente.getId);
+                onDelete();
+              },
+            )
+        ),
+      )
+      )
     );
   }
 

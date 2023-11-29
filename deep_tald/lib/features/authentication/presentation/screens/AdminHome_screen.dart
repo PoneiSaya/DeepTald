@@ -12,7 +12,8 @@ class AdminHomeScreen extends StatefulWidget{
   AdminHomeScreenState createState() => AdminHomeScreenState();
 }
 
-class AdminHomeScreenState extends State<AdminHomeScreen>{
+class AdminHomeScreenState extends State
+<AdminHomeScreen>{
   TextEditingController _textController = TextEditingController();
   bool visualizzaMedici = true;
   late List<Utente> utentiVisualizzati; 
@@ -28,58 +29,92 @@ class AdminHomeScreenState extends State<AdminHomeScreen>{
     }
     return Container(
         color: Colors.white,
-        margin: const EdgeInsets.only(top: 30.0, bottom: 10.0, left: 10.0, right: 10.0),
+        margin: const EdgeInsets.only(top: 25.0, bottom: 10.0, left: 10.0, right: 10.0),
         child: Column(
           children: [
-            TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                suffixIcon: IconButton(icon: Icon(Icons.clear), onPressed: _clearText,),
-                labelText: visualizzaMedici? "Cerca Medico" : "Cerca Paziente",
-                border: OutlineInputBorder()
-                ),
-              onChanged: (value) => {
-                setState(() {
-                  leggiUtenti(value);
-                })
-              },
-            ),
-            ElevatedButton(onPressed: () => {
-              onClickButton()
-            }, child: Text(visualizzaMedici? "Visualizza Pazienti" : "Visualizza Medici")),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(visualizzaMedici? "Medici Presenti Nel Sistema" : "Pazienti Presenti Nel Sistema", 
-              style: TextStyle(
-                fontWeight: FontWeight.bold
-              ))
+            Container(
+              margin: const EdgeInsets.only(top: 30),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(0),
+                color: Color.fromRGBO(244,67,54, 0.0)
               ),
-            FutureBuilder(
-              future: leggiUtenti(_textController.text),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Errore: ${snapshot.error}');
-                } else{
-                    utentiVisualizzati = snapshot.data ?? [];
-                    return Expanded( 
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: utentiVisualizzati.length,
-                        itemBuilder: (context, index) {
-                          return userCard(ruolo: ruolo, utente: utentiVisualizzati[index],
-                            onDelete: (){
-                              setState(() {
-                                utentiVisualizzati.removeAt(index);
-                              });
-                            });
-                      },
-                  ));
-                }
-              },
+              child : ElevatedButton( 
+                onPressed: () => { onClickButton() },
+               style: ElevatedButton.styleFrom(
+                primary: Color.fromRGBO(89,155,255, 1), // Trasparenza direttamente nel pulsante
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+               ),
+               child: Text(visualizzaMedici? "Visualizza Pazienti" : "Visualizza Medici"),
+               )
             ),
+            Container(
+              margin: EdgeInsets.only(top: 35.0, left: 10.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(visualizzaMedici? "Medici Presenti Nel Sistema" : "Pazienti Presenti Nel Sistema", 
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+               ))
+              ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: FutureBuilder(
+                future: leggiUtenti(_textController.text),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Errore: ${snapshot.error}');
+                  } else{
+                      utentiVisualizzati = snapshot.data ?? [];
+                      return ListView.builder(  
+                          scrollDirection: Axis.vertical,
+                          itemCount: utentiVisualizzati.length,
+                          itemBuilder: (context, index) {
+                            return userCard(ruolo: ruolo, utente: utentiVisualizzati[index],
+                              onDelete: (){
+                                setState(() {
+                                  utentiVisualizzati.removeAt(index);
+                                });
+                              });
+                        }
+                      );
+                  }
+                },
+              ),
+              ),
+            Container(
+              margin: const EdgeInsets.only(top: 20.0, bottom: 10.0, left: 20.0, right: 20.0),
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(234,234,234, 1),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                          color: Colors.black, // Colore del bordo (nero)
+                          width: 1.0, // Larghezza del bordo in pixel
+                        ),
+              ),
+              child: TextField(
+                  controller: _textController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: IconButton(icon: Icon(Icons.clear), onPressed: _clearText,),
+                    labelText: visualizzaMedici? "Cerca Medico" : "Cerca Paziente",
+                    labelStyle: TextStyle(
+                      color: Colors.black, // Colore desiderato per il testo del label
+                    ),
+                    border: InputBorder.none
+                    ),
+                  onChanged: (value) => {
+                    setState(() {
+                      leggiUtenti(value);
+                    })
+                  },
+                ),
+            )
           ],
         )
     );
@@ -106,17 +141,21 @@ class AdminHomeScreenState extends State<AdminHomeScreen>{
       collection = FirebaseFirestore.instance.collection('Pazienti');
     }
 
-    if(searchText.isEmpty){
-      querySnapshot = await collection.get();
-    }else{
-      querySnapshot = await collection
-      .where('Nome', isGreaterThanOrEqualTo: searchText)
-      .where('Nome', isLessThanOrEqualTo: searchText + '\uf8ff')
-      .get();
-    }
+    querySnapshot = await collection.get();
     List<Utente> utenti =
-        querySnapshot.docs.map((doc) => Medico.fromDocumentSnapshot(doc)).toList();
+      querySnapshot.docs.map((doc) => Medico.fromDocumentSnapshot(doc)).toList();
+
+    if(searchText.isNotEmpty){
+      return filtraUtenti(searchText, utenti);
+    }
 
     return utenti;
+  }
+
+  List<Utente> filtraUtenti(String searchText, List<Utente> allUtenti){
+    return allUtenti.where(
+      (utente) => utente.nome.toLowerCase().contains(searchText.toLowerCase()) || 
+      utente.cognome.toLowerCase().contains(searchText.toLowerCase())
+      ).toList();
   }
 }
