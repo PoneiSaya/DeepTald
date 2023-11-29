@@ -16,16 +16,20 @@ class _PazienteScreenState extends State<PazienteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String? nome = authController.utente?.nome;
+    if (nome == null) nome = "...";
+    String? cognome = authController.utente?.cognome;
+
     return MaterialApp(
       home: Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Padding(
+            Padding(
               padding: //padding sopra e a sinistra
                   EdgeInsets.only(left: 30, top: 30),
               child: Text(
-                'Ciao Paolo!  \u{1F44B}',
+                'Ciao $nome!  \u{1F44B}',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),

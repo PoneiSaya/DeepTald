@@ -74,7 +74,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
   String hashPassword(String password) {
     var hash = sha256.convert(utf8.encode(password));
     String hashedPassword = hash.toString();
-    return password;
+    return hashedPassword;
   }
 
   @override
