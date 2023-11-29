@@ -5,7 +5,6 @@ import 'package:deep_tald/features/authentication/presentation/screens/initial_s
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../model/entity/paziente.dart';
@@ -18,8 +17,6 @@ class AuthController extends GetxController {
   bool isPaziente = false;
   late String nome;
   late String cognome;
-
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   final GetStorage userStorage = GetStorage();
 
   final UserRepository userRepository = UserRepository();
@@ -37,7 +34,6 @@ class AuthController extends GetxController {
   void onReady() {
     super.onReady();
 
-    //vedi se c'è un utente loggato con shared preferences
     //prendi email e password da user storage
     //se c'è un utente loggato allora fai login
     dynamic email = userStorage.read("email");
@@ -45,13 +41,7 @@ class AuthController extends GetxController {
     if (email != null && password != null) {
       loginWithEmailPassword(email, password);
     }
-    /* _prefs.then((SharedPreferences prefs) {
-      String? email = prefs.getString('email');
-      String? password = prefs.getString('password');
-      if (email != null && password != null) {
-        loginWithEmailPassword(email, password);
-      }
-    }); */
+
     _user = Rx<User?>(auth.currentUser);
     //pensalo come lo stato dell'utente che se cambia hai "notifiche"
     _user.bindStream(auth.userChanges());
@@ -61,7 +51,6 @@ class AuthController extends GetxController {
 
   ///metodo privato che fa da route per la prima pagina
   _initialScreen(User? user) {
-    //get the type of user
     //Cerca nel database se l'utente è nella collection pazienti
     //se si allora vai alla home paziente
     //se no vai alla home medico
@@ -82,16 +71,6 @@ class AuthController extends GetxController {
     } else {
       Get.offAll(() => const InitialScreen());
     }
-    /* if (user == null) {
-      Get.offAll(() =>
-          const InitialScreen()); //se al posto di login metti home ti porta alla home
-    } else {
-      if (isPaziente) {
-        
-      } else {
-        Get.toNamed(Routes.getHomePazienteRoute()); //quando avremo una home
-      }
-    } */
   }
 
   String hashPassword(String password) {
@@ -135,10 +114,6 @@ class AuthController extends GetxController {
           email: email, password: hashPassword(password));
       userStorage.write("email", email);
       userStorage.write("password", password);
-      /* await _prefs.then((SharedPreferences prefs) {
-        prefs.setString('email', email);
-        prefs.setString('password', password);
-      }); */
     } catch (e) {
       Get.snackbar(
         'Errore nel login',
@@ -153,10 +128,6 @@ class AuthController extends GetxController {
       await auth.signOut();
       userStorage.remove("email");
       userStorage.remove("password");
-      /* await _prefs.then((SharedPreferences prefs) {
-        prefs.remove('email');
-        prefs.remove('password');
-      }); */
     } catch (e) {
       Get.snackbar(
         'Errore nel logout',
