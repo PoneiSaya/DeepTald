@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Button.dart';
+import 'package:deep_tald/features/authentication/presentation/widget/Tab.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:deep_tald/repository/user_repository.dart';
@@ -105,6 +106,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
         child: Column(
           children: [
             const SizedBox(height: 182.0),
+            Padding(
+              padding: const EdgeInsets.only(right: 80, bottom: 50),
+              child: Text(
+                "Come ti chiami?",
+                style: GoogleFonts.rubik(
+                    color: const Color.fromARGB(255, 24, 24, 23),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30),
+              ),
+            ),
             SizedBox(
               width: 317,
               child: Text(
@@ -181,6 +193,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
         child: Column(
           children: [
             const SizedBox(height: 182.0),
+            Padding(
+              padding: const EdgeInsets.only(right: 80, bottom: 50),
+              child: Text(
+                "Dati Personali",
+                style: GoogleFonts.rubik(
+                    color: const Color.fromARGB(255, 24, 24, 23),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30),
+              ),
+            ),
             SizedBox(
               width: 317,
               child: Text(
@@ -268,6 +291,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
         child: Column(
           children: [
             const SizedBox(height: 182.0),
+            Padding(
+              padding: const EdgeInsets.only(right: 80, bottom: 50),
+              child: Text(
+                "Credenziali",
+                style: GoogleFonts.rubik(
+                    color: const Color.fromARGB(255, 24, 24, 23),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30),
+              ),
+            ),
             SizedBox(
               width: 317,
               child: Text(
@@ -329,6 +363,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           selectedDate != null &&
                           isValidEmail(email) &&
                           isValidCodiceFiscale(codiceFiscale)) {
+                        bool isEmailPresent = await user.isEmailTaken(email);
+                        if (isEmailPresent) {
+                          Get.snackbar(
+                            'Email già in uso',
+                            'Ricompila',
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                          currentStep = currentStep - 1;
+
+                          return;
+                        }
                         await authController.registerWithEmailAndPassword(
                           nome,
                           cognome,
