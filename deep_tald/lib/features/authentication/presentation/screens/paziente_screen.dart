@@ -1,9 +1,6 @@
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
 import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../controllers/auth_controller.dart';
 
 class PazienteScreen extends StatefulWidget {
   const PazienteScreen({Key? key}) : super(key: key);
@@ -15,15 +12,8 @@ class PazienteScreen extends StatefulWidget {
 class _PazienteScreenState extends State<PazienteScreen> {
   final int currentPageIndex = 0;
 
-  final AuthController _controller = Get.find<AuthController>();
-
-  late String nome;
-  late String cognome;
-
   @override
   Widget build(BuildContext context) {
-    nome = _controller.getNome();
-    cognome = _controller.getCognome();
     return MaterialApp(
       home: Scaffold(
         //CI STA LA NAVIGATION BAR QUI GIUSTO PER PROVARE
@@ -53,13 +43,12 @@ class _PazienteScreenState extends State<PazienteScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
+            const Padding(
               padding: //padding sopra e a sinistra
-                  const EdgeInsets.only(left: 30, top: 30),
+                  EdgeInsets.only(left: 30, top: 30),
               child: Text(
-                'Ciao $nome $cognome!  \u{1F44B}',
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                'Ciao Paolo!  \u{1F44B}',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
@@ -81,6 +70,7 @@ class _PazienteScreenState extends State<PazienteScreen> {
                       // ...
                     },
                   ),
+
                   CardDeepTald(
                     'assets/images/gestire.png',
                     'Prova Logout!',
@@ -90,6 +80,7 @@ class _PazienteScreenState extends State<PazienteScreen> {
                       Get.toNamed(Routes.getProfileRoute());
                     },
                   ),
+
                 ],
               ),
             ),

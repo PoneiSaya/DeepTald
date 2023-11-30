@@ -43,8 +43,6 @@ dependencies:
 
   get:
   google_fonts: ^6.1.0
-  shared_preferences: ^2.2.2
-  get_storage: ^2.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -61,11 +59,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
   assets: 
+    - assets/images/patient2.png
+    - assets/images/doctor.png
+    - assets/images/patient.png
     - assets/images/
 
   # To add assets to your application, add an assets section, like this:
