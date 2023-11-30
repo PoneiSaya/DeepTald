@@ -363,6 +363,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           selectedDate != null &&
                           isValidEmail(email) &&
                           isValidCodiceFiscale(codiceFiscale)) {
+                        bool isEmailPresent = await user.isEmailTaken(email);
+                        if (isEmailPresent) {
+                          Get.snackbar(
+                            'Email già in uso',
+                            'Ricompila',
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                          currentStep = currentStep - 1;
+
+                          return;
+                        }
                         await authController.registerWithEmailAndPassword(
                           nome,
                           cognome,

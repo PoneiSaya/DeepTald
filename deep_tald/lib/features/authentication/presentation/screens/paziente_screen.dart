@@ -1,4 +1,5 @@
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
+import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -86,7 +87,7 @@ class _PazienteScreenState extends State<PazienteScreen> {
                     'LogOut',
                     //logout
                     () {
-                      _controller.logout();
+                      Get.toNamed(Routes.getProfileRoute());
                     },
                   ),
                 ],
