@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 abstract class Utente {
@@ -11,6 +12,16 @@ abstract class Utente {
 
   Utente(this.nome, this.cognome, this._codFiscale, this._email, this._password,
       this._dataDiNascita);
+
+  @protected
+  void setid(String id){
+    _id = id;
+  }
+
+  @protected
+  get getId{
+    return _id;
+  }
 
   @protected
   get getNome {
