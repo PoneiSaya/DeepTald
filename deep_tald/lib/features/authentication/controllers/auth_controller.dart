@@ -1,33 +1,42 @@
-import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
+import 'package:deep_tald/model/entity/medico.dart';
+import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../model/entity/paziente.dart';
+import '../../../model/entity/utente.dart';
+import '../../../navbar/navbar_controller.dart';
 import '../../../routes/routes.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  late Rx<User?> _user;
+  UserRepository userRepository = UserRepository();
+  // ignore: unused_field
+  late Rx<User?> _user = Rx<User?>(auth.currentUser);
+  Utente? utente;
+  NavbarController navbarController = Get.put(NavbarController());
 
   //metodo che viene lanciato appena si avvia l'app
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
     _user = Rx<User?>(auth.currentUser);
-    //pensalo come lo stato dell'utente che se cambia hai "notifiche"
-    _user.bindStream(auth.userChanges());
-    // è un metodo che serve a lanciare il metodo _initialScreen basandosi sullo stato dell'user
-    ever(_user, _initialScreen);
-  }
-
-  ///metodo privato che fa da route per la prima pagina
-  _initialScreen(User? user) {
-    if (user == null) {
-      Get.offAll(() =>
-          const InitialScreen()); //se al posto di login metti home ti porta alla home
+    if (auth.currentUser != null) {
+      utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
+          as Utente;
+    }
+    if (utente != null && auth.currentUser?.displayName == "paziente") {
+      //Rebuild all GetX from previous routes
+      navbarController.setUpForPaziente();
+    } else if (utente != null && auth.currentUser?.displayName == "medico") {
+      navbarController.setUpForMedico();
     } else {
-      Get.toNamed(Routes.getHomePazienteRoute()); //quando avremo una home
+      //utente non logato vai alla schermata di login
+      Get.toNamed(Routes.initialScreen);
     }
   }
 
@@ -52,17 +61,46 @@ class AuthController extends GetxController {
                     .collection("Pazienti")
                     .add(pz.toJson(registeredUser.user?.uid))
               });
-
+      //aggiungi all'user l'attributo displayname medico e paziente
+      await auth.currentUser?.updateDisplayName(
+          "paziente"); //BISOGNERà FARE DISTINZIONE TRA MEDICO E PAZIENTE
+      utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
+          as Utente;
       _user = Rx<User?>(auth.currentUser);
+      //usa get storage per memorizzare nome e cognome
     } catch (e) {
-      print("\n\nECCEZIONE FALLISCE LA REGISRRAZIONE\n\n");
+      print("\n\nECCEZIONE FALLISCE LA REGISTRAZIONE\n\n"); //fare get.snack
       print(e.toString());
     }
   }
 
+  String hashPassword(String password) {
+    var hash = sha256.convert(utf8.encode(password));
+    String hashedPassword = hash.toString();
+    return hashedPassword;
+  }
+
   Future<void> loginWithEmailPassword(String email, String password) async {
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
+      await auth.signInWithEmailAndPassword(
+          email: email, password: hashPassword(password));
+      utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
+          as Utente;
+      //se il display name è medico vai alla home medico
+      if (auth.currentUser?.displayName == "medico") {
+        print('sono nel lato giusto');
+        navbarController.setUpForMedico();
+        Get.toNamed(Routes.homeMedico);
+      } else if (auth.currentUser?.displayName == "paziente") {
+        navbarController.setUpForPaziente();
+        Get.toNamed(Routes.navbar);
+      } else {
+        Get.snackbar(
+          'Arturo rifai la registrazione hai un account vecchio',
+          "Non sei registrato",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     } catch (e) {
       Get.snackbar(
         'Errore nel login',
@@ -75,6 +113,7 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       await auth.signOut();
+      Get.toNamed(Routes.initialScreen);
     } catch (e) {
       Get.snackbar(
         'Errore nel logout',
@@ -82,5 +121,9 @@ class AuthController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+  }
+
+  Future<bool> contollaAutenticazione() async {
+    return utente == null;
   }
 }

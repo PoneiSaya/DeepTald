@@ -1,5 +1,3 @@
-import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
-import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import './routes/routes.dart';
@@ -19,7 +17,7 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends GetMaterialApp {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -28,10 +26,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // Utilizza il widget principale della tua applicazione
-
-      initialRoute: Routes.getInitialScren(),
-      getPages: Routes
-          .routes, //anzichè regitration dovremo mettere una gif che carica
+      debugShowCheckedModeBanner: false,
+      initialRoute: Routes.getNavbar(),
+      getPages: Routes.routes, //anzichè regitration dovremo mettere una gif
     );
   }
 }

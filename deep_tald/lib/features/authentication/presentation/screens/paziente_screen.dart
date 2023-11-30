@@ -1,6 +1,9 @@
+import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
 import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../widget/Button.dart';
 
 class PazienteScreen extends StatefulWidget {
   const PazienteScreen({Key? key}) : super(key: key);
@@ -10,46 +13,32 @@ class PazienteScreen extends StatefulWidget {
 }
 
 class _PazienteScreenState extends State<PazienteScreen> {
-  final int currentPageIndex = 0;
+  final AuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    String? nome = authController.utente?.nome;
+    nome ??= "...";
+    String? cognome = authController.utente?.cognome;
+    cognome ??= "...";
+
     return MaterialApp(
       home: Scaffold(
-        //CI STA LA NAVIGATION BAR QUI GIUSTO PER PROVARE
-        bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int index) {},
-          indicatorColor: Colors.blue,
-          selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              selectedIcon: Icon(Icons.home),
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: Badge(child: Icon(Icons.notifications_sharp)),
-              label: 'Notifiche',
-            ),
-            NavigationDestination(
-              icon: Badge(
-                label: Text('2'),
-                child: Icon(Icons.man),
-              ),
-              label: 'Profilo',
-            ),
-          ],
-        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Padding(
+            Padding(
               padding: //padding sopra e a sinistra
-                  EdgeInsets.only(left: 30, top: 30),
+                  const EdgeInsets.only(left: 30, top: 30),
               child: Text(
-                'Ciao Paolo!  \u{1F44B}',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                'Ciao $nome $cognome!  \u{1F44B}',
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
+            ),
+            Button(
+              buttonText: "logout",
+              onPressed: () => {authController.logout()},
             ),
             Expanded(
               child: ListView(

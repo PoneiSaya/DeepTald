@@ -2,9 +2,11 @@ import 'package:deep_tald/features/authentication/controllers/auth_controller.da
 import 'package:deep_tald/features/authentication/presentation/widget/Button.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/profile_textfield.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
