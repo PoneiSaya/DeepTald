@@ -1,4 +1,5 @@
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
+import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class PazienteScreen extends StatefulWidget {
@@ -69,6 +70,17 @@ class _PazienteScreenState extends State<PazienteScreen> {
                       // ...
                     },
                   ),
+
+                  CardDeepTald(
+                    'assets/images/gestire.png',
+                    'Prova Logout!',
+                    'LogOut',
+                    //logout
+                    () {
+                      Get.toNamed(Routes.getProfileRoute());
+                    },
+                  ),
+
                 ],
               ),
             ),
