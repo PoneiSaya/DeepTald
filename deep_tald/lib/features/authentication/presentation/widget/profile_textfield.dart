@@ -13,16 +13,21 @@ class ProfileField extends StatelessWidget {
       child: Container(
         width: 317,
         height: 50,
-        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14.0),
           color: const Color.fromARGB(166, 203, 207, 209),
         ),
-        child: Text(
-          label,
-          style: GoogleFonts.montserrat(
-            fontSize: 16,
-            color: const Color.fromARGB(255, 157, 164, 167),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              label,
+              style: GoogleFonts.montserrat(
+                fontSize: 16,
+                color: const Color.fromARGB(255, 157, 164, 167),
+              ),
+            ),
           ),
         ),
       ),

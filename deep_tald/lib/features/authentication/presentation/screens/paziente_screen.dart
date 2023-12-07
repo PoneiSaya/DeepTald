@@ -21,6 +21,7 @@ class _PazienteScreenState extends State<PazienteScreen> {
     nome ??= "...";
     String? cognome = authController.utente?.cognome;
     cognome ??= "...";
+    var height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
       home: Scaffold(
@@ -29,16 +30,12 @@ class _PazienteScreenState extends State<PazienteScreen> {
           children: [
             Padding(
               padding: //padding sopra e a sinistra
-                  const EdgeInsets.only(left: 30, top: 30),
+                  EdgeInsets.only(left: 30, top: height / 12),
               child: Text(
                 'Ciao $nome $cognome!  \u{1F44B}',
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-            ),
-            Button(
-              buttonText: "logout",
-              onPressed: () => {authController.logout()},
             ),
             Expanded(
               child: ListView(
@@ -59,7 +56,6 @@ class _PazienteScreenState extends State<PazienteScreen> {
                       // ...
                     },
                   ),
-
                   CardDeepTald(
                     'assets/images/gestire.png',
                     'Prova Logout!',
@@ -69,7 +65,6 @@ class _PazienteScreenState extends State<PazienteScreen> {
                       Get.toNamed(Routes.getProfileRoute());
                     },
                   ),
-
                 ],
               ),
             ),
