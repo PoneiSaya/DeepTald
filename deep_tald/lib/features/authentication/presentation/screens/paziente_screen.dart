@@ -1,9 +1,7 @@
 import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
-import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../widget/Button.dart';
 
 class PazienteScreen extends StatefulWidget {
   const PazienteScreen({Key? key}) : super(key: key);
@@ -21,56 +19,40 @@ class _PazienteScreenState extends State<PazienteScreen> {
     nome ??= "...";
     String? cognome = authController.utente?.cognome;
     cognome ??= "...";
-    var height = MediaQuery.of(context).size.height;
 
     return MaterialApp(
-      home: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: //padding sopra e a sinistra
-                  EdgeInsets.only(left: 30, top: height / 12),
-              child: Text(
-                'Ciao $nome $cognome!  \u{1F44B}',
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
+        home: Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: //padding sopra e a sinistra
+                EdgeInsets.only(
+                    left: 30, top: MediaQuery.of(context).size.height / 9),
+            child: Text(
+              'Ciao $nome!  \u{1F44B} ',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            Expanded(
-              child: ListView(
-                children: [
-                  CardDeepTald(
-                    'assets/images/mindfullness.png',
-                    'Parla con Bob!',
-                    'Inizia',
-                    () {
-                      // ...
-                    },
-                  ),
-                  CardDeepTald(
-                    'assets/images/gestire.png',
-                    'Controlla il tuo Andamento!',
-                    'Controlla',
-                    () {
-                      // ...
-                    },
-                  ),
-                  CardDeepTald(
-                    'assets/images/gestire.png',
-                    'Prova Logout!',
-                    'LogOut',
-                    //logout
-                    () {
-                      Get.toNamed(Routes.getProfileRoute());
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height / 35),
+          CardDeepTald(
+            'assets/images/mindfullness.png',
+            'Parla con Bob!',
+            'Inizia',
+            () {
+              // ...
+            },
+          ),
+          CardDeepTald(
+            'assets/images/gestire.png',
+            'Andamento!',
+            'Controlla',
+            () {
+              // ...
+            },
+          ),
+        ],
       ),
-    );
+    ));
   }
 }
