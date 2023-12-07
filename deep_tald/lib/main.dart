@@ -25,10 +25,9 @@ class MyApp extends GetMaterialApp {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // Utilizza il widget principale della tua applicazione
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.getNavbar(),
-      getPages: Routes.routes, //anzichè regitration dovremo mettere una gif
+      getPages: Routes.routes,
     );
   }
 }
