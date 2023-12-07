@@ -50,9 +50,9 @@ class CardDeepTald extends StatelessWidget {
                           fontSize: 24),
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 20),
                   Padding(
-                      padding: const EdgeInsets.all(0),
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 22),
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height / 19.5,
                         child: ElevatedButton(
