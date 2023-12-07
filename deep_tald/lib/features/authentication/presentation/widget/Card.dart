@@ -32,13 +32,15 @@ class CardDeepTald extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:
+                  EdgeInsets.all((MediaQuery.of(context).size.height / 60)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 7, top: 7),
+                    padding:
+                        EdgeInsets.all(MediaQuery.of(context).size.height / 70),
                     child: Text(
                       _title,
                       style: GoogleFonts.rubik(
@@ -48,11 +50,11 @@ class CardDeepTald extends StatelessWidget {
                           fontSize: 24),
                     ),
                   ),
-                  const SizedBox(height: 50),
+                  SizedBox(height: MediaQuery.of(context).size.height / 20),
                   Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(0),
                       child: SizedBox(
-                        height: 43,
+                        height: MediaQuery.of(context).size.height / 19.5,
                         child: ElevatedButton(
                           //round the edges
                           style: const ButtonStyle(

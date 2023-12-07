@@ -2,6 +2,7 @@ import 'package:deep_tald/features/authentication/controllers/auth_controller.da
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PazienteScreen extends StatefulWidget {
   const PazienteScreen({Key? key}) : super(key: key);
@@ -31,7 +32,11 @@ class _PazienteScreenState extends State<PazienteScreen> {
                     left: 30, top: MediaQuery.of(context).size.height / 9),
             child: Text(
               'Ciao $nome!  \u{1F44B} ',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: GoogleFonts.rubik(
+                  color: const Color.fromARGB(255, 24, 24, 23),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24),
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 35),
