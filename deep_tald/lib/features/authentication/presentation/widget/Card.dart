@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CardDeepTald extends StatelessWidget {
   final String _imageUrl;
@@ -14,8 +15,10 @@ class CardDeepTald extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width - 32,
+      height: MediaQuery.of(context).size.height / 4.7,
       margin: const EdgeInsets.all(16),
       child: Card(
+        color: const Color.fromRGBO(191, 223, 225, 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(22.0),
         ),
@@ -36,31 +39,45 @@ class CardDeepTald extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 7, top: 7),
-                    child: Text(_title, style: const TextStyle(fontSize: 22)),
+                    child: Text(
+                      _title,
+                      style: GoogleFonts.rubik(
+                          color: const Color.fromARGB(255, 24, 24, 23),
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24),
+                    ),
                   ),
                   const SizedBox(height: 50),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      //round the edges
-                      style: const ButtonStyle(
-                        shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(18),
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: 43,
+                        child: ElevatedButton(
+                          //round the edges
+                          style: const ButtonStyle(
+                            shape: MaterialStatePropertyAll<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(18),
+                                ),
+                              ),
                             ),
+                            backgroundColor: MaterialStatePropertyAll<Color>(
+                                Color.fromARGB(255, 89, 155, 255)),
+                          ),
+                          onPressed: _buttonFunction,
+                          child: Text(
+                            _buttonText,
+                            style: GoogleFonts.rubik(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20),
                           ),
                         ),
-                        backgroundColor:
-                            MaterialStatePropertyAll<Color>(Colors.blue),
-                      ),
-                      onPressed: _buttonFunction,
-                      child: Text(
-                        _buttonText,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
+                      )),
                 ],
               ),
             ),
