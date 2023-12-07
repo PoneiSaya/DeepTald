@@ -12,11 +12,7 @@ import 'package:get/get.dart';
 class NavbarController extends GetxController {
   var tabIndex = 0;
 
-  List<Widget> pagine = const [
-    Center(
-      child: CircularProgressIndicator(),
-    )
-  ];
+  List<Widget> pagine = [MedicoScreen(), UsaIaScreen(), ProfileScreen()];
   late List<BottomNavigationBarItem> items = const [
     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
     BottomNavigationBarItem(
