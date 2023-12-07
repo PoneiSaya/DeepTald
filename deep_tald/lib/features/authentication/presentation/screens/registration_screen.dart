@@ -100,306 +100,293 @@ class RegistrationScreenState extends State<RegistrationScreen> {
 
   Widget _buildStep1(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromARGB(255, 245, 246, 250),
-      // QUI CI VA APPBAR QUANDO SARA PRONTA
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 182.0),
-            Padding(
-              padding: const EdgeInsets.only(right: 80, bottom: 50),
-              child: Text(
-                "Come ti chiami?",
-                style: GoogleFonts.rubik(
-                    color: const Color.fromARGB(255, 24, 24, 23),
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 30),
-              ),
-            ),
-            SizedBox(
-              width: 317,
-              child: Text(
-                "Nome",
-                style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              control: nomeController,
-              hintString: "Inserisci nome",
-              isObscureText: false,
-            ),
-            const SizedBox(height: 35),
-            SizedBox(
-              width: 317,
-              child: Text(
-                "Cognome",
-                style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              control: cognomeController,
-              hintString: "Inserisci cognome",
-              isObscureText: false,
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 100.0),
-              // alignment: Alignment.bottomCenter,
-              child: Column(
-                children: [
-                  Button(
-                    onPressed: () {
-                      String nome = nomeController.text.trim();
-                      String cognome = cognomeController.text.trim();
-                      if (nome.isNotEmpty && cognome.isNotEmpty) {
-                        _goToNextStep();
-                      } else {
-                        Get.snackbar(
-                          'Campi vuoti',
-                          'Compila tutti i campi',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      }
-                    },
-                    buttonText: 'Avanti',
+      //QUI CI VA APPBAR QUANDO SARA PRONTA
+      body: Align(
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 80, bottom: 30),
+                  child: Text(
+                    "Come ti chiami?",
+                    style: GoogleFonts.rubik(
+                        color: const Color.fromARGB(255, 24, 24, 23),
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 30),
                   ),
-                ],
-              ),
+                ),
+                SizedBox(
+                    width: 317,
+                    child: Text(
+                      "Nome",
+                      style: GoogleFonts.rubik(
+                          color: const Color.fromARGB(255, 24, 24, 23),
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24),
+                    )),
+                const SizedBox(height: 10),
+                CustomTextfield(
+                  control: nomeController,
+                  hintString: "Inserisci nome",
+                  isObscureText: false,
+                ),
+                const SizedBox(height: 35),
+                SizedBox(
+                    width: 317,
+                    child: Text(
+                      "Cognome",
+                      style: GoogleFonts.rubik(
+                          color: const Color.fromARGB(255, 24, 24, 23),
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24),
+                    )),
+                const SizedBox(height: 10),
+                CustomTextfield(
+                  control: cognomeController,
+                  hintString: "Inserisci password",
+                  isObscureText: false,
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Column(
+                  children: [
+                    Button(
+                      onPressed: () {
+                        String nome = nomeController.text.trim();
+                        String cognome = cognomeController.text.trim();
+                        if (nome.isNotEmpty && cognome.isNotEmpty) {
+                          _goToNextStep();
+                        } else {
+                          Get.snackbar(
+                            'Campi vuoti',
+                            'Compila tutti i campi',
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                        }
+                      },
+                      buttonText: 'Avanti',
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 
   Widget _buildStep2(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromARGB(255, 245, 246, 250),
-      // QUI CI VA APPBAR QUANDO SARA PRONTA
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 182.0),
-            Padding(
-              padding: const EdgeInsets.only(right: 80, bottom: 50),
-              child: Text(
-                "Dati Personali",
-                style: GoogleFonts.rubik(
-                    color: const Color.fromARGB(255, 24, 24, 23),
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 30),
-              ),
-            ),
-            SizedBox(
-              width: 317,
-              child: Text(
-                "Data di nascita",
-                style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
+      //QUI CI VA APPBAR QUANDO SARA PRONTA
+      body: Align(
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 80, bottom: 30),
+                  child: Text(
+                    "Dati personali",
+                    style: GoogleFonts.rubik(
+                        color: const Color.fromARGB(255, 24, 24, 23),
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 30),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () => _selectDate(context),
-              child: Text('Seleziona Data'),
-            ),
-            const SizedBox(height: 35),
-            SizedBox(
-              width: 317,
-              child: Text(
-                "Codice Fiscale",
-                style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
+                ElevatedButton(
+                  onPressed: () => _selectDate(context),
+                  child: Text('Seleziona Data di nascita'),
                 ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              control: codiceFiscaleController,
-              hintString: "Inserisci Codice Fiscale",
-              isObscureText: false,
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 100.0),
-              // alignment: Alignment.bottomCenter,
-              child: Column(
-                children: [
-                  Button(
-                    onPressed: () async {
-                      String codiceFiscale =
-                          codiceFiscaleController.text.trim();
-                      if (codiceFiscale.isNotEmpty &&
-                          selectedDate != null &&
-                          isValidCodiceFiscale(codiceFiscale)) {
-                        bool isCodiceFiscaleTaken =
-                            await user.isCodiceFiscaleTaken(codiceFiscale);
-                        if (isCodiceFiscaleTaken) {
+                const SizedBox(height: 10),
+                const SizedBox(height: 35),
+                SizedBox(
+                    width: 317,
+                    child: Text(
+                      "Codice fiscale",
+                      style: GoogleFonts.rubik(
+                          color: const Color.fromARGB(255, 24, 24, 23),
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24),
+                    )),
+                const SizedBox(height: 10),
+                CustomTextfield(
+                  control: codiceFiscaleController,
+                  hintString: "Inserisci codice fiscale",
+                  isObscureText: false,
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Column(
+                  children: [
+                    Button(
+                      onPressed: () async {
+                        String codiceFiscale =
+                            codiceFiscaleController.text.trim();
+                        if (codiceFiscale.isNotEmpty &&
+                            selectedDate != null &&
+                            isValidCodiceFiscale(codiceFiscale)) {
+                          bool isCodiceFiscaleTaken =
+                              await user.isCodiceFiscaleTaken(codiceFiscale);
+                          if (isCodiceFiscaleTaken) {
+                            Get.snackbar(
+                              'Codice fiscale già in uso',
+                              'Ricompila',
+                              snackPosition: SnackPosition.BOTTOM,
+                            );
+                            currentStep = currentStep - 1;
+                          }
+                          _goToNextStep();
+                        } else {
                           Get.snackbar(
-                            'Codice fiscale già in uso',
-                            'Ricompila',
+                            'Campi vuoti',
+                            'Compila tutti i campi',
                             snackPosition: SnackPosition.BOTTOM,
                           );
-                          currentStep = currentStep - 1;
                         }
-                        _goToNextStep();
-                      } else {
-                        Get.snackbar(
-                          'Campi vuoti',
-                          'Compila tutti i campi',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      }
-                    },
-                    buttonText: 'Avanti',
-                  ),
-                ],
-              ),
+                      },
+                      buttonText: 'Avanti',
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 
   Widget _buildStep3(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromARGB(255, 245, 246, 250),
-      // QUI CI VA APPBAR QUANDO SARA PRONTA
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 182.0),
-            Padding(
-              padding: const EdgeInsets.only(right: 80, bottom: 50),
-              child: Text(
-                "Credenziali",
-                style: GoogleFonts.rubik(
-                    color: const Color.fromARGB(255, 24, 24, 23),
-                    decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 30),
-              ),
-            ),
-            SizedBox(
-              width: 317,
-              child: Text(
-                "Email",
-                style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
+      //QUI CI VA APPBAR QUANDO SARA PRONTA
+      body: Align(
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 80, bottom: 30),
+                  child: Text(
+                    "Credenziali",
+                    style: GoogleFonts.rubik(
+                        color: const Color.fromARGB(255, 24, 24, 23),
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 30),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              control: emailController,
-              hintString: "Inserisci email",
-              isObscureText: false,
-            ),
-            const SizedBox(height: 35),
-            SizedBox(
-              width: 317,
-              child: Text(
-                "Password",
-                style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
+                SizedBox(
+                    width: 317,
+                    child: Text(
+                      "Email",
+                      style: GoogleFonts.rubik(
+                          color: const Color.fromARGB(255, 24, 24, 23),
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24),
+                    )),
+                const SizedBox(height: 10),
+                CustomTextfield(
+                  control: emailController,
+                  hintString: "Inserisci email",
+                  isObscureText: false,
                 ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            CustomTextfield(
-              control: passwordController,
-              hintString: "Inserisci password",
-              isObscureText: true,
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 100.0),
-              // alignment: Alignment.bottomCenter,
-              child: Column(
-                children: [
-                  Button(
-                    onPressed: () async {
-                      String email = emailController.text.trim();
-                      String codiceFiscale =
-                          codiceFiscaleController.text.trim();
-                      String password = passwordController.text.trim();
-                      String nome = nomeController.text.trim();
-                      String hashedPassword = hashPassword(password);
-                      String cognome = cognomeController.text.trim();
+                const SizedBox(height: 35),
+                SizedBox(
+                    width: 317,
+                    child: Text(
+                      "Password",
+                      style: GoogleFonts.rubik(
+                          color: const Color.fromARGB(255, 24, 24, 23),
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24),
+                    )),
+                const SizedBox(height: 10),
+                CustomTextfield(
+                  control: passwordController,
+                  hintString: "Inserisci password",
+                  isObscureText: true,
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Column(
+                  children: [
+                    Button(
+                      onPressed: () async {
+                        String email = emailController.text.trim();
+                        String codiceFiscale =
+                            codiceFiscaleController.text.trim();
+                        String password = passwordController.text.trim();
+                        String nome = nomeController.text.trim();
+                        String hashedPassword = hashPassword(password);
+                        String cognome = cognomeController.text.trim();
 
-                      if (email.isNotEmpty &&
-                          nome.isNotEmpty &&
-                          cognome.isNotEmpty &&
-                          codiceFiscale.isNotEmpty &&
-                          password.isNotEmpty &&
-                          selectedDate != null &&
-                          isValidEmail(email) &&
-                          isValidCodiceFiscale(codiceFiscale)) {
-                        bool isEmailPresent = await user.isEmailTaken(email);
-                        if (isEmailPresent) {
+                        if (email.isNotEmpty &&
+                            nome.isNotEmpty &&
+                            cognome.isNotEmpty &&
+                            codiceFiscale.isNotEmpty &&
+                            password.isNotEmpty &&
+                            selectedDate != null &&
+                            isValidEmail(email) &&
+                            isValidCodiceFiscale(codiceFiscale)) {
+                          bool isEmailPresent = await user.isEmailTaken(email);
+                          if (isEmailPresent) {
+                            Get.snackbar(
+                              'Email già in uso',
+                              'Ricompila',
+                              snackPosition: SnackPosition.BOTTOM,
+                            );
+                            currentStep = currentStep - 1;
+
+                            return;
+                          }
+                          await authController.registerWithEmailAndPassword(
+                            nome,
+                            cognome,
+                            codiceFiscale,
+                            email,
+                            hashedPassword,
+                            selectedDate!,
+                          );
+
+                          Get.toNamed(Routes.getNavbar());
+                        } else {
                           Get.snackbar(
-                            'Email già in uso',
-                            'Ricompila',
+                            'Campi vuoti',
+                            'Compila tutti i campi',
                             snackPosition: SnackPosition.BOTTOM,
                           );
-                          currentStep = currentStep - 1;
-
-                          return;
                         }
-                        await authController.registerWithEmailAndPassword(
-                          nome,
-                          cognome,
-                          codiceFiscale,
-                          email,
-                          hashedPassword,
-                          selectedDate!,
-                        );
-
-                        Get.toNamed(Routes.getNavbar());
-                      } else {
-                        Get.snackbar(
-                          'Campi vuoti',
-                          'Compila tutti i campi',
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      }
-                    },
-                    buttonText: 'Registrati',
-                  ),
-                ],
-              ),
+                      },
+                      buttonText: 'Registrati',
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 }
