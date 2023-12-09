@@ -31,17 +31,11 @@ class Medico extends Utente {
     };
   }
 
-  factory Medico.fromDocumentSnapshot(DocumentSnapshot doc){
+  factory Medico.fromDocumentSnapshot(DocumentSnapshot doc) {
     Map<String, dynamic> dati = doc.data() as Map<String, dynamic>;
-    Medico medico = Medico(
-      dati['Nome'],
-      dati['Cognome'],
-      dati['CodiceFiscale'],
-      dati['Email'],
-      dati['Password'],
-      DateTime.now()
-    );
-    medico.setid(doc.id);
+    Medico medico = Medico(dati['Nome'], dati['Cognome'], dati['CodiceFiscale'],
+        dati['Email'], dati['Password'], DateTime.now());
+    medico.setId(doc.id);
     return medico;
   }
 }
