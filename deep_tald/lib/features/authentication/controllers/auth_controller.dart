@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:deep_tald/model/entity/admin.dart';
 import 'package:deep_tald/model/entity/medico.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
@@ -49,8 +50,8 @@ class AuthController extends GetxController {
       DateTime dataDiNascita) async {
     try {
       // Registra l'utente con Firebase Authentication
-      final Paziente pz = Paziente(
-          nome, cognome, codiceFiscale, email, password, dataDiNascita);
+      final Admin pz =
+          Admin(nome, cognome, codiceFiscale, email, password, dataDiNascita);
       await auth
           .createUserWithEmailAndPassword(
             email: email,
@@ -58,12 +59,12 @@ class AuthController extends GetxController {
           )
           .then((registeredUser) => {
                 firestore
-                    .collection("Pazienti")
+                    .collection("Admin")
                     .add(pz.toJson(registeredUser.user?.uid))
               });
       //aggiungi all'user l'attributo displayname medico e paziente
       await auth.currentUser?.updateDisplayName(
-          "paziente"); //BISOGNERà FARE DISTINZIONE TRA MEDICO E PAZIENTE
+          "admin"); //questo attributo ci indica il ruolo che l'utyente ha nel
       utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
           as Utente;
       _user = Rx<User?>(auth.currentUser);
@@ -86,17 +87,20 @@ class AuthController extends GetxController {
           email: email, password: hashPassword(password));
       utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
           as Utente;
+      print(utente);
       //se il display name è medico vai alla home medico
       if (auth.currentUser?.displayName == "medico") {
-        print('sono nel lato giusto');
         navbarController.setUpForMedico();
         Get.toNamed(Routes.homeMedico);
       } else if (auth.currentUser?.displayName == "paziente") {
         navbarController.setUpForPaziente();
         Get.toNamed(Routes.navbar);
+      } else if (auth.currentUser?.displayName == "admin") {
+        navbarController.setUpForAdmin();
+        Get.toNamed(Routes.navbar);
       } else {
         Get.snackbar(
-          'Arturo rifai la registrazione hai un account vecchio',
+          'Errore',
           "Non sei registrato",
           snackPosition: SnackPosition.BOTTOM,
         );

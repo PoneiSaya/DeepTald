@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deep_tald/model/entity/admin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../model/entity/paziente.dart';
@@ -44,6 +45,22 @@ class UserRepository extends GetxController {
           medicoData['Email'],
           medicoData['Password'],
           medicoData["DataDiNascita"].toDate(),
+        );
+      }
+
+      // Se non trovi il paziente, cerca tra i medici
+      QuerySnapshot adminQuery =
+          await _db.collection('Admin').where('uid', isEqualTo: userId).get();
+
+      if (adminQuery.docs.isNotEmpty) {
+        Map adminData = adminQuery.docs.first.data() as Map<String, dynamic>;
+        return Admin(
+          adminData['Nome'],
+          adminData['Cognome'],
+          adminData['CodiceFiscale'],
+          adminData['Email'],
+          adminData['Password'],
+          adminData["DataDiNascita"].toDate(),
         );
       }
 
