@@ -34,7 +34,7 @@ class UserRepository extends GetxController {
 
       // Se non trovi il paziente, cerca tra i medici
       QuerySnapshot mediciQuery =
-          await _db.collection('Medici').where('uid', isEqualTo: userId).get();
+          await _db.collection('Medico').where('uid', isEqualTo: userId).get();
 
       if (mediciQuery.docs.isNotEmpty) {
         Map medicoData = mediciQuery.docs.first.data() as Map<String, dynamic>;

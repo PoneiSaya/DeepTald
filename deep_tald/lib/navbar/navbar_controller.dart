@@ -50,9 +50,12 @@ class NavbarController extends GetxController {
   }
 
   void setUpForAdmin() {
-    pagine = const [AdminPage(), ProfileScreen()];
+    pagine = const [AdminPage(), ReportScreen(), ProfileScreen()];
     items = const [
       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.supervised_user_circle_sharp),
+          label: "Gestisci Utenti"),
       BottomNavigationBarItem(
           icon: Icon(Icons.manage_accounts_rounded), label: "Profilo")
     ];

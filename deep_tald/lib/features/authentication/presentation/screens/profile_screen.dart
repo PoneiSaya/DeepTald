@@ -37,7 +37,7 @@ class ProfileScreenState extends State<ProfileScreen> {
         child: Stack(
       children: <Widget>[
         Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(255, 245, 246, 250),
           body: Container(
             child: Stack(
               children: <Widget>[

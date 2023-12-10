@@ -50,8 +50,8 @@ class AuthController extends GetxController {
       DateTime dataDiNascita) async {
     try {
       // Registra l'utente con Firebase Authentication
-      final Admin pz =
-          Admin(nome, cognome, codiceFiscale, email, password, dataDiNascita);
+      final Paziente pz = Paziente(
+          nome, cognome, codiceFiscale, email, password, dataDiNascita);
       await auth
           .createUserWithEmailAndPassword(
             email: email,
@@ -59,12 +59,12 @@ class AuthController extends GetxController {
           )
           .then((registeredUser) => {
                 firestore
-                    .collection("Admin")
+                    .collection("Pazienti")
                     .add(pz.toJson(registeredUser.user?.uid))
               });
       //aggiungi all'user l'attributo displayname medico e paziente
       await auth.currentUser?.updateDisplayName(
-          "admin"); //questo attributo ci indica il ruolo che l'utyente ha nel
+          "paziente"); //questo attributo ci indica il ruolo che l'utyente ha nel
       utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
           as Utente;
       _user = Rx<User?>(auth.currentUser);
@@ -129,5 +129,55 @@ class AuthController extends GetxController {
 
   Future<bool> contollaAutenticazione() async {
     return utente == null;
+  }
+
+  /// Permette di registrare un user inserendone anche il ruolo, viene usato nella pagina admin */
+  Future<void> registerWithRuolo(
+    String nome,
+    String cognome,
+    String codiceFiscale,
+    String email,
+    String password,
+    DateTime dataDiNascita,
+    bool flag,
+  ) async {
+    /// se flag == true allora registra un admin
+    if (flag == true) {
+      try {
+        final Admin admin =
+            Admin(nome, cognome, codiceFiscale, email, password, dataDiNascita);
+        await auth
+            .createUserWithEmailAndPassword(
+              email: email,
+              password: password,
+            )
+            .then((registeredUser) => {
+                  firestore
+                      .collection("Admin")
+                      .add(admin.toJson(registeredUser.user?.uid))
+                });
+        await auth.currentUser?.updateDisplayName("admin"); //"admin"
+      } catch (e) {
+        Get.snackbar("Errore", "La registrazione non va a buon fine");
+      }
+    } else {
+      try {
+        final Medico admin = Medico(
+            nome, cognome, codiceFiscale, email, password, dataDiNascita);
+        await auth
+            .createUserWithEmailAndPassword(
+              email: email,
+              password: password,
+            )
+            .then((registeredUser) => {
+                  firestore
+                      .collection("Medico")
+                      .add(admin.toJson(registeredUser.user?.uid))
+                });
+        await auth.currentUser?.updateDisplayName("medico"); //ruolo medico
+      } catch (e) {
+        Get.snackbar("Errore", "La registrazione non va a buon fine");
+      }
+    }
   }
 }
