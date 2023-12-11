@@ -1,5 +1,6 @@
 import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
+import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,13 +42,9 @@ class _PazienteScreenState extends State<PazienteScreen> {
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 35),
           CardDeepTald(
-            'assets/images/mindfullness.png',
-            'Parla con Bob!',
-            'Inizia',
-            () {
-              // ...
-            },
-          ),
+              'assets/images/mindfullness.png', 'Parla con Bob!', 'Inizia', () {
+            Get.toNamed(Routes.chatbot);
+          }),
           CardDeepTald(
             'assets/images/gestire.png',
             'Andamento!',

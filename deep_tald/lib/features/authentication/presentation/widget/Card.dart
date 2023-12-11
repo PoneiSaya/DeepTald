@@ -5,8 +5,7 @@ class CardDeepTald extends StatelessWidget {
   final String _imageUrl;
   final String _title;
   final String _buttonText;
-  final Function() _buttonFunction;
-
+  final VoidCallback _buttonFunction;
   const CardDeepTald(
       this._imageUrl, this._title, this._buttonText, this._buttonFunction,
       {super.key});

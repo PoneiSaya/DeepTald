@@ -3,6 +3,8 @@ import 'package:deep_tald/features/authentication/presentation/widget/Button.dar
 import 'package:deep_tald/features/authentication/presentation/widget/profile_textfield.dart';
 import 'package:deep_tald/model/entity/paziente.dart';
 import 'package:deep_tald/model/entity/utente.dart';
+import 'package:intl/intl.dart';
+
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,14 +33,16 @@ class ProfileScreenState extends State<ProfileScreen> {
     String cognome = u?.getCognome;
     String codiceFiscale = u?.getCodiceFiscale;
     DateTime dataDiNascita = u?.getDataDiNascita;
+    String formattedDate = DateFormat('dd/MM/yy').format(dataDiNascita);
     String email = u?.getEmail;
     String password = u?.getPassword;
     return Container(
         child: Stack(
       children: <Widget>[
         Scaffold(
-          backgroundColor: Color.fromARGB(255, 245, 246, 250),
-          body: Container(
+          backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+          body: SingleChildScrollView(
+              child: Container(
             child: Stack(
               children: <Widget>[
                 Align(
@@ -80,13 +84,85 @@ class ProfileScreenState extends State<ProfileScreen> {
                         child: Align(
                           alignment: Alignment.center,
                           child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
+                                Padding(
+                                    padding:
+                                        EdgeInsets.only(bottom: 7, left: 9),
+                                    child: Text(
+                                      'Nome',
+                                      style: GoogleFonts.rubik(
+                                          color:
+                                              Color.fromARGB(255, 24, 24, 23),
+                                          decoration: TextDecoration.none,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    )),
                                 ProfileField(label: nome),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.only(bottom: 7, left: 9),
+                                    child: Text(
+                                      'Cognome',
+                                      style: GoogleFonts.rubik(
+                                          color:
+                                              Color.fromARGB(255, 24, 24, 23),
+                                          decoration: TextDecoration.none,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    )),
                                 ProfileField(label: cognome),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.only(bottom: 7, left: 9),
+                                    child: Text(
+                                      'Codice fiscale',
+                                      style: GoogleFonts.rubik(
+                                          color:
+                                              Color.fromARGB(255, 24, 24, 23),
+                                          decoration: TextDecoration.none,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    )),
                                 ProfileField(label: codiceFiscale),
-                                ProfileField(label: dataDiNascita.toString()),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.only(bottom: 7, left: 9),
+                                    child: Text(
+                                      'Data di nascita',
+                                      style: GoogleFonts.rubik(
+                                          color:
+                                              Color.fromARGB(255, 24, 24, 23),
+                                          decoration: TextDecoration.none,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    )),
+                                ProfileField(label: formattedDate),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.only(bottom: 7, left: 9),
+                                    child: Text(
+                                      'Email',
+                                      style: GoogleFonts.rubik(
+                                          color:
+                                              Color.fromARGB(255, 24, 24, 23),
+                                          decoration: TextDecoration.none,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    )),
                                 ProfileField(label: email),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.only(bottom: 7, left: 9),
+                                    child: Text(
+                                      'Password',
+                                      style: GoogleFonts.rubik(
+                                          color:
+                                              Color.fromARGB(255, 24, 24, 23),
+                                          decoration: TextDecoration.none,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    )),
                                 ProfileField(label: "*********************"),
                                 Padding(
                                   padding: EdgeInsets.only(left: 150),
@@ -134,7 +210,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                 )
               ],
             ),
-          ),
+          )),
         ),
       ],
     ));
