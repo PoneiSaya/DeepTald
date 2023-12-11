@@ -111,10 +111,11 @@ class _AdminPageState extends State<AdminPage> {
             hintString: "Inserisci password",
             isObscureText: true,
           )),
-          Center(
-              child: Row(
+          Flex(
+            mainAxisAlignment: MainAxisAlignment.center,
+            direction: Axis.horizontal,
             children: [
-              Text("Medico"),
+              const Text("Medico"),
               FlutterSwitch(
                 value: isAdmin,
                 onToggle: (value) {
@@ -123,9 +124,9 @@ class _AdminPageState extends State<AdminPage> {
                   });
                 },
               ),
-              Text("Admin")
+              const Text("Admin")
             ],
-          )),
+          ),
           Button(
               buttonText: "Registra",
               onPressed: () async {

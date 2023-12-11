@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/admin_screen.dart';
+import 'package:deep_tald/features/authentication/presentation/screens/gestione_utenti.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/medico_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/paziente_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/profile_screen.dart';
@@ -50,7 +51,7 @@ class NavbarController extends GetxController {
   }
 
   void setUpForAdmin() {
-    pagine = const [AdminPage(), ReportScreen(), ProfileScreen()];
+    pagine = const [AdminPage(), GestioneUtentiPage(), ProfileScreen()];
     items = const [
       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
       BottomNavigationBarItem(

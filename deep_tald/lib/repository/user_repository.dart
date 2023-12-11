@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deep_tald/model/dto/utenteDto.dart';
 import 'package:deep_tald/model/entity/admin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -139,5 +140,29 @@ class UserRepository extends GetxController {
       print('Errore durante la verifica del codice fiscale: $e');
       return true; // Assume un errore per evitare falsi positivi
     }
+  }
+
+  /// Metodo per ottenere 3 DTO, si usa per far comparire 3 utenti quando admin va nella pagina "gestisci utenti"
+  /// fare che prende in input la stringa della tabella in cui andare a cercare
+  Future<List<UtenteDTO>> getTreUtenti() async {
+    List<UtenteDTO> listaPazienti = List.empty(growable: true);
+    try {
+      QuerySnapshot query = await _db.collection('Pazienti').limit(3).get();
+
+      for (QueryDocumentSnapshot doc in query.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+        UtenteDTO paziente = UtenteDTO.fromMap(data);
+        paziente.ruolo = "paziente";
+
+        listaPazienti.add(paziente);
+      }
+
+      return listaPazienti;
+    } catch (e) {
+      Get.snackbar("Errore", "Impossibile caricare utenti.");
+    }
+
+    return listaPazienti;
   }
 }

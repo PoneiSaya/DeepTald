@@ -1,4 +1,5 @@
 import 'package:deep_tald/features/authentication/presentation/screens/admin_screen.dart';
+import 'package:deep_tald/features/authentication/presentation/screens/gestione_utenti.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/medico_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/paziente_screen.dart';
@@ -18,6 +19,7 @@ class Routes {
   static String homeMedico = "/homeMedico";
   static String homePaziente = "/homePaziente";
   static String homeAdmin = "/homeAdmin";
+  static String gestioneUtenti = "/gestioneUtenti";
   static String initialScreen = "/initialScreen";
   static String navbar = "/";
 
@@ -29,6 +31,7 @@ class Routes {
   static String getHomePazienteRoute() => homePaziente;
   static String getHomeAdminRoute() => homeAdmin;
   static String getInitialScren() => initialScreen;
+  static String gestioneUtentiPage() => initialScreen;
   static String getNavbar() => navbar;
 
   // lista di tutte le routes
@@ -41,6 +44,7 @@ class Routes {
     GetPage(page: () => const MedicoScreen(), name: homeMedico),
     GetPage(page: () => const PazienteScreen(), name: homePaziente),
     GetPage(page: () => const AdminPage(), name: homeAdmin),
+    GetPage(page: () => const GestioneUtentiPage(), name: gestioneUtenti),
     //ad ogni pagina corrisponde un GetPage
   ];
 }
