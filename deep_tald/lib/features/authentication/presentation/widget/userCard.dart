@@ -1,59 +1,45 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deep_tald/features/authentication/controllers/admin_controller.dart';
 import 'package:deep_tald/model/entity/utente.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class userCard extends StatelessWidget{
+class UserCard extends StatelessWidget {
+  /*
   final String ruolo;
   final Utente utente;
   final VoidCallback onDelete;
 
-  const userCard({required this.ruolo, required this.utente, required this.onDelete});
+  UserCard({required this.ruolo, required this.utente, required this.onDelete});*/
 
+  //final AdminController adminController = Get.find();
   @override
-  Widget build (BuildContext context){
+  Widget build(BuildContext context) {
     String imagePath;
-    if (ruolo == "dottore"){
-       imagePath = "assets/images/doctor.png";
-    }
-    else {
-      imagePath = "assets/images/patient2.png";
-    }
-      
+    //if (ruolo == "dottore") {
+    imagePath = "assets/images/doctor.png";
+    //} else {
+    //imagePath = "assets/images/patient2.png";
+    //}
+
     return Container(
-      margin: EdgeInsets.only(left: 8.0, right: 8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      color: Colors.red,
+      width: MediaQuery.of(context).size.width * 0.5,
       child: Card(
         shadowColor: Colors.black,
-        color: Color.fromRGBO(191,223,225, 1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-          padding: EdgeInsets.all(0.2),
-          child: ListTile(
-            leading: CircleAvatar(backgroundImage: AssetImage(imagePath)),
-            title: Text(utente.getNome + " " +utente.getCognome),
-            trailing:  IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                eliminaOggetto(utente.getId);
-                onDelete();
-              },
-            )
+        color: const Color.fromRGBO(191, 223, 225, 1),
+        child: ListTile(
+          leading: CircleAvatar(backgroundImage: AssetImage(imagePath)),
+          title: const Text(
+              /*utente.getNome +*/ "NOME COGNOME " /*+ utente.getCognome*/),
+          trailing: IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+              //adminController.eliminaOggetto(utente.getId, ruolo);
+              //onDelete();
+            },
+          ),
         ),
-      )
-      )
+      ),
     );
-  }
-
-  Future<void> eliminaOggetto(String idDocumento) async{
-    String tabella;
-    ruolo == "dottore"? tabella = "Medico" : tabella = "Pazienti";
-
-    DocumentReference documentReference =
-        FirebaseFirestore.instance.collection(tabella).doc(idDocumento);
-
-    await documentReference.delete();
   }
 }

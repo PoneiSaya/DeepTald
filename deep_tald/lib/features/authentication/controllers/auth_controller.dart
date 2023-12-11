@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:deep_tald/model/entity/admin.dart';
 import 'package:deep_tald/model/entity/medico.dart';
 import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
@@ -63,7 +64,7 @@ class AuthController extends GetxController {
               });
       //aggiungi all'user l'attributo displayname medico e paziente
       await auth.currentUser?.updateDisplayName(
-          "paziente"); //BISOGNERà FARE DISTINZIONE TRA MEDICO E PAZIENTE
+          "paziente"); //questo attributo ci indica il ruolo che l'utyente ha nel
       utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
           as Utente;
       _user = Rx<User?>(auth.currentUser);
@@ -86,17 +87,20 @@ class AuthController extends GetxController {
           email: email, password: hashPassword(password));
       utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
           as Utente;
+      print(utente);
       //se il display name è medico vai alla home medico
       if (auth.currentUser?.displayName == "medico") {
-        print('sono nel lato giusto');
         navbarController.setUpForMedico();
         Get.toNamed(Routes.homeMedico);
       } else if (auth.currentUser?.displayName == "paziente") {
         navbarController.setUpForPaziente();
         Get.toNamed(Routes.navbar);
+      } else if (auth.currentUser?.displayName == "admin") {
+        navbarController.setUpForAdmin();
+        Get.toNamed(Routes.navbar);
       } else {
         Get.snackbar(
-          'Arturo rifai la registrazione hai un account vecchio',
+          'Errore',
           "Non sei registrato",
           snackPosition: SnackPosition.BOTTOM,
         );
@@ -125,5 +129,55 @@ class AuthController extends GetxController {
 
   Future<bool> contollaAutenticazione() async {
     return utente == null;
+  }
+
+  /// Permette di registrare un user inserendone anche il ruolo, viene usato nella pagina admin */
+  Future<void> registerWithRuolo(
+    String nome,
+    String cognome,
+    String codiceFiscale,
+    String email,
+    String password,
+    DateTime dataDiNascita,
+    bool flag,
+  ) async {
+    /// se flag == true allora registra un admin
+    if (flag == true) {
+      try {
+        final Admin admin =
+            Admin(nome, cognome, codiceFiscale, email, password, dataDiNascita);
+        await auth
+            .createUserWithEmailAndPassword(
+              email: email,
+              password: password,
+            )
+            .then((registeredUser) => {
+                  firestore
+                      .collection("Admin")
+                      .add(admin.toJson(registeredUser.user?.uid))
+                });
+        await auth.currentUser?.updateDisplayName("admin"); //"admin"
+      } catch (e) {
+        Get.snackbar("Errore", "La registrazione non va a buon fine");
+      }
+    } else {
+      try {
+        final Medico admin = Medico(
+            nome, cognome, codiceFiscale, email, password, dataDiNascita);
+        await auth
+            .createUserWithEmailAndPassword(
+              email: email,
+              password: password,
+            )
+            .then((registeredUser) => {
+                  firestore
+                      .collection("Medico")
+                      .add(admin.toJson(registeredUser.user?.uid))
+                });
+        await auth.currentUser?.updateDisplayName("medico"); //ruolo medico
+      } catch (e) {
+        Get.snackbar("Errore", "La registrazione non va a buon fine");
+      }
+    }
   }
 }

@@ -1,79 +1,63 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:deep_tald/features/authentication/presentation/widget/user_card.dart';
+import 'package:deep_tald/model/dto/utenteDto.dart';
+import 'package:deep_tald/repository/user_repository.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class AdminController extends GetxController {
-  FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  late Rx<User?> _admin;
+  UserRepository userRepository = Get.find();
+  List<UtenteDTO> elencoCards = List.empty(growable: true);
 
-  //metodo che viene lanciato appena si avvia l'app
-  @override
-  void onReady() {
-    super.onReady();
-    _admin = Rx<User?>(auth.currentUser);
-    //pensalo come lo stato dell'utente che se cambia hai "notifiche"
-    _admin.bindStream(auth.userChanges());
-    // è un metodo che serve a lanciare il metodo _initialScreen basandosi sullo stato dell'user
-    ever(_admin, _initialScreen);
+  Future<List<UtenteDTO>> getElencoCards() async {
+    return await this.elencoCards;
   }
 
-  ///metodo privato che fa da route per la prima pagina
-  _initialScreen(User? user) {
-    if (user == null) {
-      Get.offAll(() =>
-          RegistrationScreen()); //se al posto di login metti home ti porta alla home
-    } else {
-      print("TI SEI LOGGATO");
-      //Get.offAll(() => HomePage()); quando avremo una home
+  Future<void> eliminaOggetto(String idDocumento, String ruolo) async {
+    print("sono in elimina");
+    String tabella;
+    ruolo == "dottore" ? tabella = "Medico" : tabella = "Pazienti";
+
+    DocumentReference documentReference =
+        firestore.collection(tabella).doc(idDocumento);
+
+    await documentReference.delete();
+  }
+
+  /// Metodo in cui si cercano utenti nel db
+  /// [codiceFiscale] è il codice fiscale inserito
+  /// [tabella] puo avere due valori: Medico o Pazienti e indica in che tabella occorre andare a cercare
+  ///
+  Future<UtenteDTO?> getbyCodiceFiscale(
+      String codiceFiscale, String tabella) async {
+    if (codiceFiscale.isEmpty || codiceFiscale.length != 16) {
+      return null;
     }
-  }
-
-  Future<void> loginWithEmailPassword(String email, String password) async {
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
+      QuerySnapshot querySnapshot = await firestore
+          .collection(tabella)
+          .where('CodiceFiscale', isEqualTo: codiceFiscale)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        Map<String, dynamic>? data =
+            querySnapshot.docs.first.data() as Map<String, dynamic>;
+
+        late String ruolo;
+        tabella == "Medico" ? ruolo = "medico" : ruolo = "paziente";
+
+        UtenteDTO result = UtenteDTO.fromMap(data);
+        result.ruolo = ruolo;
+
+        return result;
+      } else {
+        print('non ho trovato niente');
+        Get.snackbar(
+            "Errore", "Nessun utente trovato con questo codice fiscale.");
+        return null;
+      }
     } catch (e) {
-      Get.snackbar(
-        'Errore nel login',
-        e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      Get.snackbar("Errore", "Errore del server nella ricerca.");
     }
   }
-
-  getAllPazienti(){
-    firestore
-      .collection("Pazienti")
-      .get()
-      .then(
-        (QuerySnapshot querySnapshot){
-           querySnapshot.docs.forEach((doc) {
-            print(doc["Nome"]);
-          });
-        });
-  }
-
-
-
-  Future<void> logout() async {
-    try {
-      await auth.signOut();
-    } catch (e) {
-      Get.snackbar(
-        'Errore nel logout',
-        e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-  }
-
-
-
-
 }

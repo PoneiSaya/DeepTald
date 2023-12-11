@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:deep_tald/model/dto/utenteDto.dart';
+import 'package:deep_tald/model/entity/admin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../model/entity/paziente.dart';
@@ -33,7 +35,7 @@ class UserRepository extends GetxController {
 
       // Se non trovi il paziente, cerca tra i medici
       QuerySnapshot mediciQuery =
-          await _db.collection('Medici').where('uid', isEqualTo: userId).get();
+          await _db.collection('Medico').where('uid', isEqualTo: userId).get();
 
       if (mediciQuery.docs.isNotEmpty) {
         Map medicoData = mediciQuery.docs.first.data() as Map<String, dynamic>;
@@ -44,6 +46,22 @@ class UserRepository extends GetxController {
           medicoData['Email'],
           medicoData['Password'],
           medicoData["DataDiNascita"].toDate(),
+        );
+      }
+
+      // Se non trovi il paziente, cerca tra i medici
+      QuerySnapshot adminQuery =
+          await _db.collection('Admin').where('uid', isEqualTo: userId).get();
+
+      if (adminQuery.docs.isNotEmpty) {
+        Map adminData = adminQuery.docs.first.data() as Map<String, dynamic>;
+        return Admin(
+          adminData['Nome'],
+          adminData['Cognome'],
+          adminData['CodiceFiscale'],
+          adminData['Email'],
+          adminData['Password'],
+          adminData["DataDiNascita"].toDate(),
         );
       }
 
@@ -122,5 +140,29 @@ class UserRepository extends GetxController {
       print('Errore durante la verifica del codice fiscale: $e');
       return true; // Assume un errore per evitare falsi positivi
     }
+  }
+
+  /// Metodo per ottenere 3 DTO, si usa per far comparire 3 utenti quando admin va nella pagina "gestisci utenti"
+  /// fare che prende in input la stringa della tabella in cui andare a cercare
+  Future<List<UtenteDTO>> getTreUtenti() async {
+    List<UtenteDTO> listaPazienti = List.empty(growable: true);
+    try {
+      QuerySnapshot query = await _db.collection('Pazienti').limit(3).get();
+
+      for (QueryDocumentSnapshot doc in query.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+        UtenteDTO paziente = UtenteDTO.fromMap(data);
+        paziente.ruolo = "paziente";
+
+        listaPazienti.add(paziente);
+      }
+
+      return listaPazienti;
+    } catch (e) {
+      Get.snackbar("Errore", "Impossibile caricare utenti.");
+    }
+
+    return listaPazienti;
   }
 }

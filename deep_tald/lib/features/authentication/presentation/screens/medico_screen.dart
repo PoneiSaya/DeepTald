@@ -1,5 +1,7 @@
+import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MedicoScreen extends StatefulWidget {
   const MedicoScreen({Key? key}) : super(key: key);
@@ -10,7 +12,7 @@ class MedicoScreen extends StatefulWidget {
 
 class _MedicoScreenState extends State<MedicoScreen> {
   final int currentPageIndex = 0;
-
+  AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -50,6 +52,7 @@ class _MedicoScreenState extends State<MedicoScreen> {
                     'Gestisci i Pazienti!',
                     'Gestisci',
                     () {
+                      authController.logout();
                       // ...
                     },
                   ),

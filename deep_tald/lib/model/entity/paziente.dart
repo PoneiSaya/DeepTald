@@ -48,17 +48,11 @@ class Paziente extends Utente {
     };
   }
 
-  factory Paziente.fromDocumentSnapshot(DocumentSnapshot doc){
+  factory Paziente.fromDocumentSnapshot(DocumentSnapshot doc) {
     Map<String, dynamic> dati = doc.data() as Map<String, dynamic>;
-    Paziente paziente = Paziente(
-      dati['Nome'],
-      dati['Cognome'],
-      dati['CodiceFiscale'],
-      dati['Email'],
-      dati['Password'],
-      DateTime.now()
-    );
-    paziente.setid(doc.id);
+    Paziente paziente = Paziente(dati['Nome'], dati['Cognome'],
+        dati['CodiceFiscale'], dati['Email'], dati['Password'], DateTime.now());
+    paziente.setId(doc.id);
     return paziente;
   }
 }

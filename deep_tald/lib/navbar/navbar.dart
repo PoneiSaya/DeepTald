@@ -8,10 +8,6 @@ class Navbar extends StatefulWidget {
   @override
   State<Navbar> createState() => _NavbarState();
 }
-/**
-   * TODO 
-   * Fare metodo che restituisce l'array di elementi della navbar vedendo che tipo di user
-   */
 
 class _NavbarState extends State<Navbar> {
   final navbarController = Get.put(NavbarController());
