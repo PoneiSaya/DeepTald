@@ -91,7 +91,7 @@ class AuthController extends GetxController {
       //se il display name è medico vai alla home medico
       if (auth.currentUser?.displayName == "medico") {
         navbarController.setUpForMedico();
-        Get.toNamed(Routes.homeMedico);
+        Get.toNamed(Routes.navbar);
       } else if (auth.currentUser?.displayName == "paziente") {
         navbarController.setUpForPaziente();
         Get.toNamed(Routes.navbar);

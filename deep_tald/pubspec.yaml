@@ -44,6 +44,7 @@ dependencies:
   audioplayers: ^5.2.1
   permission_handler: ^11.1.0
   path_provider: ^2.0.14
+  audio_waveforms: ^1.0.4
   intl: ^0.17.0
   
 

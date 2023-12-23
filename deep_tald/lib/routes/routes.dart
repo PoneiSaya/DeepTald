@@ -5,6 +5,7 @@ import 'package:deep_tald/features/authentication/presentation/screens/initial_s
 import 'package:deep_tald/features/authentication/presentation/screens/medico_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/paziente_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
+import 'package:deep_tald/features/medico_ia/presentation/screens/usa_ia_page.dart';
 import 'package:deep_tald/navbar/navbar.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +25,7 @@ class Routes {
   static String initialScreen = "/initialScreen";
   static String navbar = "/";
   static String chatbot = "/chatbot";
+  static String medicoIa = "/medicoIa";
 
   //qui crea i getter
   static String getLoginRoute() => login;
@@ -36,6 +38,7 @@ class Routes {
   static String gestioneUtentiPage() => initialScreen;
   static String getNavbar() => navbar;
   static String getChatBot() => chatbot;
+  static String getMedicoIa() => medicoIa;
 
   // lista di tutte le routes
   static List<GetPage> routes = [
@@ -48,7 +51,8 @@ class Routes {
     GetPage(page: () => const PazienteScreen(), name: homePaziente),
     GetPage(page: () => const AdminPage(), name: homeAdmin),
     GetPage(page: () => const GestioneUtentiPage(), name: gestioneUtenti),
-    GetPage(page: () => ChatBot(), name: chatbot)
+    GetPage(page: () => ChatBot(), name: chatbot),
+    GetPage(page: () => const UsaIaScreen(), name: medicoIa)
     //ad ogni pagina corrisponde un GetPage
   ];
 }
