@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:deep_tald/features/authentication/presentation/screens/report.dart';
-import 'package:deep_tald/features/authentication/presentation/screens/usa_ia.dart';
+import 'package:deep_tald/features/medico_ia/presentation/screens/usa_ia_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
