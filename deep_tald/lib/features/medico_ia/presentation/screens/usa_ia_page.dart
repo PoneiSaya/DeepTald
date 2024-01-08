@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 import 'dart:ui' as ui show Gradient;
 
 class UsaIaScreen extends StatefulWidget {
@@ -48,7 +49,25 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
           isRecordingCompleted = true;
 
           playerController.preparePlayer(path: path);
-          //Get.snackbar("finito", "Recorded file size: ${File(path)}");
+          var url = Uri.parse("http://127.0.0.1:9000/transcribe_audio");
+          var request = http.MultipartRequest('POST', url);
+
+          var file = await http.MultipartFile.fromPath('audio', path);
+
+          request.files.add(file);
+
+          try {
+            print("HEYYYYY SONO NELLA RICHIESTA INVIAT");
+            var response = await request.send();
+
+            if (response.statusCode == 200) {
+              Get.snackbar("risposta",
+                  'Risposta: ${await response.stream.bytesToString()}');
+              //Get.snackbar("finito", "Recorded file size: ${File(path)}");
+            }
+          } catch (error) {
+            print("object");
+          }
         }
       } else {
         //se non sta registrando allora inizia a registrare
