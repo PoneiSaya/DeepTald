@@ -55,9 +55,7 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
           isRecordingCompleted = true;
 
           playerController.preparePlayer(path: path);
-          print("SET UP URL");
-          var url = Uri.parse("http://192.168.1.131:9000/transcribe_audio");
-          print("SET UP POST");
+          var url = Uri.parse("http://127.0.0.1:9000/transcribe_audio");
           var request = http.MultipartRequest('POST', url);
 
           var file = await http.MultipartFile.fromPath('audio', path);
@@ -65,18 +63,16 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
           request.files.add(file);
 
           try {
-            print("HEYYYYY sto mandando richiesta");
+            print("HEYYYYY SONO NELLA RICHIESTA INVIAT");
             var response = await request.send();
-            print("HEYYYYY ho mandato richiesta");
+
             if (response.statusCode == 200) {
               Get.snackbar("risposta",
                   'Risposta: ${await response.stream.bytesToString()}');
               //Get.snackbar("finito", "Recorded file size: ${File(path)}");
             }
           } catch (error) {
-            print("---------------ERRORE------------------");
-            print(error);
-            print("---------------ERRORE------------------");
+            print("object");
           }
         }
       } else {
@@ -109,7 +105,7 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
   void _playandPause() async {
     playerController.playerState == PlayerState.playing
         ? await playerController.pausePlayer()
-        : await playerController.startPlayer(finishMode: FinishMode.stop);
+        : await playerController.startPlayer(finishMode: FinishMode.pause);
   }
 
   @override
@@ -160,7 +156,7 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
                 ElevatedButton(
                     onPressed: () {
                       playerController.startPlayer();
-                      //_playandPause(); Non funzione su android crasha
+                      _playandPause();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 245, 246, 250),
