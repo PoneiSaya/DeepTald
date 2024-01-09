@@ -29,13 +29,14 @@ class ProfileScreenState extends State<ProfileScreen> {
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
     Utente? u = authController.utente;
-    String nome = u?.getNome;
-    String cognome = u?.getCognome;
-    String codiceFiscale = u?.getCodiceFiscale;
-    DateTime dataDiNascita = u?.getDataDiNascita;
-    String formattedDate = DateFormat('dd/MM/yy').format(dataDiNascita);
-    String email = u?.getEmail;
-    String password = u?.getPassword;
+    String nome = u?.getNome ?? "...";
+    String cognome = u?.getCognome ?? "...";
+    String codiceFiscale = u?.getCodiceFiscale ?? "...";
+    DateTime dataDiNascita = u?.getDataDiNascita ?? DateTime.now();
+    String formattedDate =
+        DateFormat('dd/MM/yy').format(dataDiNascita) ?? "...";
+    String email = u?.getEmail ?? "...";
+    String password = u?.getPassword ?? "...";
     return Container(
         child: Stack(
       children: <Widget>[

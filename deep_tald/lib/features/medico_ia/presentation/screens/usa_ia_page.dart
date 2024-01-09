@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:path_provider/path_provider.dart';
@@ -23,6 +25,7 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
   late Directory directory;
   bool isRecording = false;
   bool isRecordingCompleted = false;
+  String dateTime = "";
 
   Future<void> _initialiseController() async {
     recorderController = RecorderController()
@@ -32,9 +35,12 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
       ..sampleRate = 16000
       ..updateFrequency = const Duration(milliseconds: 70)
       ..currentScrolledDuration;
-
+    var separator = Platform.pathSeparator;
     directory = await getApplicationDocumentsDirectory();
-    path = "${directory.path}/${DateTime.now()}.aac"; //è il nome del file audio
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd-HH-mm-ss");
+    dateTime = dateFormat.format(DateTime.now());
+    path =
+        "${directory.path}${separator}${dateTime}.aac"; //è il nome del file audio
   }
 
   void _startOrStopRecording() async {
@@ -78,7 +84,7 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
     } finally {
       setState(() {
         isRecording = !isRecording; //aggiorna lo stato
-        path = "${directory.path}/${DateTime.now()}.aac";
+        path = "${directory.path}${Platform.pathSeparator}${dateTime}.aac";
       });
     }
   }
@@ -150,7 +156,7 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
                 ElevatedButton(
                     onPressed: () {
                       playerController.startPlayer();
-                      _playandPause();
+                      //_playandPause(); Non funzione su android crasha
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 245, 246, 250),
