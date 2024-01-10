@@ -45,8 +45,15 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
         messageType: messageType,
       ),
     );
+    //Qui si richiama LLAMA per ottenere la risposta
+    creaMessaggio();
+  }
 
-    //Get.snackbar(chatController.initialMessageList.last.toString(), message);
+  /// Qui si deve richiamare LLAMA per generare una domanda
+  void creaMessaggio() {
+    String testo = "Paolo ";
+    chatController.addMessage(Message(
+        message: testo, createdAt: DateTime.now(), sendBy: 2.toString()));
   }
 
   Widget build(BuildContext context) {
@@ -99,19 +106,17 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
               messageReactionConfig: MessageReactionConfiguration(
                 backgroundColor: Colors.red,
                 //borderColor: theme.messageReactionBackGroundColor,
-                reactedUserCountTextStyle: TextStyle(color: Colors.black),
-                reactionCountTextStyle: TextStyle(color: Colors.black),
+                reactedUserCountTextStyle: const TextStyle(color: Colors.black),
+                reactionCountTextStyle: const TextStyle(color: Colors.black),
                 reactionsBottomSheetConfig: ReactionsBottomSheetConfiguration(
                   //backgroundColor: theme.backgroundColor,
-                  reactedUserTextStyle: TextStyle(color: Colors.amber),
+                  reactedUserTextStyle: const TextStyle(color: Colors.amber),
                   reactionWidgetDecoration: BoxDecoration(
                     color: Colors.black,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
-                        color: true
-                            ? Colors.black12
-                            : const Color.fromARGB(255, 136, 26, 26),
-                        offset: const Offset(0, 20),
+                        color: Colors.black12,
+                        offset: Offset(0, 20),
                         blurRadius: 40,
                       )
                     ],
