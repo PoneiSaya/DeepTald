@@ -39,7 +39,7 @@ class NavbarController extends GetxController {
   }
 
   void setUpForPaziente() {
-    pagine = const [PazienteScreen(), ReportScreen(), ProfileScreen()];
+    pagine = const [PazienteScreen(), ReportPage(), ProfileScreen()];
     items = const [
       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
       BottomNavigationBarItem(
