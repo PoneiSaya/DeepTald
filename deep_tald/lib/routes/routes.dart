@@ -1,10 +1,11 @@
 import 'package:deep_tald/features/authentication/presentation/screens/admin_screen.dart';
-import 'package:deep_tald/features/authentication/presentation/screens/chatbot.dart';
+import 'package:deep_tald/features/chatbot/presentation/screens/chatbot.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/gestione_utenti.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/medico_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/paziente_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/registration_screen.dart';
+import 'package:deep_tald/features/chatbot/presentation/screens/chatbot.dart';
 import 'package:deep_tald/features/medico_ia/presentation/screens/usa_ia_page.dart';
 import 'package:deep_tald/navbar/navbar.dart';
 import 'package:get/get.dart';
@@ -51,7 +52,7 @@ class Routes {
     GetPage(page: () => const PazienteScreen(), name: homePaziente),
     GetPage(page: () => const AdminPage(), name: homeAdmin),
     GetPage(page: () => const GestioneUtentiPage(), name: gestioneUtenti),
-    GetPage(page: () => ChatBot(), name: chatbot),
+    GetPage(page: () => const ChatbotScreen(), name: chatbot),
     GetPage(page: () => const UsaIaScreen(), name: medicoIa)
     //ad ogni pagina corrisponde un GetPage
   ];
