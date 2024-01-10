@@ -3,7 +3,8 @@ from transformers import pipeline
 
 pipe = pipeline("text-generation", model="TinyLlama/TinyLlama-1.1B-Chat-v1.0", torch_dtype=torch.bfloat16)
 
-testo = '''Write a simple generic question to start a chat. Write only one question'''
+risposta = "Yes I have a lot of spare time today."
+testo = "Given this response: " + risposta + " write something to keep the conversation going, like a question"
 
 messages = [
     {"role": "user", "content": testo}

@@ -1,4 +1,3 @@
-import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:chatview/chatview.dart';
 import 'package:get/get.dart';
@@ -80,7 +79,8 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
               defaultSendButtonColor: Colors.black,
               replyDialogColor: Colors.black,
               replyTitleColor: Color.fromARGB(255, 223, 55, 55),
-              textFieldBackgroundColor: Color.fromARGB(255, 234, 35, 35),
+              textFieldBackgroundColor:
+                  const Color.fromARGB(255, 245, 246, 250),
 
               closeIconColor: Colors.black,
               textFieldConfig: TextFieldConfiguration(
@@ -104,7 +104,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
             ),
             messageConfig: MessageConfiguration(
               messageReactionConfig: MessageReactionConfiguration(
-                backgroundColor: Colors.red,
+                backgroundColor: const Color.fromARGB(255, 245, 246, 250),
                 //borderColor: theme.messageReactionBackGroundColor,
                 reactedUserCountTextStyle: const TextStyle(color: Colors.black),
                 reactionCountTextStyle: const TextStyle(color: Colors.black),
