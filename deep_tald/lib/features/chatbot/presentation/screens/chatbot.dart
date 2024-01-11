@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:chatview/chatview.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({super.key});
@@ -45,14 +46,35 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       ),
     );
     //Qui si richiama LLAMA per ottenere la risposta
-    creaMessaggio();
+    creaMessaggio(message);
   }
 
   /// Qui si deve richiamare LLAMA per generare una domanda
-  void creaMessaggio() {
-    String testo = "Paolo ";
+  void creaMessaggio(String path) async {
+    //fare la richiesta
+    var urlChatbot = Uri.parse("http://172.19.190.93:9000/transcribe_audio");
+    var request = http.MultipartRequest('POST', urlChatbot);
+    String testoLLAMA = "";
+
+    var file = await http.MultipartFile.fromPath('audio', path);
+    request.files.add(file);
+
+    Get.snackbar("title", file.toString());
+
+    try {
+      print("MAMMT       ---      ");
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        testoLLAMA = await response.stream.bytesToString();
+      }
+    } catch (error) {
+      print("--------------------ERRORE---------");
+      print(error);
+    }
+
     chatController.addMessage(Message(
-        message: testo, createdAt: DateTime.now(), sendBy: 2.toString()));
+        message: testoLLAMA, createdAt: DateTime.now(), sendBy: 2.toString()));
   }
 
   Widget build(BuildContext context) {
@@ -79,8 +101,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
               defaultSendButtonColor: Colors.black,
               replyDialogColor: Colors.black,
               replyTitleColor: Color.fromARGB(255, 223, 55, 55),
-              textFieldBackgroundColor:
-                  const Color.fromARGB(255, 245, 246, 250),
+              textFieldBackgroundColor: Color.fromARGB(255, 245, 246, 250),
 
               closeIconColor: Colors.black,
               textFieldConfig: TextFieldConfiguration(

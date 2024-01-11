@@ -55,7 +55,8 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
           isRecordingCompleted = true;
 
           playerController.preparePlayer(path: path);
-          var url = Uri.parse("http://127.0.0.1:9000/transcribe_audio");
+          var url = Uri.parse("http://172.19.190.93:9000/transcribe_audio");
+          //var url = Uri.parse("http://127.0.0.1:9000/transcribe_audio");
           var request = http.MultipartRequest('POST', url);
 
           var file = await http.MultipartFile.fromPath('audio', path);

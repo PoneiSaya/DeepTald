@@ -5,6 +5,7 @@ import speech_recognition as sr
 from pydub import AudioSegment
 import os
 import chatbot_utils as utils
+import tinyllama as lama
 
 app = flask.Flask(__name__)
 
@@ -12,6 +13,7 @@ r = sr.Recognizer()
 
 @app.route("/transcribe_audio", methods=["POST"])
 def transcribe_audio():
+    print("SONO NEL PYTONE 2")
     if 'audio' not in request.files:
         print(request.files)
         return "Nessun file audio caricato"
@@ -31,14 +33,11 @@ def transcribe_audio():
     with msg as source:
         audio = r.record(source)
         text = r.recognize_google(audio_data = audio, language = "it-IT")
-        return text
+        return lama.creaDomanda()
     
-    
-    # Salva il file audio
-    #file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-    
-    return "File audio caricato con successo"
+
+    return "Problemi"
 
 
 if __name__ == "__main__":
-    app.run(port=9000)
+    app.run(host="172.19.190.93" , port=9000, debug=True)
