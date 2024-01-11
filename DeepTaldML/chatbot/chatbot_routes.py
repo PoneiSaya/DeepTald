@@ -11,12 +11,13 @@ app = flask.Flask(__name__)
 
 r = sr.Recognizer()
 
-@app.route("/transcribe_audio", methods=["POST"])
-def transcribe_audio():
+
+
+
+@app.route("/make_message", methods=["POST"])
+def make_message():
     print("SONO NEL PYTONE 2")
-    if 'audio' not in request.files:
-        print(request.files)
-        return "Nessun file audio caricato"
+
     
     file = request.files['audio']
 
@@ -33,11 +34,19 @@ def transcribe_audio():
     with msg as source:
         audio = r.record(source)
         text = r.recognize_google(audio_data = audio, language = "it-IT")
-        return lama.creaDomanda()
-    
-
+        print("testo = " + text)
+        print("ora sta chiamando llama")
+        return lama.creaDomandaConContesto(text)
     return "Problemi"
 
 
+@app.route("/start_conversation", methods=["POST"])
+def start_conversation():
+    print("SONO NEL PYTONE 2")
+    return lama.creaDomanda()
+
+
+
 if __name__ == "__main__":
-    app.run(host="172.19.190.93" , port=9000, debug=True)
+    
+    app.run(host='192.168.1.131', port = 9099, debug=True)

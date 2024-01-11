@@ -52,7 +52,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   /// Qui si deve richiamare LLAMA per generare una domanda
   void creaMessaggio(String path) async {
     //fare la richiesta
-    var urlChatbot = Uri.parse("http://172.19.190.93:9000/transcribe_audio");
+    var urlChatbot = Uri.parse("http://192.168.1.131:9000/transcribe_audio");
     var request = http.MultipartRequest('POST', urlChatbot);
     String testoLLAMA = "";
 
