@@ -23,6 +23,33 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     ],
   );
 
+  @override
+  void initState() {
+    super.initState();
+    iniziaConversazione();
+    // /start_conversation
+  }
+
+  void iniziaConversazione() async {
+    //fare la richiesta
+    print("CI SONO ENTRATO");
+    var urlChatbot = Uri.parse("http://192.168.1.131:9099/start_conversation");
+    var request = http.MultipartRequest('POST', urlChatbot);
+    String testoLLAMA = "";
+    try {
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        testoLLAMA = await response.stream.bytesToString();
+      }
+    } catch (error) {
+      print("--------------------ERRORE---------");
+      print(error);
+    }
+
+    chatController.addMessage(Message(
+        message: testoLLAMA, createdAt: DateTime.now(), sendBy: 2.toString()));
+  }
+
   void onSendTap(
     String message,
     ReplyMessage replyMessage,
@@ -52,7 +79,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   /// Qui si deve richiamare LLAMA per generare una domanda
   void creaMessaggio(String path) async {
     //fare la richiesta
-    var urlChatbot = Uri.parse("http://192.168.1.131:9000/transcribe_audio");
+    var urlChatbot = Uri.parse("http://192.168.1.131:9099/make_message");
     var request = http.MultipartRequest('POST', urlChatbot);
     String testoLLAMA = "";
 

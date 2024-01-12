@@ -5,7 +5,7 @@ import speech_recognition as sr
 from pydub import AudioSegment
 import os
 import chatbot_utils as utils
-import tinyllama as lama
+import chatgpt as bot
 
 app = flask.Flask(__name__)
 
@@ -36,14 +36,14 @@ def make_message():
         text = r.recognize_google(audio_data = audio, language = "it-IT")
         print("testo = " + text)
         print("ora sta chiamando llama")
-        return lama.creaDomandaConContesto(text)
+        return bot.creaDomandaConContesto(text)
     return "Problemi"
 
 
 @app.route("/start_conversation", methods=["POST"])
 def start_conversation():
     print("SONO NEL PYTONE 2")
-    return lama.creaDomanda()
+    return bot.creaDomanda()
 
 
 
