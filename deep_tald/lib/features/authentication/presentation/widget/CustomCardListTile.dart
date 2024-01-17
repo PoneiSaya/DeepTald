@@ -1,4 +1,5 @@
 import 'package:deep_tald/features/authentication/presentation/widget/TALDinfo/LogorreaInfo.dart';
+import 'package:deep_tald/features/authentication/presentation/widget/TALDinfo/PensieroRallentatoInfo.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/TALDinfo/RuminazioneInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -100,8 +101,8 @@ class CustomCardListTile extends StatelessWidget {
                           return AlertDialog(
                           contentPadding: EdgeInsets.all(0), // Rimuovi i padding predefiniti
                           content: Container(
-                            height: MediaQuery.of(context).size.height * 0.8,
-                            child: RuminazioneInfo(),
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            child: PensieroRallentatoInfo(),
                             ),
                           );
                       },
