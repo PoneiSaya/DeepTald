@@ -1,3 +1,4 @@
+import 'package:deep_tald/features/authentication/presentation/widget/TALDinfo/LogorreaInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -95,19 +96,13 @@ class CustomCardListTile extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Informazioni'),
-                          content:
-                              Text('Qua ci vanno le informazioni del report'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('Chiudi'),
+                          return AlertDialog(
+                          contentPadding: EdgeInsets.all(0), // Rimuovi i padding predefiniti
+                          content: Container(
+                            height: MediaQuery.of(context).size.height * 0.68,
+                            child: LoggoreaInfo(),
                             ),
-                          ],
-                        );
+                          );
                       },
                     );
                   },
