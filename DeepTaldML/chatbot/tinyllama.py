@@ -1,13 +1,33 @@
 import torch
 from transformers import pipeline
 
-pipe = pipeline("text-generation", model="TinyLlama/TinyLlama-1.1B-Chat-v1.0", torch_dtype=torch.bfloat16)
+pipe = pipeline("text-generation", model="TinyLlama/TinyLlama-1.1B-Chat-v1.0", torch_dtype=torch.bfloat16, device_map="cuda")
 
-testo = '''Write a simple generic question to start a chat. Write only one question'''
 
-messages = [
-    {"role": "user", "content": testo}
-]
-prompt = pipe.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-outputs = pipe(prompt, max_new_tokens=256, do_sample=True, temperature=0.7, top_k=50, top_p=0.95)
-print(outputs[0]["generated_text"])
+def creaDomanda():
+    testo = " write something to keep the conversation going, like a question. Write only ONE question."
+    messages = [
+        {"role": "user", "content": testo}
+    ]
+    print("sto generando una domanda")
+    
+    prompt = pipe.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    outputs = pipe(prompt, max_new_tokens=256, do_sample=True, temperature=0.7, top_k=50, top_p=0.95)
+    print(outputs[0]["generated_text"])
+
+    return outputs[0]["generated_text"]
+
+def creaDomandaConContesto(contesto: str):
+    
+    testo = "Given this response " + contesto + " write something to keep the conversation going, like a question. Write only ONE question."
+    messages = [
+        {"role": "user", "content": testo}
+    ]
+    print("sto generando una domanda")
+    
+    prompt = pipe.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    outputs = pipe(prompt, max_new_tokens=256, do_sample=True, temperature=0.7, top_k=50, top_p=0.95)
+    print(outputs[0]["generated_text"])
+
+    return outputs[0]["generated_text"]
+

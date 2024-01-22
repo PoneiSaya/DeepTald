@@ -29,6 +29,7 @@ class AuthController extends GetxController {
     if (auth.currentUser != null) {
       utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
           as Utente;
+      utente!.setId(auth.currentUser!.uid);
     }
     if (utente != null && auth.currentUser?.displayName == "paziente") {
       //Rebuild all GetX from previous routes
