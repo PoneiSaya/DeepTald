@@ -1,3 +1,4 @@
+import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:chatview/chatview.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,8 @@ class ChatbotScreen extends StatefulWidget {
 List<Message> messagesList = List.empty(growable: true);
 
 class _ChatbotScreenState extends State<ChatbotScreen> {
+  int counter = 1;
+  AuthController authController = Get.find();
   final ChatUser utente = ChatUser(id: '1', name: "Utente");
   final chatController = ChatController(
     initialMessageList: List.empty(growable: true),
@@ -33,10 +36,17 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   void iniziaConversazione() async {
     //fare la richiesta
     print("CI SONO ENTRATO");
-    var urlChatbot = Uri.parse("http://192.168.1.131:9099/start_conversation");
+    var urlChatbot = Uri.parse("http://172.19.138.123:9099/start_conversation");
     var request = http.MultipartRequest('POST', urlChatbot);
+
+    Map<String, String> data = {
+      'codiceFiscale': authController.utente!.getCodiceFiscale,
+    };
+
     String testoLLAMA = "";
     try {
+      request.fields.addAll(data);
+
       var response = await request.send();
       if (response.statusCode == 200) {
         testoLLAMA = await response.stream.bytesToString();
@@ -79,17 +89,20 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   /// Qui si deve richiamare LLAMA per generare una domanda
   void creaMessaggio(String path) async {
     //fare la richiesta
-    var urlChatbot = Uri.parse("http://192.168.1.131:9099/make_message");
+    var urlChatbot = Uri.parse("http://172.19.138.123:9099/make_message");
     var request = http.MultipartRequest('POST', urlChatbot);
     String testoLLAMA = "";
 
     var file = await http.MultipartFile.fromPath('audio', path);
     request.files.add(file);
 
-    Get.snackbar("title", file.toString());
+    Map<String, String> data = {
+      'codiceFiscale': authController.utente!.getCodiceFiscale,
+      'counter': counter.toString(),
+    };
 
     try {
-      print("MAMMT       ---      ");
+      request.fields.addAll(data);
       var response = await request.send();
 
       if (response.statusCode == 200) {
@@ -102,6 +115,31 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
 
     chatController.addMessage(Message(
         message: testoLLAMA, createdAt: DateTime.now(), sendBy: 2.toString()));
+
+    counter++;
+    if (counter >= 3) {
+      print("COUNTER == 1");
+      var urlTermina =
+          Uri.parse("http://172.19.138.123:9099/terminate_conversation");
+      var request = http.MultipartRequest('POST', urlTermina);
+
+      Map<String, String> data = {
+        'codiceFiscale': authController.utente!.getCodiceFiscale,
+        'counter': counter.toString(),
+      };
+
+      try {
+        request.fields.addAll(data);
+        var response = await request.send();
+
+        if (response.statusCode == 200) {
+          testoLLAMA = await response.stream.bytesToString();
+        }
+      } catch (error) {
+        print("--------------------ERRORE---------");
+        print(error);
+      }
+    }
   }
 
   Widget build(BuildContext context) {
