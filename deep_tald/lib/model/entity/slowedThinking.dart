@@ -1,7 +1,6 @@
 import 'package:deep_tald/model/entity/Item.dart';
 
 class SlowedThinking extends ItemMisurabile {
-  late String _resultString;
   late int _questionCount;
   late int _nWordsDoctor;
   late int _nWordsPatient;
@@ -9,23 +8,20 @@ class SlowedThinking extends ItemMisurabile {
   late double _responseTime;
 
   SlowedThinking(
-      {required String resultString,
+      {
       required int score,
       required int questionCount,
       required int nWordsDoctor,
       required int nWordsPatient,
       required double pauseBetweenWords,
       required double responseTime})
-      : _resultString = resultString,
-        _questionCount = questionCount,
+      :  _questionCount = questionCount,
         _nWordsDoctor = nWordsDoctor,
         _nWordsPatient = nWordsPatient,
         _pauseBetweenWords = pauseBetweenWords,
         _responseTime = responseTime,
         super(score);
 
-  get resultString => this._resultString;
-  set resultString(value) => this._resultString = value;
   get questionCount => this._questionCount;
   set questionCount(value) => this._questionCount = value;
   get nWordsDoctor => this._nWordsDoctor;

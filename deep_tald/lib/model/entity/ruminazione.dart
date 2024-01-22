@@ -5,20 +5,17 @@ class Ruminazione extends ItemMisurabile {
   late String _resultStringTopic;
   late int _counterQuestions;
   late int _counter;
-  late String _resultString;
 
   Ruminazione(
       {required int score,
       required String resultStringSentiment,
       required String resultStringTopic,
       required int counterQuestions,
-      required int counter,
-      required String resultString})
+      required int counter})
       : _resultStringSentiment = resultStringSentiment,
         _resultStringTopic = resultStringTopic,
         _counterQuestions = counterQuestions,
         _counter = counter,
-        _resultString = resultString,
         super(score);
 
   get resultStringSentiment => _resultStringSentiment;
@@ -32,7 +29,4 @@ class Ruminazione extends ItemMisurabile {
 
   get counter => _counter;
   set counter(value) => _counter = value;
-
-  get resultString => _resultString;
-  set resultString(value) => _resultString = value;
 }
