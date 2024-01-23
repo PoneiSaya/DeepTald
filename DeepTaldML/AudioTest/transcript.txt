@@ -1,13 +1,13 @@
 
-CLINICIAN 0:00:00 0:00:03
-Qual è il tuo libro preferito? Ce l'hai? 
-PATIENT 0:00:04 0:00:08
-A me di solito piacciono i libri quelli lì sull'orrore. Libri horror, thriller, gialli. Mi piacciono un sacco. Tipo, una volta ho letto un libro a sfondo religioso, si chiama il Vangelo, secondo Satano. Mi è piaciuto molto proprio il tipo di scrittura, come scrivevo, fluiva molto. Mi è piaciuto particolarmente. Sennò mi piacciono i libri quelli li per bambini, gli atlanti, i libri di scienze. Ad esempio io da piccola leggevo Geronimo Stilton, che mi piaceva molto. Però di solito io non leggo, da piccola leggevo di più. Adesso ci sai internet. 
-CLINICIAN 0:01:02 0:01:05
-Nei libri di Geronimo Stilton c'erano le parole quelle? 
-PATIENT 0:01:05 0:01:14
-Sì, erano molto divertenti. Io il primo libro che ho preso, aspetta qual era? La famiglia Tene Brax. Geronimo Stilton è la famiglia Tene Brax. Mi piaceva molto. Poi nel Regno della Fantasia sempre Geronimo Stilton. Mi ho comprato i due. Erano molto belli. Si sentivano tutte le puzze, i profumi, ogni regno, il suo profumo, molto bello. 
-CLINICIAN 0:01:43 0:01:45
-Hai una pizza preferita? 
-PATIENT 0:01:47 0:01:51
-Allora, in particolare mi piace la pizza senza la mozzarella. Quella lì in Apoletana, però senza lì. Io sono fissata con la dieta, essere vegetariana, cos'è il genere. La mozzarella ha sempre un formaggio che non mangio molto. Mangio alcuni tipi di pizza, ma che mi piacciono sono quelle con il pomodoro frisco, con la rucola, il pomodoro frisco e il parmigiano. Quello pure mi piace un sacco. Però, ad esempio, io non mangio carne, quindi scelgo questo tipo di pizza. 
+CLINICIAN 0:00:00 0:00:04
+Hai mai avuto l'opportunità di viaggiare all'estero? 
+PATIENT 0:00:05 0:00:10
+Sì, sono ad Erasmus in Germania, Spagna e Finlandia, tu e in Filania. 
+CLINICIAN 0:00:11 0:00:11
+Ciao! Wow! Sembra che tu abbia avuto delle esperienze incredibili durante il tuo periodo Erasmus. Mi piacerebbe saperne di più. Qual è stato il tuo paese preferito tra Germania, Spagna, Norvegia e Finlandia? Cosa ti ha affascinato di più di ogni paese? E come hai deciso di scegliere queste destinazioni per il tuo periodo di studio all'estero? 
+PATIENT 0:00:38 0:00:43
+Il mio paese preferito è stato a Finlandia perché fa freddissimo, ma non è un cuoco di sconculo. 
+CLINICIAN 0:00:45 0:00:45
+Ciao! Mi fa piacere che tu abbia apprezzato la Finlandia nonostante il freddo intenso. Sono curioso. Quali sono state le cose che ti hanno attratto maggiormente di questo paese? Hai avuto l'opportunità di visitare qualche città o luogo particolare? 
+PATIENT 0:01:04 0:01:08
+La cosa che ci è mai attratto sono i vestiti filantesi. 
