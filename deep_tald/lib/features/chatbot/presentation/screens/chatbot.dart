@@ -122,6 +122,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       var urlTermina =
           Uri.parse("http://172.19.149.84:9099/terminate_conversation");
       var request = http.MultipartRequest('POST', urlTermina);
+      
 
       Map<String, String> data = {
         'codiceFiscale': authController.utente!.getCodiceFiscale,
@@ -134,6 +135,8 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
 
         if (response.statusCode == 200) {
           testoLLAMA = await response.stream.bytesToString();
+          //metti in un toast a schermo il messaggio
+          Get.snackbar("Risposta", testoLLAMA);
         }
       } catch (error) {
         print("--------------------ERRORE---------");

@@ -1,6 +1,7 @@
 import flask
-from flask import request, jsonify
+from flask import redirect, request, jsonify
 from flask import Response
+import requests
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
@@ -98,7 +99,9 @@ def terminate_conversation():
             break
             
     #chiamare modello  
-          
+    
+    
+
     return "FATTO"
 
 

@@ -152,6 +152,8 @@ def counter_interruption(segments, first_speaker):
 
   #print('Numero di interruzioni verificatesi durante l\'intervista: ', interruption_count)
 
+  if question_count == 0:
+        question_count = 1
   interruption_score = interruption_count / question_count
 
   #print('Numero di domande:', question_count)
@@ -239,7 +241,10 @@ def response_time(segments,first_speaker):
               total_response_time += response_time
 
   #Secondi totali di tempi di risposta / numero di risposte !!!!!!!! modificare qui forse, non fare questa divisione ma sommare solo i tempi di risposta
-  average_response_time = sum(speaker1_responses) / len(speaker1_responses)
+  if len(speaker1_responses) == 0:
+    average_response_time = sum(speaker1_responses) / 1
+  else:
+    average_response_time = sum(speaker1_responses) / len(speaker1_responses)
 
   print(speaker1_responses)
 

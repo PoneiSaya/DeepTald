@@ -1,6 +1,8 @@
-from flask import Flask, request, jsonify, send_file, Response
+from flask import Flask, request, jsonify, send_file, Response, url_for, redirect
 from flask_cors import CORS
 import os
+
+import requests
 from audio_transcript import transcribe_audio
 from perseveranza import perseveranza
 from logorrea_pensiero_rallentato import compute_final_score_item_logorrea, compute_final_score_item_pensiero_rallentato
@@ -41,8 +43,19 @@ upload_folder = os.path.join(project_path, audio_folder)
 app.config['UPLOAD_FOLDER'] = upload_folder
 
 
+def upload_file_inner(file):
+    # Verifica se il file è stato effettivamente caricato
+    if file.__name__ == '':
+        print("hello")
+        return "Nessun file selezionato"
+    
+    # Salva il file audio
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.__name__))
+    print("fatto")
+
 @app.route("/upload", methods=["POST"])
 def upload_file():
+    print("CI SONO")
     if 'audio' not in request.files:
         return "Nessun file audio caricato"
     
@@ -50,12 +63,32 @@ def upload_file():
     
     # Verifica se il file è stato effettivamente caricato
     if file.filename == '':
+        print("hello")
         return "Nessun file selezionato"
     
     # Salva il file audio
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+    print("fatto")
     
     return "File audio caricato con successo"
+
+def start_transcription_inner(path) :
+
+    global segments,word_count,duration,result, n_words_doctor, n_words_patient, first_speaker
+    # Esegui la trascrizione dell'audio con il nome del file fornito
+    segments, duration, result, word_count, n_words_doctor, n_words_patient, first_speaker = transcribe_audio(path)
+    
+    # Recupera il percorso completo del file di trascrizionee
+    transcription_file_path = 'AudioTest/transcript.txt'
+    
+    # Leggi il contenuto del file di trascrizione
+    with open(transcription_file_path, 'r', encoding = 'utf-8') as file:
+        transcription_result = file.read()
+    
+    print('Transcription result', transcription_result)
+    
+    # Restituisci il risultato della trascrizione al frontend
+    return jsonify({'transcriptionResult': transcription_result})
 
 @app.route("/start_transcription", methods=["POST"])
 def start_transcription():
@@ -90,6 +123,46 @@ def start_transcription():
     # Restituisci il risultato della trascrizione al frontend
     return jsonify({'transcriptionResult': transcription_result})
 
+def compute_logorrea_inner():
+    with open('metric_value.json', 'r') as f:
+        data = json.load(f)
+
+    interruptions_weight = data['interruptions_weight']
+    response_length_weight = data['response_length_weight']
+    maxValue_response_length = data['max_value_avg_response_length']
+    minValue_response_length = data['min_value_avg_response_length']
+
+    score_logorrea, question_count, interruption_count, avg_respons_length, speaking_time_patient = compute_final_score_item_logorrea(
+    segments,word_count, float(interruptions_weight),float(response_length_weight), first_speaker,result, 
+    int(maxValue_response_length), int(minValue_response_length))
+
+    speaking_time_doctor = duration - speaking_time_patient
+
+
+    # Valori da visualizzare nel grafico
+    labels = ['Duration', 'Speaking Time (Patient)', 'Speaking Time (Doctor)']
+    values = [duration, speaking_time_patient, speaking_time_doctor]
+
+    plt.figure(figsize=(8, 4))
+    plt.barh(labels, values, color=['blue', 'green', 'orange'])
+
+    plt.xlabel('Time (in sec)')
+    plt.title('Interview time (in sec)')
+    plt.tight_layout()
+
+    image_path = 'AudioTest/speaking_time_analysis.png'
+
+    # Salvataggio dell'immagine del grafico
+    plt.savefig(image_path)
+
+
+    avg_respons_length = round(avg_respons_length * 10, 1)
+
+    
+    return jsonify({'scoreLogorrea': 'Logorrhoea score is : ' + str(score_logorrea),
+        'score_logorrea_report': score_logorrea, 'question_count': question_count, 'n_words_doctor': n_words_doctor, 
+         'n_words_patient': n_words_patient, 'interruption_count': interruption_count, 'avg_respons_length': avg_respons_length, 
+         'duration': duration, 'speaking_time_patient': speaking_time_patient, 'speaking_time_doctor': speaking_time_doctor})
 
 @app.route("/compute_logorrea", methods=["POST"])
 def compute_logorrea():
@@ -134,7 +207,43 @@ def compute_logorrea():
          'n_words_patient': n_words_patient, 'interruption_count': interruption_count, 'avg_respons_length': avg_respons_length, 
          'duration': duration, 'speaking_time_patient': speaking_time_patient, 'speaking_time_doctor': speaking_time_doctor})
 
+def pensiero_rallentato_inner() :
+    with open('metric_value.json', 'r') as f:
+        data = json.load(f)
 
+    pause_time_weight = data['pause_time_weight']
+    response_time_weight = data['response_time_weight']
+    max_value_response_time = data['max_value_avg_response_time']
+    min_value_response_time = data['min_value_avg_response_time']
+
+    score_pensiero_rallentato, question_count, pause_between_words, time_response, speaking_time_patient = compute_final_score_item_pensiero_rallentato(result,segments,float(pause_time_weight),float(response_time_weight), first_speaker, int(max_value_response_time), int(min_value_response_time))
+
+    pause_between_words = round(pause_between_words,1)
+    time_response = round(time_response,1)
+
+    speaking_time_doctor = duration - speaking_time_patient
+
+
+    # Valori da visualizzare nel grafico
+    labels = ['Duration', 'Speaking Time (Patient)', 'Speaking Time (Doctor)']
+    values = [duration, speaking_time_patient, speaking_time_doctor]
+
+    plt.figure(figsize=(8, 4))
+    plt.barh(labels, values, color=['blue', 'green', 'orange'])
+
+    plt.xlabel('Time (in sec)')
+    plt.title('Interview time (in sec)')
+    plt.tight_layout()
+
+    image_path = 'AudioTest/speaking_time_analysis.png'
+
+    # Salvataggio dell'immagine del grafico
+    plt.savefig(image_path)
+
+    
+    return jsonify({'scorePensieroRallentato': 'Slowed thinking score is : ' + str(score_pensiero_rallentato),
+        'score_pensiero_rallentato': score_pensiero_rallentato, 'question_count': question_count, 'n_words_doctor': n_words_doctor, 'n_words_patient': n_words_patient,
+        'pause_between_words': pause_between_words, 'time_response': time_response})
 
 @app.route("/compute_pensiero_rallentato", methods=["POST"])
 def pensiero_rallentato():
@@ -483,10 +592,40 @@ def terminate_conversation():
             counter += 1
         else:
             break
-            
+
+            # Creare un dizionario con il file da inviare
+    os.remove(path + f"domanda_{counter}.mp3")
+    result = start_transcription_inner(output_file) 
+    
+    print(result)
+    print(pensiero_rallentato_inner())
+    """
+     # Chiamare un'altra route usando una richiesta POST
+    url = "/start_transcription"  # Sostituire con l'URL effettivo della tua altra route
+    data = {"parametro": "valore"}  # Sostituire con i dati che desideri passare
+    response = requests.post(url, data=data)
+
+    # Puoi anche verificare la risposta della route e gestire di conseguenza
+    if response.status_code == 200:
+        return "FATTO"
+    else:
+        return "ERRORE NELLA CHIAMATA ALL'ALTRA ROUTE" 
+    
+    url = "/compute_logorrea"  # Sostituire con l'URL effettivo della tua altra route
+    data = {"parametro": "valore"}  # Sostituire con i dati che desideri passare
+    response = requests.post(url, data=data)
+
+    # Puoi anche verificare la risposta della route e gestire di conseguenza
+    if response.status_code == 200:
+        return "FATTO"
+    else:
+        return "ERRORE NELLA CHIAMATA ALL'ALTRA ROUTE" 
+
+
     #chiamare modello  
-          
-    return "FATTO"
+
+    """
+    return pensiero_rallentato_inner()
 
 
 
