@@ -38,7 +38,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   void iniziaConversazione() async {
     //fare la richiesta
     print("CI SONO ENTRATO");
-    var urlChatbot = Uri.parse("http://172.19.147.127:9099/start_conversation");
+    var urlChatbot = Uri.parse("http://172.19.149.84:9099/start_conversation");
     var request = http.MultipartRequest('POST', urlChatbot);
 
     Map<String, String> data = {
@@ -91,7 +91,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   /// Qui si deve richiamare LLAMA per generare una domanda
   void creaMessaggio(String path) async {
     //fare la richiesta
-    var urlChatbot = Uri.parse("http://172.19.147.127:9099/make_message");
+    var urlChatbot = Uri.parse("http://172.19.149.84:9099/make_message");
     var request = http.MultipartRequest('POST', urlChatbot);
     String testoLLAMA = "";
 
@@ -117,7 +117,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
 
     chatController.addMessage(Message(
         message: testoLLAMA, createdAt: DateTime.now(), sendBy: 2.toString()));
-
+  
     counter++;
     if (counter == 4) {
       setState(() {
@@ -125,7 +125,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       });
 
       var urlTermina =
-          Uri.parse("http://172.19.147.127:9099/terminate_conversation");
+          Uri.parse("http://172.19.149.84:9099/terminate_conversation");
       var request = http.MultipartRequest('POST', urlTermina);
 
       Map<String, String> data = {
@@ -154,6 +154,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
         //Navigator.of(context, rootNavigator: true).pop();
         print(error);
       } finally {
+        chatController.scrollController.dispose();
         //mostro i risultati
       }
     }
