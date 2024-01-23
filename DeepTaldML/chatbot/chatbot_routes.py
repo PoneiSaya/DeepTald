@@ -97,11 +97,12 @@ def terminate_conversation():
         else:
             break
             
-    #chiamare modello        
+    #chiamare modello  
+          
     return "FATTO"
 
 
 
 
 if __name__ == "__main__":
-    app.run(host='172.19.138.123', port = 9099, debug=True)
+    app.run(host='172.19.139.25', port = 9099, debug=True)
