@@ -1,4 +1,5 @@
 import 'package:deep_tald/features/authentication/presentation/screens/admin_screen.dart';
+import 'package:deep_tald/features/authentication/presentation/screens/gestione_pazienti.dart';
 import 'package:deep_tald/features/chatbot/presentation/screens/chatbot.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/gestione_utenti.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
@@ -27,6 +28,7 @@ class Routes {
   static String navbar = "/";
   static String chatbot = "/chatbot";
   static String medicoIa = "/medicoIa";
+  static String gestionePazienti = "/gestionePazienti";
 
   //qui crea i getter
   static String getLoginRoute() => login;
@@ -37,6 +39,7 @@ class Routes {
   static String getHomeAdminRoute() => homeAdmin;
   static String getInitialScren() => initialScreen;
   static String gestioneUtentiPage() => initialScreen;
+  static String gestionePazientiPage() => gestionePazienti;
   static String getNavbar() => navbar;
   static String getChatBot() => chatbot;
   static String getMedicoIa() => medicoIa;
@@ -47,13 +50,14 @@ class Routes {
     GetPage(page: () => const InitialScreen(), name: initialScreen),
     GetPage(page: () => const LoginScreen(), name: login),
     GetPage(page: () => const ProfileScreen(), name: profile),
-    GetPage(page: () => RegistrationScreen(), name: registration),
+    GetPage(page: () => const RegistrationScreen(), name: registration),
     GetPage(page: () => const MedicoScreen(), name: homeMedico),
     GetPage(page: () => const PazienteScreen(), name: homePaziente),
     GetPage(page: () => const AdminPage(), name: homeAdmin),
     GetPage(page: () => const GestioneUtentiPage(), name: gestioneUtenti),
     GetPage(page: () => const ChatbotScreen(), name: chatbot),
-    GetPage(page: () => const UsaIaScreen(), name: medicoIa)
+    GetPage(page: () => const UsaIaScreen(), name: medicoIa),
+    GetPage(page: () => const GestionePazientiPage(), name: gestionePazienti),
     //ad ogni pagina corrisponde un GetPage
   ];
 }

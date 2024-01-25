@@ -539,7 +539,10 @@ def make_message():
 
     with msg as source:
         audio = r.record(source)
-        text = r.recognize_google(audio_data = audio, language = "it-IT")
+        try:
+            text = r.recognize_google(audio_data = audio, language = "it-IT")
+        except:
+            text = "Rifammi una domanda per favore"
         print("testo = " + text)
         print("ora sta chiamando il chatbot")
         domanda = bot.creaDomandaConContesto(text)
@@ -631,4 +634,4 @@ def terminate_conversation():
 
 
 if __name__ == "__main__":
-    app.run(host='172.19.149.84', port = 9099, debug=True)
+    app.run(host='192.168.1.131', port = 9099, debug=True)

@@ -1,5 +1,6 @@
 import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Card.dart';
+import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -52,7 +53,8 @@ class _MedicoScreenState extends State<MedicoScreen> {
                     'Gestisci i Pazienti!',
                     'Gestisci',
                     () {
-                      authController.logout();
+                      Get.toNamed(Routes.gestionePazientiPage());
+                      //authController.logout();
                       // ...
                     },
                   ),
