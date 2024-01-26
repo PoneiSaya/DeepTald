@@ -18,8 +18,19 @@ import chatbot.chatbot_utils as utils
 import chatbot.chatgpt as bot
 from gtts import gTTS
 from pydub.generators import Sine
+import firebase_admin
+from firebase_admin import credentials, firestore
 
+cred = credentials.Certificate("configfirebase.json")
+firebase_admin.initialize_app(cred)
 app = Flask(__name__)
+db = firestore.client()
+
+pazienti_ref = db.collection('Pazienti')
+report_ref = db.collection('Report')
+
+
+
 
 CORS(app)
 
@@ -159,10 +170,10 @@ def compute_logorrea_inner():
     avg_respons_length = round(avg_respons_length * 10, 1)
 
     
-    return jsonify({'scoreLogorrea': 'Logorrhoea score is : ' + str(score_logorrea),
+    return {'scoreLogorrea': 'Logorrhoea score is : ' + str(score_logorrea),
         'score_logorrea_report': score_logorrea, 'question_count': question_count, 'n_words_doctor': n_words_doctor, 
          'n_words_patient': n_words_patient, 'interruption_count': interruption_count, 'avg_respons_length': avg_respons_length, 
-         'duration': duration, 'speaking_time_patient': speaking_time_patient, 'speaking_time_doctor': speaking_time_doctor})
+         'duration': duration, 'speaking_time_patient': speaking_time_patient, 'speaking_time_doctor': speaking_time_doctor}
 
 @app.route("/compute_logorrea", methods=["POST"])
 def compute_logorrea():
@@ -241,9 +252,9 @@ def pensiero_rallentato_inner() :
     plt.savefig(image_path)
 
     
-    return jsonify({'scorePensieroRallentato': 'Slowed thinking score is : ' + str(score_pensiero_rallentato),
+    return {'scorePensieroRallentato': 'Slowed thinking score is : ' + str(score_pensiero_rallentato),
         'score_pensiero_rallentato': score_pensiero_rallentato, 'question_count': question_count, 'n_words_doctor': n_words_doctor, 'n_words_patient': n_words_patient,
-        'pause_between_words': pause_between_words, 'time_response': time_response})
+        'pause_between_words': pause_between_words, 'time_response': time_response}
 
 @app.route("/compute_pensiero_rallentato", methods=["POST"])
 def pensiero_rallentato():
@@ -292,6 +303,42 @@ def get_speaking_time_analysis_image():
     image_path = os.path.join(os.path.dirname(__file__), 'AudioTest', 'speaking_time_analysis.png')
     return send_file(image_path, mimetype='image/png')
 
+def compute_perseveranza_inner():
+    #load the file in AudioTest transcript.txt
+    with open('AudioTest/transcript.txt', 'r', encoding = 'utf-8') as file:
+        corpus = file.readlines()
+
+    formatted_corpus = []
+    for phrase in corpus:
+        formatted_phrase = phrase.strip('"')
+        formatted_phrase = formatted_phrase.replace("'", "\'").replace("’", "\'")
+        formatted_corpus.append(formatted_phrase)
+
+    formatted_text = '\n'.join(formatted_corpus)
+    
+    
+    score_perseveranza, counter_question, topics_dict, counter = perseveranza(formatted_corpus)
+
+
+    result_string = ""
+    first_topic = True
+
+    for topic, sentences in topics_dict.items():
+        
+        if first_topic:
+            result_string += f"{topic.rstrip(',')}:\n"
+        else:
+            result_string += textwrap.indent(f"{topic.rstrip(',')}:\n","        ")
+        
+        for sentence in sentences:
+            if sentence != topic:
+                result_string += textwrap.indent(f"- {sentence.rstrip(',')}\n","       ")
+        
+        result_string += "\n"
+        first_topic = False
+    
+    return {'scorePerseveranza': 'Perseverance score is : ' + str(score_perseveranza),
+         'score_perseveranza': score_perseveranza, 'counter_question': counter_question, 'counter': counter, 'result_string': result_string}
 
 @app.route("/compute_perseveranza", methods=["POST"])
 def compute_perseveranza():
@@ -335,7 +382,49 @@ def compute_perseveranza():
     return jsonify({'scorePerseveranza': 'Perseverance score is : ' + str(score_perseveranza),
          'score_perseveranza': score_perseveranza, 'counter_question': counter_question, 'counter': counter, 'result_string': result_string})
 
+def compute_ruminazione_inner():
+    #load the file in AudioTest transcript.txt
+    with open('AudioTest/transcript.txt', 'r', encoding = 'utf-8') as file:
+        corpus = file.readlines()
+    print(corpus)
 
+    formatted_corpus = []
+    for phrase in corpus:
+        formatted_phrase = phrase.strip('"')
+        formatted_phrase = formatted_phrase.replace("'", "\'").replace("’", "\'")
+        formatted_corpus.append(formatted_phrase)
+
+
+    score_ruminazione, counter_question, counter, topics_dict, sentiment_dict = ruminazione(formatted_corpus)
+
+
+    result_string_sentiment = ""
+
+    for sentence, sentiment in sentiment_dict.items():
+        
+        result_string_sentiment += textwrap.indent(f"{sentence.rstrip(',')} --> {sentiment}\n","       ")
+
+
+    result_string_topic = ""
+    first_topic = True
+
+    for topic, sentences in topics_dict.items():
+        
+        if first_topic:
+            result_string_topic += f"{topic.rstrip(',')}:\n"
+        else:
+            result_string_topic += textwrap.indent(f"{topic.rstrip(',')}:\n","        ")
+        
+        for sentence in sentences:
+            if sentence != topic:
+                result_string_topic += textwrap.indent(f"- {sentence.rstrip(',')}\n","       ")
+        
+        result_string_topic += "\n"
+        first_topic = False
+
+
+    return {'scoreRuminazione': 'Rumination score is : ' + str(score_ruminazione),
+        'score_ruminazione': score_ruminazione, 'result_string_sentiment': result_string_sentiment, 'result_string_topic': result_string_topic, 'counter_question': counter_question, 'counter': counter}
 
 @app.route("/compute_ruminazione", methods=["POST"])
 def compute_ruminazione():
@@ -628,7 +717,20 @@ def terminate_conversation():
     #chiamare modello  
 
     """
-    return pensiero_rallentato_inner()
+    risultato_rallentato_json = pensiero_rallentato_inner()
+    risultato_logorrea_json = compute_logorrea_inner()
+    risultato_ruminazione_json = compute_ruminazione_inner()
+    risultato_perseveranza_json = compute_perseveranza_inner()
+    tutti_risultati = {"risultato_perseveranza": risultato_perseveranza_json, "risultato_ruminazione": risultato_ruminazione_json, "risultato_rallentato" : risultato_rallentato_json, "risultato_logorrea" : risultato_logorrea_json, "codiceFiscale" : codiceFiscale}
+    # metti nel db nella tabella report il risultato di pensiero rallentato
+    report_ref.document().set(tutti_risultati)
+    # metti nel db nella tabella report il risultato di logorrea
+    
+    
+    
+    
+    
+    return jsonify(compute_logorrea_inner())
 
 
 
