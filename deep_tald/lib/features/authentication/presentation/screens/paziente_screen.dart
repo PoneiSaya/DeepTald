@@ -23,38 +23,40 @@ class _PazienteScreenState extends State<PazienteScreen> {
     cognome ??= "...";
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: //padding sopra e a sinistra
-                EdgeInsets.only(
-                    left: 30, top: MediaQuery.of(context).size.height / 9),
-            child: Text(
-              'Ciao $nome!  \u{1F44B} ',
-              style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24),
-            ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: //padding sopra e a sinistra
+                    EdgeInsets.only(
+                        left: 30, top: MediaQuery.of(context).size.height / 9),
+                child: Text(
+                  'Ciao $nome!  \u{1F44B} ',
+                  style: GoogleFonts.rubik(
+                      color: const Color.fromARGB(255, 24, 24, 23),
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 24),
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height / 35),
+              CardDeepTald(
+                  'assets/images/mindfullness.png', 'Parla con Bob!', 'Inizia',
+                  () {
+                Get.toNamed(Routes.chatbot);
+              }),
+              CardDeepTald(
+                'assets/images/gestire.png',
+                'Andamento!',
+                'Controlla',
+                () {
+                  // ...
+                },
+              ),
+            ],
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 35),
-          CardDeepTald(
-              'assets/images/mindfullness.png', 'Parla con Bob!', 'Inizia', () {
-            Get.toNamed(Routes.chatbot);
-          }),
-          CardDeepTald(
-            'assets/images/gestire.png',
-            'Andamento!',
-            'Controlla',
-            () {
-              // ...
-            },
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 }

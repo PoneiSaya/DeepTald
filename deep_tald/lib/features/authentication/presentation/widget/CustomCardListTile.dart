@@ -34,12 +34,12 @@ class CustomCardListTile extends StatelessWidget {
               children: [
                 // Cerchio colorato con numero
                 Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.blue,
                   ),
-                  child: Text(
+                  child: const Text(
                     '42',
                     style: TextStyle(
                       color: Colors.white,
@@ -99,8 +99,9 @@ class CustomCardListTile extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                          return AlertDialog(
-                          contentPadding: EdgeInsets.all(0), // Rimuovi i padding predefiniti
+                        return AlertDialog(
+                          contentPadding: EdgeInsets.all(
+                              0), // Rimuovi i padding predefiniti
                           content: Container(
                             height: MediaQuery.of(context).size.height * 0.7,
                             child: (() {
@@ -117,8 +118,8 @@ class CustomCardListTile extends StatelessWidget {
                                   return null;
                               }
                             })(),
-                            ),
-                          );
+                          ),
+                        );
                       },
                     );
                   },

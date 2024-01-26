@@ -92,13 +92,13 @@ class AuthController extends GetxController {
       //se il display name è medico vai alla home medico
       if (auth.currentUser?.displayName == "medico") {
         navbarController.setUpForMedico();
-        Get.toNamed(Routes.navbar);
+        Get.offAllNamed(Routes.navbar);
       } else if (auth.currentUser?.displayName == "paziente") {
         navbarController.setUpForPaziente();
-        Get.toNamed(Routes.navbar);
+        Get.offAllNamed(Routes.navbar);
       } else if (auth.currentUser?.displayName == "admin") {
         navbarController.setUpForAdmin();
-        Get.toNamed(Routes.navbar);
+        Get.offAllNamed(Routes.navbar);
       } else {
         Get.snackbar(
           'Errore',
@@ -118,7 +118,7 @@ class AuthController extends GetxController {
   Future<void> logout() async {
     try {
       await auth.signOut();
-      Get.toNamed(Routes.initialScreen);
+      Get.offAllNamed(Routes.initialScreen);
     } catch (e) {
       Get.snackbar(
         'Errore nel logout',

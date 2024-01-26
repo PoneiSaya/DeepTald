@@ -21,11 +21,11 @@ class MyApp extends GetMaterialApp {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'My App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false,
       initialRoute: Routes.getNavbar(),
       getPages: Routes.routes,
     );

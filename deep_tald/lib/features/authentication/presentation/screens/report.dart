@@ -22,28 +22,28 @@ class _Report extends State<ReportPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 245, 246, 250),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Padding(
+            padding: //padding sopra e a sinistra
+                EdgeInsets.only(
+                    left: 30, top: MediaQuery.of(context).size.height / 9),
+            child: Text(
+              'Reports 📑',
+              style: GoogleFonts.rubik(
+                  color: const Color.fromARGB(255, 24, 24, 23),
+                  decoration: TextDecoration.none,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24),
+            ),
+          ),
           Expanded(
-            flex: 8,
+            //flex: 8,
             child: ListView(
               children: [
+                //SizedBox(height: MediaQuery.of(context).size.height / 35),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: 30, top: MediaQuery.of(context).size.height / 9),
-                  child: Text(
-                    'I Miei Report 📝',
-                    style: GoogleFonts.rubik(
-                      color: const Color.fromARGB(255, 24, 24, 23),
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height / 50),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: 35, top: MediaQuery.of(context).size.height / 200),
+                  padding: const EdgeInsets.only(left: 35),
                   child: Text(
                     'Ultime analisi:',
                     style: GoogleFonts.rubik(
@@ -67,21 +67,23 @@ class _Report extends State<ReportPage> {
                       return ExpansionPanel(
                         headerBuilder: (BuildContext context, bool isExpanded) {
                           return ListTile(
-                            title: const Row(
+                            title: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.location_on,
                                   size: 20,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Text(
-                                  "12/11/2001",
-                                  style: TextStyle(
+                                  "22/11/2011",
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.rubik(
                                       color: Colors.black,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 20),
                                 ),
                               ],
                             ),

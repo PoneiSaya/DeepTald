@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const double _kPanelHeaderCollapsedHeight = 48.0;
 const double _kPanelHeaderExpandedHeight = 64.0;
@@ -75,9 +76,9 @@ class CustomExpansionPanelList extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 8.0),
           key: _SaltedKey<BuildContext, int>(context, index * 2),
           child: Material(
-            color: Color.fromARGB(255, 182, 235, 231),
+            color: const Color.fromRGBO(191, 223, 225, 1),
             elevation: 2.0,
-            borderRadius: BorderRadius.all(Radius.circular(radiusValue)),
+            borderRadius: const BorderRadius.all(Radius.circular(14)),
             child: Column(
               children: <Widget>[
                 header,
