@@ -42,7 +42,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     var request = http.MultipartRequest('POST', urlChatbot);
 
     Map<String, String> data = {
-      'codiceFiscale': authController.utente!.getCodiceFiscale,
+      'id': authController.utente!.getId,
     };
 
     String testoLLAMA = "";
@@ -99,7 +99,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     request.files.add(file);
 
     Map<String, String> data = {
-      'codiceFiscale': authController.utente!.getCodiceFiscale,
+      'id': authController.utente!.getId,
       'counter': counter.toString(),
     };
 
@@ -129,7 +129,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       var request = http.MultipartRequest('POST', urlTermina);
 
       Map<String, String> data = {
-        'codiceFiscale': authController.utente!.getCodiceFiscale,
+        'id': authController.utente!.getId,
         'counter': counter.toString(),
       };
 

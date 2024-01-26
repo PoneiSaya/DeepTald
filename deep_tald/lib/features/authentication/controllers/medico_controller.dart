@@ -137,7 +137,7 @@ class MedicoController extends GetxController {
 
         idMedico = data['uid'];
         String prova = querySnapshot.docs.first.id;
-        Get.snackbar("idTrovato", "idMedico: $prova;");
+        Get.snackbar("idTrovato", "idPaziente: $prova;");
 
         return prova;
       } else {

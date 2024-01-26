@@ -602,7 +602,7 @@ r = sr.Recognizer()
 def make_message():
     ##todo ID UTENTE
     file = request.files['audio']
-    codiceFiscale = request.form.get('codiceFiscale')
+    id = request.form.get('id')
     counter = request.form.get('counter')
 
     # Verifica se il file è stato effettivamente caricato
@@ -610,7 +610,7 @@ def make_message():
         return "Nessun file selezionato"
 
     counter_int = int(counter)
-    #file.save(f'./audio/{codiceFiscale}/risposta_{counter_int-1}.mp3') #salviamo l'audio 
+    
     file.save("audio.mp3")
 
     # Carica il file audio
@@ -620,9 +620,9 @@ def make_message():
     output_format = "mp3"
 
     # Esporta l'oggetto AudioSegment nel formato MP3
-    audio.export(f'./audio/{codiceFiscale}/risposta_{counter_int-1}.mp3', format=output_format)
+    audio.export(f'./audio/{id}/risposta_{counter_int-1}.mp3', format=output_format)
 
-    utils.convert_audio_file(f'./audio/{codiceFiscale}/risposta_{counter_int-1}.mp3')
+    utils.convert_audio_file(f'./audio/{id}/risposta_{counter_int-1}.mp3')
     msg = sr.AudioFile("./audio.flac")
 
 
@@ -637,7 +637,7 @@ def make_message():
         domanda = bot.creaDomandaConContesto(text)
 
         tts = gTTS(domanda, lang='it')
-        tts.save(f'./audio/{codiceFiscale}/domanda_{counter}.mp3')
+        tts.save(f'./audio/{id}/domanda_{counter}.mp3')
     
         return domanda
     return "Problemi"
@@ -646,28 +646,28 @@ def make_message():
 @app.route("/start_conversation", methods=["POST"])
 def start_conversation():
     print(request)
-    codiceFiscale = request.form.get('codiceFiscale')
+    id = request.form.get('id')
 
-    print(f"ID = {codiceFiscale}\n\n\n")
+    print(f"ID = {id}\n\n\n")
     domanda = bot.creaDomanda()
     tts = gTTS(domanda, lang='it')
-    if not os.path.isdir(f"./audio/{codiceFiscale}") :
-        os.mkdir(f"./audio/{codiceFiscale}")
+    if not os.path.isdir(f"./audio/{id}") :
+        os.mkdir(f"./audio/{id}")
 
-    tts.save(f'./audio/{codiceFiscale}/domanda_0.mp3')
+    tts.save(f'./audio/{id}/domanda_0.mp3')
 
     return domanda
 
 
 @app.route("/terminate_conversation", methods=["POST"])
 def terminate_conversation():
-    codiceFiscale = request.form.get('codiceFiscale')
+    id = request.form.get('id')
     
-    if not os.path.isdir(f"./audio/{codiceFiscale}") :
+    if not os.path.isdir(f"./audio/{id}") :
         raise "ERRORE"
 
     counter = 0
-    path = f"./audio/{codiceFiscale}/"
+    path = f"./audio/{id}/"
 
     output_file = path + "risultato.mp3"
     empty_audio = Sine(0).to_audio_segment(duration=1 * 1000)
@@ -721,7 +721,7 @@ def terminate_conversation():
     risultato_logorrea_json = compute_logorrea_inner()
     risultato_ruminazione_json = compute_ruminazione_inner()
     risultato_perseveranza_json = compute_perseveranza_inner()
-    tutti_risultati = {"risultato_perseveranza": risultato_perseveranza_json, "risultato_ruminazione": risultato_ruminazione_json, "risultato_rallentato" : risultato_rallentato_json, "risultato_logorrea" : risultato_logorrea_json, "codiceFiscale" : codiceFiscale}
+    tutti_risultati = {"risultato_perseveranza": risultato_perseveranza_json, "risultato_ruminazione": risultato_ruminazione_json, "risultato_rallentato" : risultato_rallentato_json, "risultato_logorrea" : risultato_logorrea_json, "uid_paziente" : id}
     # metti nel db nella tabella report il risultato di pensiero rallentato
     report_ref.document().set(tutti_risultati)
     # metti nel db nella tabella report il risultato di logorrea
