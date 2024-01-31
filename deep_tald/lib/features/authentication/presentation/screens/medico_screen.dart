@@ -45,7 +45,7 @@ class _MedicoScreenState extends State<MedicoScreen> {
                     'Monitora i pazienti!',
                     'Monitora',
                     () {
-                      // ...
+                      Get.toNamed(Routes.getMonitoraPazientiPage());
                     },
                   ),
                   CardDeepTald(

@@ -1,5 +1,6 @@
 import 'package:deep_tald/features/authentication/presentation/screens/admin_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/gestione_pazienti.dart';
+import 'package:deep_tald/features/authentication/presentation/screens/monitora_pazienti.dart';
 import 'package:deep_tald/features/chatbot/presentation/screens/chatbot.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/gestione_utenti.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/initial_screen.dart';
@@ -29,6 +30,7 @@ class Routes {
   static String chatbot = "/chatbot";
   static String medicoIa = "/medicoIa";
   static String gestionePazienti = "/gestionePazienti";
+  static String monitoraPazienti = "/monitoraPazienti";
 
   //qui crea i getter
   static String getLoginRoute() => login;
@@ -43,6 +45,7 @@ class Routes {
   static String getNavbar() => navbar;
   static String getChatBot() => chatbot;
   static String getMedicoIa() => medicoIa;
+  static String getMonitoraPazientiPage() => monitoraPazienti;
 
   // lista di tutte le routes
   static List<GetPage> routes = [
@@ -58,6 +61,7 @@ class Routes {
     GetPage(page: () => const ChatbotScreen(), name: chatbot),
     GetPage(page: () => const UsaIaScreen(), name: medicoIa),
     GetPage(page: () => const GestionePazientiPage(), name: gestionePazienti),
+    GetPage(page:() => const MonitoraPazientiPage(), name: monitoraPazienti),
     //ad ogni pagina corrisponde un GetPage
   ];
 }
