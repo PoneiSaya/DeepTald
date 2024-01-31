@@ -3,6 +3,7 @@ import 'package:deep_tald/features/authentication/presentation/widget/Card.dart'
 import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MedicoScreen extends StatefulWidget {
   const MedicoScreen({Key? key}) : super(key: key);
@@ -17,16 +18,21 @@ class _MedicoScreenState extends State<MedicoScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Padding(
+            Padding(
               padding: //padding sopra e a sinistra
-                  EdgeInsets.only(left: 30, top: 30),
+                  const EdgeInsets.only(left: 30, top: 30),
               child: Text(
                 'Ciao Dr. Lambiase!  \u{1F44B}',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: GoogleFonts.rubik(
+                    color: const Color.fromARGB(255, 24, 24, 23),
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24),
               ),
             ),
             Expanded(
@@ -37,7 +43,7 @@ class _MedicoScreenState extends State<MedicoScreen> {
                     'Usa IA!',
                     'Inizia',
                     () {
-                      // ...
+                      Get.toNamed(Routes.getMedicoIa());
                     },
                   ),
                   CardDeepTald(
