@@ -66,9 +66,7 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
                                 //widget per inserire il testo
                                 TextField(
                                   onChanged: (value) => {
-                                    setState(() {
-                                      testoInserito = value;
-                                    })
+                                    testoInserito = value,
                                   },
                                   //variabile che contiene il testo inserito
                                   //controller: emailController,
@@ -96,10 +94,14 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
                                         authController.utente!.getEmail);
                                 String idPaziente = await medicoController
                                     .getIdPaziente(testoInserito);
+
+                                if(idPaziente != "") {
                                 //associa paziente a medico
                                 medicoController.associaPaziente(
                                     idMedico, idPaziente);
                                 // ignore: use_build_context_synchronously
+                                }
+                                
                                 Navigator.of(context).pop();
                               },
                             ),

@@ -80,7 +80,7 @@ class MedicoController extends GetxController {
 
         UtenteDTO result = UtenteDTO.fromMap(data);
         result.ruolo = ruolo;
-        Get.snackbar('TROVATO', 'Paziente trovato');
+        //Get.snackbar('TROVATO', 'Paziente trovato');
         return result;
       } else {
         print('non ho trovato niente');
@@ -108,7 +108,7 @@ class MedicoController extends GetxController {
 
         idMedico = data['uid'];
         String prova = querySnapshot.docs.first.id;
-        Get.snackbar("idTrovato", "idMedico: $prova;");
+        //Get.snackbar("idTrovato", "idMedico: $prova;");
 
         return prova;
       } else {
@@ -137,7 +137,7 @@ class MedicoController extends GetxController {
 
         idMedico = data['uid'];
         String prova = querySnapshot.docs.first.id;
-        Get.snackbar("idTrovato", "idPaziente: $prova;");
+        //Get.snackbar("idTrovato", "idPaziente: $prova;");
 
         return prova;
       } else {
@@ -156,6 +156,8 @@ class MedicoController extends GetxController {
     print("sono in associa");
     DocumentReference documentReference =
         firestore.collection("Medico").doc(idMedico);
+
+    //se non hai trovato il medico
     print("trovato medico con id $idMedico");
     //stampa il doc reference
     print(documentReference.id);
