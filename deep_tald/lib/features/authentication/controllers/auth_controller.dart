@@ -88,7 +88,7 @@ class AuthController extends GetxController {
           email: email, password: hashPassword(password));
       utente = await userRepository.findUtenteByUserId(auth.currentUser!.uid)
           as Utente;
-      print(utente);
+
       //se il display name è medico vai alla home medico
       if (auth.currentUser?.displayName == "medico") {
         navbarController.setUpForMedico();

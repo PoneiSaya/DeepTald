@@ -1,5 +1,6 @@
 import 'package:deep_tald/features/authentication/controllers/admin_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/Button.dart';
+import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 class UserCardMonitora extends StatefulWidget {
   late String nome, cognome;
   late String ruolo;
-  late String uid;
+  String uid;
 
   UserCardMonitora(
       {super.key,
@@ -63,13 +64,18 @@ class UserCardMonitoraState extends State<UserCardMonitora> {
                 ),
                 const Spacer(),
                 ElevatedButton(
-                  onPressed: () => {} ,
-                  child: Text("Report"),
+                  onPressed: () {
+                    print("QUI MI STAMPO UID = " + widget.uid);
+                    Get.toNamed(Routes.getReportPage(),
+                        parameters: {'uidPaziente': widget.uid});
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF599BFF),
-                    foregroundColor: Colors.white,),
+                    foregroundColor: Colors.white,
                   ),
-                  const SizedBox(width: 5),
+                  child: const Text("Report"),
+                ),
+                const SizedBox(width: 5),
               ],
             ),
           ],

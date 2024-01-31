@@ -6,6 +6,16 @@ class Ruminazione extends ItemMisurabile {
   late int _counterQuestions;
   late int _counter;
 
+  @override
+  String toString() {
+    return 'Ruminazione{'
+        '_resultStringSentiment: $_resultStringSentiment, '
+        '_resultStringTopic: $_resultStringTopic, '
+        '_counterQuestions: $_counterQuestions, '
+        '_counter: $_counter'
+        '}';
+  }
+
   Ruminazione(
       {required int score,
       required String resultStringSentiment,

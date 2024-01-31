@@ -6,9 +6,23 @@ class Logorrea extends ItemMisurabile {
   late int _nWordsPatient;
   late int _interruptionCount;
   late double _avgResponseLength;
-  late int _duration;
-  late int _speakingTimePatient;
-  late int _speakingTimeDoctor;
+  late double _duration;
+  late double _speakingTimePatient;
+  late double _speakingTimeDoctor;
+
+  @override
+  String toString() {
+    return 'Logorrea{'
+        '_questionCount: $_questionCount, '
+        '_nWordsDoctor: $_nWordsDoctor, '
+        '_nWordsPatient: $_nWordsPatient, '
+        '_interruptionCount: $_interruptionCount, '
+        '_avgResponseLength: $_avgResponseLength, '
+        '_duration: $_duration, '
+        '_speakingTimePatient: $_speakingTimePatient, '
+        '_speakingTimeDoctor: $_speakingTimeDoctor'
+        '}';
+  }
 
   Logorrea(
       {required int score,
@@ -17,11 +31,10 @@ class Logorrea extends ItemMisurabile {
       required int nWordsPatient,
       required int interruptionCount,
       required double avgResponseLength,
-      required int duration,
-      required int speakingTimePatient,
-      required int speakingTimeDoctor})
-      : 
-        _questionCount = questionCount,
+      required double duration,
+      required double speakingTimePatient,
+      required double speakingTimeDoctor})
+      : _questionCount = questionCount,
         _nWordsDoctor = nWordsDoctor,
         _nWordsPatient = nWordsPatient,
         _interruptionCount = interruptionCount,

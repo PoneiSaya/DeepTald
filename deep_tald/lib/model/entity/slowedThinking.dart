@@ -7,15 +7,25 @@ class SlowedThinking extends ItemMisurabile {
   late double _pauseBetweenWords;
   late double _responseTime;
 
+  @override
+  String toString() {
+    return 'SlowedThinking{'
+        '_questionCount: $_questionCount, '
+        '_nWordsDoctor: $_nWordsDoctor, '
+        '_nWordsPatient: $_nWordsPatient, '
+        '_pauseBetweenWords: $_pauseBetweenWords, '
+        '_responseTime: $_responseTime'
+        '}';
+  }
+
   SlowedThinking(
-      {
-      required int score,
+      {required int score,
       required int questionCount,
       required int nWordsDoctor,
       required int nWordsPatient,
       required double pauseBetweenWords,
       required double responseTime})
-      :  _questionCount = questionCount,
+      : _questionCount = questionCount,
         _nWordsDoctor = nWordsDoctor,
         _nWordsPatient = nWordsPatient,
         _pauseBetweenWords = pauseBetweenWords,

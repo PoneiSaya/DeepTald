@@ -12,6 +12,15 @@ class Perseverance extends ItemMisurabile {
   get resultString => this._resultString;
   set resultString(value) => this._resultString = value;
 
+  @override
+  String toString() {
+    return 'Perseverance{'
+        '_questionCounter: $_questionCounter, '
+        '_counter: $_counter, '
+        '_resultString: $_resultString'
+        '}';
+  }
+
   Perseverance(
       {required int questionCounter,
       required int counter,

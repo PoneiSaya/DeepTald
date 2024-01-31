@@ -1,6 +1,7 @@
 import 'package:deep_tald/features/authentication/controllers/admin_controller.dart';
 import 'package:deep_tald/features/authentication/controllers/auth_controller.dart';
 import 'package:deep_tald/features/authentication/controllers/medico_controller.dart';
+import 'package:deep_tald/features/authentication/controllers/reports_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/userCardMonitora.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/user_card.dart';
 import 'package:deep_tald/model/dto/utenteDto.dart';
@@ -47,7 +48,7 @@ class _MonitoraPazientiPageState extends State<MonitoraPazientiPage> {
 
           SizedBox(height: MediaQuery.of(context).size.height / 25),
           //bottone
-        
+
           SingleChildScrollView(
               child: FutureBuilder(
                   future: buildListPazienti(),

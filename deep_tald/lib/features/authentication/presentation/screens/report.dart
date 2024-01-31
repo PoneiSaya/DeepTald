@@ -1,10 +1,12 @@
+import 'package:deep_tald/features/authentication/controllers/reports_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widget/CustomCardListTile.dart';
 import '../widget/customexpansionpanel.dart';
 
 class ReportPage extends StatefulWidget {
-  const ReportPage({Key? key}) : super(key: key);
+  ReportPage({Key? key}) : super(key: key);
 
   @override
   State<ReportPage> createState() => _Report();
@@ -13,12 +15,30 @@ class ReportPage extends StatefulWidget {
 bool visualizzaMedici = false;
 
 class _Report extends State<ReportPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Recupera i parametri durante l'inizializzazione dello stato
+    Map<String, dynamic> params = Get.parameters;
+    uidPaziente = params['uidPaziente'];
+
+    // Ora puoi utilizzare uidPaziente come desiderato
+    print('UID Paziente: $uidPaziente');
+  }
+
   TextEditingController ricercaController = TextEditingController();
+  ReportController reportController = Get.put(ReportController());
+  // Recupera il valore di uidPaziente
+  late String uidPaziente;
 
   final List<Item> _data = generateItems(10);
 
   @override
   Widget build(BuildContext context) {
+    //passa userid a questa page
+
+    reportController.findReportsByUserId(uidPaziente);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 245, 246, 250),
       body: Column(
