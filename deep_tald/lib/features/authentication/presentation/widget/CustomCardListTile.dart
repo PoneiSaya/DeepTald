@@ -8,10 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomCardListTile extends StatelessWidget {
   late String _testo;
   late int _score;
+  late Widget reportAssociato;
 
-  CustomCardListTile(String testo, int score, {super.key}) {
+  CustomCardListTile(String testo, int score, Widget widget, {super.key}) {
     _testo = testo;
     _score = score;
+    reportAssociato = widget;
   }
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class CustomCardListTile extends StatelessWidget {
                         return Center(
                           child: Container(
                             padding: const EdgeInsets.all(16),
-                            child: Column(children: []),
+                            child: reportAssociato,
                           ),
                         );
                       },

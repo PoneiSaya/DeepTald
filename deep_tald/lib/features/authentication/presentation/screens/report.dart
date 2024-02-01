@@ -1,4 +1,5 @@
 import 'package:deep_tald/features/authentication/controllers/reports_controller.dart';
+import 'package:deep_tald/features/authentication/presentation/widget/WidgetPensieroRallentato.dart';
 import 'package:deep_tald/model/entity/report.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -143,14 +144,23 @@ class _Report extends State<ReportPage> {
                                   );
                                 },
                                 body: Column(children: [
-                                  CustomCardListTile("Perseveranza",
-                                      item.report.perseveranceObj.getScore),
-                                  CustomCardListTile("Ruminazione",
-                                      item.report.ruminazioneObj.getScore),
-                                  CustomCardListTile("Pensiero\nRallentato",
-                                      item.report.slowedThinkingObj.getScore),
-                                  CustomCardListTile("Logorrea",
-                                      item.report.logorreaObj.getScore),
+                                  CustomCardListTile(
+                                      "Perseveranza",
+                                      item.report.perseveranceObj.getScore,
+                                      Text("cazzi duri dentro i culi")),
+                                  CustomCardListTile(
+                                      "Ruminazione",
+                                      item.report.ruminazioneObj.getScore,
+                                      Text("cazzi duri dentro i culi")),
+                                  CustomCardListTile(
+                                      "Pensiero\nRallentato",
+                                      item.report.slowedThinkingObj.getScore,
+                                      Text("cazzi duri dentro i culi")),
+                                  CustomCardListTile(
+                                      "Logorrea",
+                                      item.report.logorreaObj.getScore,
+                                      PensieroRallentatoWidget(
+                                          item.report.slowedThinkingObj)),
                                 ]),
                                 isExpanded: !item.isExpanded);
                           }).toList(),
@@ -202,7 +212,7 @@ class Item {
   Item({
     required this.expandedValue,
     required this.headerValue,
-    this.isExpanded = false,
+    this.isExpanded = true,
     required this.report,
   });
 
@@ -215,9 +225,7 @@ class Item {
 List<Item> generateItems(List<Report> reports) {
   return List.generate(reports.length, (int index) {
     String formattedDate =
-        DateFormat('dd/MM/yyyy').format(reports[index].dataVisita);
-    print("-----------DEBUG-----\n");
-    print("ciao      = " + formattedDate);
+        DateFormat('dd/MM/yyyy hh:mm').format(reports[index].dataVisita);
     return Item(
       headerValue: formattedDate,
       expandedValue: reports[index].toString(),

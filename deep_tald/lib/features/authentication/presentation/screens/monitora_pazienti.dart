@@ -69,29 +69,6 @@ class _MonitoraPazientiPageState extends State<MonitoraPazientiPage> {
                       }
                     }
                   })),
-          const Spacer(), //non e una soluzione ma e tardi
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14.0),
-              color: const Color.fromARGB(166, 203, 207, 209),
-              border: Border.all(
-                color: Colors.black, // Colore del bordo (nero)
-                width: 1.0, // Larghezza del bordo in pixel
-              ),
-            ),
-            child: TextField(
-                controller: ricercaController,
-                decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                        icon: const Icon(Icons.clear), onPressed: _clearText),
-                    labelText: "Cerca Paziente con Codice Fiscale",
-                    labelStyle: const TextStyle(
-                      color: Colors.black,
-                    ),
-                    border: InputBorder.none),
-                onChanged: (value) => {setState(() {})}),
-          )
         ],
       ),
     );
