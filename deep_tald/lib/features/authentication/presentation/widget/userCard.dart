@@ -22,7 +22,6 @@ class UserCard extends StatelessWidget {
     //}
 
     return Container(
-      color: Colors.red,
       width: MediaQuery.of(context).size.width * 0.5,
       child: Card(
         shadowColor: Colors.black,
