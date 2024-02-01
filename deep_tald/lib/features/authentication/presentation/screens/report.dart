@@ -1,4 +1,5 @@
 import 'package:deep_tald/features/authentication/controllers/reports_controller.dart';
+import 'package:deep_tald/model/entity/report.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,16 +16,30 @@ class ReportPage extends StatefulWidget {
 bool visualizzaMedici = false;
 
 class _Report extends State<ReportPage> {
+
+  late List<Report> reports = List.empty(growable: true);
+
+  _asyncMethod() async {
+    reports = await reportController.findReportsByUserId(uidPaziente);
+  }
   @override
-  void initState() {
+  void initState()  {
     super.initState();
 
     // Recupera i parametri durante l'inizializzazione dello stato
     Map<String, dynamic> params = Get.parameters;
     uidPaziente = params['uidPaziente'];
-
+    _asyncMethod();
     // Ora puoi utilizzare uidPaziente come desiderato
     print('UID Paziente: $uidPaziente');
+    //_data = generateItems(reports);
+
+    //QUANDO reports cambia genera una nuova lista di Item
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        _data = generateItems(reports);
+      });
+    });
   }
 
   TextEditingController ricercaController = TextEditingController();
@@ -32,12 +47,12 @@ class _Report extends State<ReportPage> {
   // Recupera il valore di uidPaziente
   late String uidPaziente;
 
-  final List<Item> _data = generateItems(10);
-
+  late List<Item> _data;
+ 
   @override
   Widget build(BuildContext context) {
     //passa userid a questa page
-
+    _data = generateItems(reports);
     reportController.findReportsByUserId(uidPaziente);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 245, 246, 250),
@@ -83,7 +98,7 @@ class _Report extends State<ReportPage> {
                       });
                     },
                     key: null,
-                    children: _data.map<ExpansionPanel>((Item item) {
+                    children:  _data.map<ExpansionPanel>((Item item) {
                       return ExpansionPanel(
                         headerBuilder: (BuildContext context, bool isExpanded) {
                           return ListTile(
@@ -97,7 +112,7 @@ class _Report extends State<ReportPage> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "22/11/2011",
+                                  item.report.dataVisita.toString(),
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.rubik(
                                       color: Colors.black,
@@ -172,18 +187,21 @@ class Item {
     required this.expandedValue,
     required this.headerValue,
     this.isExpanded = false,
+    required this.report,
   });
 
   String expandedValue;
   String headerValue;
   bool isExpanded;
+  Report report;
 }
 
-List<Item> generateItems(int numberOfItems) {
-  return List<Item>.generate(numberOfItems, (int index) {
+List<Item> generateItems(List<Report> reports) {
+  return List.generate(reports.length, (int index) {
     return Item(
-      headerValue: 'Pannello $index',
-      expandedValue: 'Contenuto del pannello $index',
+      headerValue: reports[index].dataVisita.toString(),
+      expandedValue: reports[index].toString(),
+      report: reports[index],
     );
   });
 }

@@ -28,7 +28,9 @@ class ReportController extends GetxController {
           print("------------DEBUG------------\n\n\n");
           print(rep.toString());
         }
+        return resultList;
       }
+      
     } catch (e) {
       Get.snackbar("Errore", e.toString());
     }

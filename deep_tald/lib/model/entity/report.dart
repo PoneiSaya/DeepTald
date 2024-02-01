@@ -8,6 +8,7 @@ import 'package:deep_tald/model/entity/ruminazione.dart';
 import 'package:deep_tald/model/entity/slowedThinking.dart';
 
 class Report {
+  
   Logorrea logorreaObj;
   Perseverance perseveranceObj;
   Ruminazione ruminazioneObj;
