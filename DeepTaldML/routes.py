@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, request, jsonify, send_file, Response, url_for, redirect
 from flask_cors import CORS
 import os
@@ -721,7 +722,7 @@ def terminate_conversation():
     risultato_logorrea_json = compute_logorrea_inner()
     risultato_ruminazione_json = compute_ruminazione_inner()
     risultato_perseveranza_json = compute_perseveranza_inner()
-    tutti_risultati = {"risultato_perseveranza": risultato_perseveranza_json, "risultato_ruminazione": risultato_ruminazione_json, "risultato_rallentato" : risultato_rallentato_json, "risultato_logorrea" : risultato_logorrea_json, "uid_paziente" : id}
+    tutti_risultati = {"dataVisita": datetime.datetime.now(), "risultato_perseveranza": risultato_perseveranza_json, "risultato_ruminazione": risultato_ruminazione_json, "risultato_rallentato" : risultato_rallentato_json, "risultato_logorrea" : risultato_logorrea_json, "uid_paziente" : id}
     # metti nel db nella tabella report il risultato di pensiero rallentato
     report_ref.document().set(tutti_risultati)
     # metti nel db nella tabella report il risultato di logorrea
@@ -736,4 +737,4 @@ def terminate_conversation():
 
 
 if __name__ == "__main__":
-    app.run(host='192.168.1.238', port = 9099, debug=True)
+    app.run(host='172.19.192.40', port = 9099, debug=True)

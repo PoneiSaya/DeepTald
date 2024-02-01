@@ -12,7 +12,7 @@ class Report {
   Perseverance perseveranceObj;
   Ruminazione ruminazioneObj;
   SlowedThinking slowedThinkingObj;
-  //DateTime dataVisita;
+  DateTime dataVisita;
   String idPaziente;
 
   @override
@@ -22,7 +22,8 @@ class Report {
         'perseveranceObj: $perseveranceObj, '
         'ruminazioneObj: $ruminazioneObj, '
         'slowedThinkingObj: $slowedThinkingObj, '
-        'idPaziente: $idPaziente'
+        'idPaziente: $idPaziente,'
+        'dataVisita: $dataVisita,'
         '}';
   }
 
@@ -31,13 +32,13 @@ class Report {
       required Perseverance perseverance,
       required Ruminazione ruminazione,
       required SlowedThinking slowedThinking,
-      //required DateTime data,
+      required DateTime data,
       required String id_paziente})
       : logorreaObj = logorrea,
         perseveranceObj = perseverance,
         ruminazioneObj = ruminazione,
         slowedThinkingObj = slowedThinking,
-        //dataVisita = data,
+        dataVisita = data,
         idPaziente = id_paziente;
 
   factory Report.fromMap(Map<String, dynamic> data) {
@@ -84,13 +85,13 @@ class Report {
         perseverance: perseverance,
         ruminazione: ruminazione,
         slowedThinking: slowedThinking,
-        //data: DateTime.parse(data['dataVisita']),
+        data: (data['dataVisita'].toDate()),
         id_paziente: data['uid_paziente']);
   }
 
   toJson() {
     return {
-      //'dataVisita': dataVisita,
+      'dataVisita': dataVisita,
       'idPaziente': idPaziente,
       'Logorrea': {
         'score_logorrea_report': logorreaObj.getScore,
