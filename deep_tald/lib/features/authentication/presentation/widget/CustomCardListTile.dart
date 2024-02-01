@@ -7,13 +7,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomCardListTile extends StatelessWidget {
   late String _testo;
-  CustomCardListTile(String testo, {super.key}) {
+  late int _score;
+
+  CustomCardListTile(String testo, int score, {super.key}) {
     _testo = testo;
+    _score = score;
   }
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -39,9 +42,9 @@ class CustomCardListTile extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: Colors.blue,
                   ),
-                  child: const Text(
-                    '42',
-                    style: TextStyle(
+                  child: Text(
+                    _score.toString(),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -65,17 +68,7 @@ class CustomCardListTile extends StatelessWidget {
                         return Center(
                           child: Container(
                             padding: const EdgeInsets.all(16),
-                            child: Column(children: [
-                              CustomCardListTile("Perseveranza"),
-                              CustomCardListTile("Perseveranza"),
-                              CustomCardListTile("Perseveranza"),
-                              CustomCardListTile("Perseveranza"),
-                              CustomCardListTile("Perseveranza"),
-                              CustomCardListTile("Perseveranza"),
-                              CustomCardListTile("Perseveranza"),
-                              CustomCardListTile("Perseveranza"),
-                              CustomCardListTile("Perseveranza"),
-                            ]),
+                            child: Column(children: []),
                           ),
                         );
                       },
