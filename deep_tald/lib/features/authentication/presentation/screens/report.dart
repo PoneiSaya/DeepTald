@@ -1,5 +1,6 @@
 import 'package:deep_tald/features/authentication/controllers/reports_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/WidgetPensieroRallentato.dart';
+import 'package:deep_tald/features/authentication/presentation/widget/WidgetRuminazione.dart';
 import 'package:deep_tald/model/entity/report.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -151,16 +152,17 @@ class _Report extends State<ReportPage> {
                                   CustomCardListTile(
                                       "Ruminazione",
                                       item.report.ruminazioneObj.getScore,
-                                      Text("cazzi duri dentro i culi")),
+                                      RuminazioneWidget(
+                                          item.report.ruminazioneObj)),
                                   CustomCardListTile(
                                       "Pensiero\nRallentato",
                                       item.report.slowedThinkingObj.getScore,
-                                      Text("cazzi duri dentro i culi")),
+                                      PensieroRallentatoWidget(
+                                          item.report.slowedThinkingObj)),
                                   CustomCardListTile(
                                       "Logorrea",
                                       item.report.logorreaObj.getScore,
-                                      PensieroRallentatoWidget(
-                                          item.report.slowedThinkingObj)),
+                                      Text("cazzi duri dentro i culi")),
                                 ]),
                                 isExpanded: !item.isExpanded);
                           }).toList(),
