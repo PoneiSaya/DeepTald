@@ -1,4 +1,5 @@
 import 'package:deep_tald/features/authentication/controllers/reports_controller.dart';
+import 'package:deep_tald/features/authentication/presentation/widget/WidgetLogorrea.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/WidgetPensieroRallentato.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/WidgetRuminazione.dart';
 import 'package:deep_tald/model/entity/report.dart';
@@ -162,7 +163,7 @@ class _Report extends State<ReportPage> {
                                   CustomCardListTile(
                                       "Logorrea",
                                       item.report.logorreaObj.getScore,
-                                      Text("cazzi duri dentro i culi")),
+                                      LogorreaWidget(item.report.logorreaObj)),
                                 ]),
                                 isExpanded: !item.isExpanded);
                           }).toList(),

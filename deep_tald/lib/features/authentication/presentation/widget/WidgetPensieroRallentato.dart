@@ -27,43 +27,60 @@ class PensieroRallentatoWidget extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: //padding sopra e a sinistra
-                EdgeInsets.only(
-                    left: 30, top: MediaQuery.of(context).size.height / 20),
+          SizedBox(height: MediaQuery.of(context).size.height / 20),
+          //titolo in un rettangolo rounded colorato blue con il nome del report
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
             child: Text(
-              'Score Finale: ${pensieroRallentatoEntity.getScore}',
+              'Pensiero Rallentato',
               style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
+                  color: Colors.white,
                   decoration: TextDecoration.none,
                   fontWeight: FontWeight.w400,
                   fontSize: 24),
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 45),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Indicator(
-                color: Colors.blue,
-                text: 'Question count',
-                isSquare: false,
-              ),
-              Indicator(
-                color: Color.fromRGBO(191, 223, 225, 1),
-                text: 'Parole Dottore',
-                isSquare: false,
-              ),
-              Indicator(
-                color: Color.fromARGB(255, 18, 73, 118),
-                text: 'Parole Paziente',
-                isSquare: false,
-              ),
-            ],
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height / 25),
+          Padding(
+              padding: //padding sopra e a sinistra
+                  EdgeInsets.only(
+                      left: 30, top: MediaQuery.of(context).size.height / 35),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(
+                  'Score: ',
+                  style: GoogleFonts.rubik(
+                      color: const Color.fromARGB(255, 24, 24, 23),
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.blue,
+                  ),
+                  child: Text(
+                    pensieroRallentatoEntity.getScore.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ])),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
           AspectRatio(
-            aspectRatio: 1.4,
+            aspectRatio: 1.2,
             child: AspectRatio(
               aspectRatio: 1,
               child: PieChart(
@@ -103,6 +120,26 @@ class PensieroRallentatoWidget extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Indicator(
+                color: Colors.blue,
+                text: 'Question count',
+                isSquare: false,
+              ),
+              Indicator(
+                color: Color.fromRGBO(191, 223, 225, 1),
+                text: 'Parole Dottore',
+                isSquare: false,
+              ),
+              Indicator(
+                color: Color.fromARGB(255, 18, 73, 118),
+                text: 'Parole Paziente',
+                isSquare: false,
+              ),
+            ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 25),
           Container(
