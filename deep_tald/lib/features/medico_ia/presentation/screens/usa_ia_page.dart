@@ -56,7 +56,6 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
 
           playerController.preparePlayer(path: path);
           var url = Uri.parse("http://172.19.139.25:9000/transcribe_audio");
-          //var url = Uri.parse("http://127.0.0.1:9000/transcribe_audio");
           var request = http.MultipartRequest('POST', url);
 
           var file = await http.MultipartFile.fromPath('audio', path);
@@ -64,7 +63,6 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
           request.files.add(file);
 
           try {
-            print("HEYYYYY SONO NELLA RICHIESTA INVIAT");
             var response = await request.send();
 
             if (response.statusCode == 200) {
@@ -114,7 +112,7 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 245, 246, 250),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: //padding sopra e a sinistra
@@ -129,8 +127,11 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
                     fontSize: 24),
               ),
             ),
-            Flex(
-              direction: Axis.horizontal,
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
                     child: AudioFileWaveforms(
@@ -151,9 +152,6 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
                   //padding: const EdgeInsets.only(left: 18),
                   margin: const EdgeInsets.symmetric(horizontal: 15),
                 )),
-                const SizedBox(
-                  width: 2,
-                ),
                 ElevatedButton(
                     onPressed: () {
                       playerController.startPlayer();
@@ -167,15 +165,15 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
                     child: const Icon(Icons.play_arrow))
               ],
             ),
-            Spacer(),
-            Flex(
-              direction: Axis.horizontal,
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
                   width: 280,
                   height: 50,
                   child: Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     child: AudioWaveforms(
                       enableGesture: true,
                       size: const Size(280, 50),
@@ -195,9 +193,6 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 2,
-                ),
                 ElevatedButton(
                   onPressed: () {
                     _startOrStopRecording();
@@ -212,6 +207,9 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
                       : const Icon(Icons.mic_rounded),
                 )
               ],
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ));

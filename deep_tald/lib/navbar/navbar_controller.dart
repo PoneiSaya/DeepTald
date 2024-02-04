@@ -4,6 +4,7 @@ import 'package:deep_tald/features/authentication/presentation/screens/gestione_
 import 'package:deep_tald/features/authentication/presentation/screens/medico_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/paziente_screen.dart';
 import 'package:deep_tald/features/authentication/presentation/screens/profile_screen.dart';
+import 'package:deep_tald/features/chatbot/presentation/screens/chatbot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -39,7 +40,7 @@ class NavbarController extends GetxController {
   }
 
   void setUpForPaziente() {
-    pagine = const [PazienteScreen(), ProfileScreen()];
+    pagine = const [PazienteScreen(), ProfileScreen(), ChatbotScreen()];
     items = const [
       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
       BottomNavigationBarItem(

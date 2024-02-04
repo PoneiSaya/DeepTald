@@ -37,183 +37,151 @@ class ProfileScreenState extends State<ProfileScreen> {
         DateFormat('dd/MM/yy').format(dataDiNascita) ?? "...";
     String email = u?.getEmail ?? "...";
     String password = u?.getPassword ?? "...";
-    return Container(
-        child: Stack(
-      children: <Widget>[
-        Scaffold(
-          backgroundColor: const Color.fromARGB(255, 245, 246, 250),
-          body: SingleChildScrollView(
-              child: Container(
-            child: Stack(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: _height / 15),
+
+    return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  const SizedBox(
+                    height: 80,
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Text(
+                        'Profilo',
+                        style: GoogleFonts.rubik(
+                            color: const Color.fromARGB(255, 24, 24, 23),
+                            decoration: TextDecoration.none,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24),
+                      ))
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Column(
+                children: <Widget>[
+                  Container(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 7, left: 9),
+                                child: Text(
+                                  'Nome',
+                                  style: GoogleFonts.rubik(
+                                      color: Color.fromARGB(255, 24, 24, 23),
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                )),
+                            ProfileField(label: nome),
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 7, left: 9),
+                                child: Text(
+                                  'Cognome',
+                                  style: GoogleFonts.rubik(
+                                      color: Color.fromARGB(255, 24, 24, 23),
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                )),
+                            ProfileField(label: cognome),
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 7, left: 9),
+                                child: Text(
+                                  'Codice fiscale',
+                                  style: GoogleFonts.rubik(
+                                      color: Color.fromARGB(255, 24, 24, 23),
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                )),
+                            ProfileField(label: codiceFiscale),
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 7, left: 9),
+                                child: Text(
+                                  'Data di nascita',
+                                  style: GoogleFonts.rubik(
+                                      color: Color.fromARGB(255, 24, 24, 23),
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                )),
+                            ProfileField(label: formattedDate),
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 7, left: 9),
+                                child: Text(
+                                  'Email',
+                                  style: GoogleFonts.rubik(
+                                      color: Color.fromARGB(255, 24, 24, 23),
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                )),
+                            ProfileField(label: email),
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 7, left: 9),
+                                child: Text(
+                                  'Password',
+                                  style: GoogleFonts.rubik(
+                                      color: Color.fromARGB(255, 24, 24, 23),
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                )),
+                            ProfileField(label: "*********************"),
+                            Padding(
+                              padding: EdgeInsets.only(left: 150),
+                              child: Text("Modifica Password",
+                                  style: GoogleFonts.rubik(
+                                      color: Colors.black,
+                                      decoration: TextDecoration.none,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13)),
+                            )
+                          ]),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(
-                          height: 80,
-                        ),
-                        Text(
-                          'Profilo',
-                          style: GoogleFonts.rubik(
-                              color: Color.fromARGB(255, 24, 24, 23),
-                              decoration: TextDecoration.none,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 24),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              AuthController authController = AuthController();
+                              authController.logout();
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF599BFF),
+                                foregroundColor: Colors.white,
+                                fixedSize: const Size(169, 48)),
+                            child: Text(
+                              "Logout",
+                              style: GoogleFonts.rubik(
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24),
+                            ),
+                          ),
                         )
                       ],
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: _height / 2.2),
-                  child: Container(
-                    color: Colors.white,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: _height / 3.5,
-                      left: _width / 20,
-                      right: _width / 20),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: 7, left: 9),
-                                    child: Text(
-                                      'Nome',
-                                      style: GoogleFonts.rubik(
-                                          color:
-                                              Color.fromARGB(255, 24, 24, 23),
-                                          decoration: TextDecoration.none,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
-                                    )),
-                                ProfileField(label: nome),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: 7, left: 9),
-                                    child: Text(
-                                      'Cognome',
-                                      style: GoogleFonts.rubik(
-                                          color:
-                                              Color.fromARGB(255, 24, 24, 23),
-                                          decoration: TextDecoration.none,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
-                                    )),
-                                ProfileField(label: cognome),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: 7, left: 9),
-                                    child: Text(
-                                      'Codice fiscale',
-                                      style: GoogleFonts.rubik(
-                                          color:
-                                              Color.fromARGB(255, 24, 24, 23),
-                                          decoration: TextDecoration.none,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
-                                    )),
-                                ProfileField(label: codiceFiscale),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: 7, left: 9),
-                                    child: Text(
-                                      'Data di nascita',
-                                      style: GoogleFonts.rubik(
-                                          color:
-                                              Color.fromARGB(255, 24, 24, 23),
-                                          decoration: TextDecoration.none,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
-                                    )),
-                                ProfileField(label: formattedDate),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: 7, left: 9),
-                                    child: Text(
-                                      'Email',
-                                      style: GoogleFonts.rubik(
-                                          color:
-                                              Color.fromARGB(255, 24, 24, 23),
-                                          decoration: TextDecoration.none,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
-                                    )),
-                                ProfileField(label: email),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(bottom: 7, left: 9),
-                                    child: Text(
-                                      'Password',
-                                      style: GoogleFonts.rubik(
-                                          color:
-                                              Color.fromARGB(255, 24, 24, 23),
-                                          decoration: TextDecoration.none,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
-                                    )),
-                                ProfileField(label: "*********************"),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 150),
-                                  child: Text("Modifica Password",
-                                      style: GoogleFonts.rubik(
-                                          color: Colors.black,
-                                          decoration: TextDecoration.none,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13)),
-                                )
-                              ]),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  AuthController authController =
-                                      AuthController();
-                                  authController.logout();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF599BFF),
-                                    foregroundColor: Colors.white,
-                                    fixedSize: const Size(169, 48)),
-                                child: Text(
-                                  "Logout",
-                                  style: GoogleFonts.rubik(
-                                      color: Color.fromRGBO(255, 255, 255, 1),
-                                      decoration: TextDecoration.none,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )),
-        ),
-      ],
-    ));
+                  )
+                ],
+              ),
+            ],
+          ),
+        ));
   }
 }
