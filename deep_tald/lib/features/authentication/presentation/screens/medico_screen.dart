@@ -13,10 +13,16 @@ class MedicoScreen extends StatefulWidget {
 }
 
 class _MedicoScreenState extends State<MedicoScreen> {
+  final AuthController authController = Get.find();
+
   final int currentPageIndex = 0;
-  AuthController authController = Get.find();
+
   @override
   Widget build(BuildContext context) {
+    String? nome = authController.utente?.nome;
+    nome ??= "...";
+    String? cognome = authController.utente?.cognome;
+    cognome ??= "...";
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -25,9 +31,10 @@ class _MedicoScreenState extends State<MedicoScreen> {
           children: [
             Padding(
               padding: //padding sopra e a sinistra
-                  const EdgeInsets.only(left: 30, top: 30),
+                  EdgeInsets.only(
+                      left: 30, top: MediaQuery.of(context).size.height / 13),
               child: Text(
-                'Ciao Dr. Lambiase!  \u{1F44B}',
+                'Ciao Dr. $nome $cognome!  \u{1F44B} ',
                 style: GoogleFonts.rubik(
                     color: const Color.fromARGB(255, 24, 24, 23),
                     decoration: TextDecoration.none,
@@ -38,14 +45,14 @@ class _MedicoScreenState extends State<MedicoScreen> {
             Expanded(
               child: ListView(
                 children: [
-                  CardDeepTald(
+                  /*CardDeepTald(
                     'assets/images/mindfullness.png',
                     'Usa IA!',
                     'Inizia',
                     () {
                       Get.toNamed(Routes.getMedicoIa());
                     },
-                  ),
+                  ),*/
                   CardDeepTald(
                     'assets/images/grafico.png',
                     'Monitora i pazienti!',
