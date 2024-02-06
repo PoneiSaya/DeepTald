@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:deep_tald/model/entity/perseverance.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,20 +10,13 @@ import 'package:open_file/open_file.dart';
 import 'package:pdf/widgets.dart' as pw;
 import '../../../../model/entity/ruminazione.dart';
 
-class RuminazioneWidget extends StatelessWidget {
-  final Ruminazione ruminazioneEntity;
+class WidgetPerseveranza extends StatelessWidget {
+  final Perseverance perseveranzaEntity;
 
-  RuminazioneWidget(this.ruminazioneEntity, {Key? key}) : super(key: key);
+  WidgetPerseveranza(this.perseveranzaEntity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String score = 'Score Finale: ${ruminazioneEntity.getScore}';
-    String counter =
-        'Numero di domande chieste dal bot: ${ruminazioneEntity.counter}';
-    String topic = '${ruminazioneEntity.resultStringTopic}';
-    String result =
-        '\nString Sentiment: ${ruminazioneEntity.resultStringSentiment}';
-
     return Scaffold(
       body: SingleChildScrollView(
           child: Center(
@@ -43,7 +37,7 @@ class RuminazioneWidget extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Rumnazione',
+                'Perseveranza',
                 style: GoogleFonts.rubik(
                     color: Colors.white,
                     decoration: TextDecoration.none,
@@ -72,7 +66,7 @@ class RuminazioneWidget extends StatelessWidget {
                       color: Colors.blue,
                     ),
                     child: Text(
-                      ruminazioneEntity.getScore.toString(),
+                      perseveranzaEntity.getScore.toString(),
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -80,6 +74,7 @@ class RuminazioneWidget extends StatelessWidget {
                     ),
                   ),
                 ])),
+            //sized box responsive
             SizedBox(height: MediaQuery.of(context).size.height / 20),
             //Text(perseveranzaEntity.counter.toString()),
             Container(
@@ -91,16 +86,19 @@ class RuminazioneWidget extends StatelessWidget {
               child: Column(
                 children: [
                   const Text(
-                    'Topic',
+                    'Risultato',
                     style: TextStyle(
-                      color: Colors.white70,
+                      color: Colors.white,
                       decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 24,
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Text(
-                    topic,
+                    perseveranzaEntity.resultString,
                     style: const TextStyle(
                       color: Colors.white,
                       decoration: TextDecoration.none,
@@ -112,58 +110,31 @@ class RuminazioneWidget extends StatelessWidget {
               ),
             ),
             //sized box responsive
-            SizedBox(height: MediaQuery.of(context).size.height / 40),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                children: [
-                  //testo con su scritto Risultati
-                  const Text(
-                    'Risultati',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    result,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //Text(topic),
-            //Text(result),
-            SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height / 20),
+
+            //bottone per generare il pdf
             ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
-              ),
-              onPressed: () async {
-                final pdfPath = await _createPDF(score, counter, topic, result);
-                if (pdfPath != null) {
-                  print(pdfPath);
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                ),
+                onPressed: () async {
+                  final pdfPath = await _createPDF(
+                      perseveranzaEntity.getScore.toString(),
+                      perseveranzaEntity.counter.toString(),
+                      "Perseveranza",
+                      perseveranzaEntity.resultString);
+
                   OpenFile.open(pdfPath);
-                } else {
-                  print("sassi");
-                }
-              },
-              child: Text(
-                'Genera PDF',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+                },
+                child: const Text(
+                  'Genera PDF',
+                  style: TextStyle(
+                    color: Colors.white,
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                  ),
+                )),
           ],
         ),
       )),

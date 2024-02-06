@@ -1,6 +1,7 @@
 import 'package:deep_tald/features/authentication/controllers/reports_controller.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/WidgetLogorrea.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/WidgetPensieroRallentato.dart';
+import 'package:deep_tald/features/authentication/presentation/widget/WidgetPerseveranza.dart';
 import 'package:deep_tald/features/authentication/presentation/widget/WidgetRuminazione.dart';
 import 'package:deep_tald/model/entity/report.dart';
 import 'package:flutter/material.dart';
@@ -147,9 +148,11 @@ class _Report extends State<ReportPage> {
                                 },
                                 body: Column(children: [
                                   CustomCardListTile(
-                                      "Perseveranza",
-                                      item.report.perseveranceObj.getScore,
-                                      Text("cazzi duri dentro i culi")),
+                                    "Perseveranza",
+                                    item.report.perseveranceObj.getScore,
+                                    WidgetPerseveranza(
+                                        item.report.perseveranceObj),
+                                  ),
                                   CustomCardListTile(
                                       "Ruminazione",
                                       item.report.ruminazioneObj.getScore,
