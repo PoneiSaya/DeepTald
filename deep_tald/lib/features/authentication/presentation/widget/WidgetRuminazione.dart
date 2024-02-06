@@ -1,165 +1,83 @@
+import 'dart:io';
 import 'dart:math';
 
-import 'package:deep_tald/model/entity/slowedThinking.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:fl_chart/fl_chart.dart';
-
+import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
+import 'package:pdf/widgets.dart' as pw;
 import '../../../../model/entity/ruminazione.dart';
 
-/*
-  late int _questionCount;
-  late int _nWordsDoctor;
-  late int _nWordsPatient;
-  late double _pauseBetweenWords;
-  late double _responseTime;
-*/
-
 class RuminazioneWidget extends StatelessWidget {
-  late Ruminazione ruminazioneEntity;
+  final Ruminazione ruminazioneEntity;
 
-  RuminazioneWidget(Ruminazione ruminazione, {super.key}) {
-    ruminazioneEntity = ruminazione;
-  }
+  RuminazioneWidget(this.ruminazioneEntity, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String score = 'Score Finale: ${ruminazioneEntity.getScore}';
+    String counter =
+        'Numero di domande chieste dal bot: ${ruminazioneEntity.counter}';
+    String topic = 'Topic: ${ruminazioneEntity.resultStringTopic}';
+    String result =
+        'Result \nString Sentiment: ${ruminazioneEntity.resultStringSentiment}';
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 246, 250),
-      body: Column(
-        children: [
-          Padding(
-            padding: //padding sopra e a sinistra
-                EdgeInsets.only(
-                    left: 30, top: MediaQuery.of(context).size.height / 20),
-            child: Text(
-              'Score Finale: ${ruminazioneEntity.getScore}',
-              style: GoogleFonts.rubik(
-                  color: const Color.fromARGB(255, 24, 24, 23),
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 24),
+      body: SingleChildScrollView(
+          child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(score),
+            Text(counter),
+            Text(topic),
+            Text(result),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () async {
+                final pdfPath = await _createPDF(score, counter, topic, result);
+                if (pdfPath != null) {
+                  print(pdfPath);
+                  OpenFile.open(pdfPath);
+                } else {
+                  print("sassi");
+                }
+              },
+              child: Text('Genera PDF'),
             ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height / 45),
-          Container(
-            decoration: const BoxDecoration(
-              color: Color.fromRGBO(191, 223, 225, 1),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-              ),
-            ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  SizedBox(height: MediaQuery.of(context).size.height / 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          'Numero di domande chieste dal bot: ',
-                          style: GoogleFonts.rubik(
-                              color: const Color.fromARGB(255, 24, 24, 23),
-                              decoration: TextDecoration.none,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 15),
-                        ),
-                      ),
-                      Text(
-                        '${ruminazioneEntity.counter}',
-                        style: GoogleFonts.rubik(
-                            color: const Color.fromARGB(255, 24, 24, 23),
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 200),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            'Topic: ',
-                            style: GoogleFonts.rubik(
-                                color: const Color.fromARGB(255, 24, 24, 23),
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15),
-                          )),
-                      Text(
-                        '${ruminazioneEntity.resultStringTopic}',
-                        style: GoogleFonts.rubik(
-                            color: const Color.fromARGB(255, 24, 24, 23),
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 200),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            'result string sentiment: ',
-                            style: GoogleFonts.rubik(
-                                color: const Color.fromARGB(255, 24, 24, 23),
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15),
-                          )),
-                      Text(
-                        '${ruminazioneEntity.resultStringSentiment}',
-                        style: GoogleFonts.rubik(
-                            color: const Color.fromARGB(255, 24, 24, 23),
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 200),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
+      )),
+    );
+  }
+
+  Future<String> _createPDF(
+    String score,
+    String counter,
+    String topic,
+    String result,
+  ) async {
+    final pdf = pw.Document();
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            mainAxisAlignment: pw.MainAxisAlignment.center,
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text(score),
+              pw.Text(counter),
+              pw.Text(topic),
+              pw.Text(result),
+            ],
+          );
+        },
       ),
     );
+    final output = await getExternalStorageDirectory();
+    final file = File("${output?.path}/example.pdf");
+    await file.writeAsBytes(await pdf.save());
+    return "${output?.path}/example.pdf";
   }
 }

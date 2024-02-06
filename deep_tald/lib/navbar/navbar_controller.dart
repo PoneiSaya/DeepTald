@@ -28,11 +28,11 @@ class NavbarController extends GetxController {
   //allo start dell'applicazione
 
   void setUpForMedico() {
-    pagine = const [MedicoScreen(), UsaIaScreen(), ProfileScreen()];
+    pagine = const [MedicoScreen(), ProfileScreen()];
     items = const [
       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.dashboard_customize_rounded), label: "Usa IA"),
+      /* BottomNavigationBarItem(
+          icon: Icon(Icons.dashboard_customize_rounded), label: "Usa IA"),*/
       BottomNavigationBarItem(
           icon: Icon(Icons.manage_accounts_rounded), label: "Profilo")
     ];
