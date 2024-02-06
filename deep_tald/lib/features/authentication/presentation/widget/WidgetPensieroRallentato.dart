@@ -23,297 +23,307 @@ class PensieroRallentatoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 246, 250),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: MediaQuery.of(context).size.height / 20),
-          //titolo in un rettangolo rounded colorato blue con il nome del report
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: Text(
-              'Pensiero Rallentato',
-              style: GoogleFonts.rubik(
-                  color: Colors.white,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 24),
-            ),
-          ),
-          Padding(
-              padding: //padding sopra e a sinistra
-                  EdgeInsets.only(
-                      left: 30, top: MediaQuery.of(context).size.height / 35),
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(
-                  'Score: ',
+        backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height / 20),
+              //titolo in un rettangolo rounded colorato blue con il nome del report
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: Text(
+                  'Pensiero Rallentato',
                   style: GoogleFonts.rubik(
-                      color: const Color.fromARGB(255, 24, 24, 23),
+                      color: Colors.white,
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.w400,
                       fontSize: 24),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.blue,
-                  ),
-                  child: Text(
-                    pensieroRallentatoEntity.getScore.toString(),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ])),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
-          AspectRatio(
-            aspectRatio: 1.2,
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: PieChart(
-                PieChartData(
-                  sections: [
-                    PieChartSectionData(
-                      color: Colors.blue,
-                      value: (pensieroRallentatoEntity.questionCount as int)
-                          .toDouble(),
-                      titleStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                      radius: 150,
-                    ),
-                    PieChartSectionData(
-                      color: const Color.fromARGB(255, 53, 139, 145),
-                      value: (pensieroRallentatoEntity.nWordsDoctor as int)
-                          .toDouble(),
-                      titleStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                      radius: 150,
-                    ),
-                    PieChartSectionData(
-                      color: const Color.fromARGB(255, 18, 73, 118),
-                      value: (pensieroRallentatoEntity.nWordsPatient as int)
-                          .toDouble(),
-                      titleStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                      radius: 150,
-                    ),
-                  ],
-                ),
               ),
-            ),
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Indicator(
-                color: Colors.blue,
-                text: 'Question count',
-                isSquare: false,
-              ),
-              Indicator(
-                color: Color.fromRGBO(191, 223, 225, 1),
-                text: 'Parole Dottore',
-                isSquare: false,
-              ),
-              Indicator(
-                color: Color.fromARGB(255, 18, 73, 118),
-                text: 'Parole Paziente',
-                isSquare: false,
-              ),
-            ],
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height / 25),
-          Container(
-            height: MediaQuery.of(context).size.height / 3.3,
-            width: MediaQuery.of(context).size.width / 1.25,
-            decoration: const BoxDecoration(
-              color: Color.fromRGBO(191, 223, 225, 1),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-              ),
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: MediaQuery.of(context).size.height / 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          'Numero di domande chieste dal bot: ',
+              Padding(
+                  padding: //padding sopra e a sinistra
+                      EdgeInsets.only(
+                          left: 30,
+                          top: MediaQuery.of(context).size.height / 35),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Score: ',
                           style: GoogleFonts.rubik(
                               color: const Color.fromARGB(255, 24, 24, 23),
                               decoration: TextDecoration.none,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 15),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 24),
                         ),
-                      ),
-                      Text(
-                        '${pensieroRallentatoEntity.questionCount}',
-                        style: GoogleFonts.rubik(
-                            color: const Color.fromARGB(255, 24, 24, 23),
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 200),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 20),
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.blue,
+                          ),
                           child: Text(
-                            'Numero parole dottore: ',
-                            style: GoogleFonts.rubik(
-                                color: const Color.fromARGB(255, 24, 24, 23),
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15),
-                          )),
-                      Text(
-                        '${pensieroRallentatoEntity.nWordsDoctor}',
-                        style: GoogleFonts.rubik(
-                            color: const Color.fromARGB(255, 24, 24, 23),
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15),
-                      ),
-                    ],
+                            pensieroRallentatoEntity.getScore.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ])),
+              SizedBox(height: MediaQuery.of(context).size.height / 50),
+              AspectRatio(
+                aspectRatio: 1.2,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: PieChart(
+                    PieChartData(
+                      sections: [
+                        PieChartSectionData(
+                          color: Colors.blue,
+                          value: (pensieroRallentatoEntity.questionCount as int)
+                              .toDouble(),
+                          titleStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                          radius: 150,
+                        ),
+                        PieChartSectionData(
+                          color: const Color.fromARGB(255, 53, 139, 145),
+                          value: (pensieroRallentatoEntity.nWordsDoctor as int)
+                              .toDouble(),
+                          titleStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                          radius: 150,
+                        ),
+                        PieChartSectionData(
+                          color: const Color.fromARGB(255, 18, 73, 118),
+                          value: (pensieroRallentatoEntity.nWordsPatient as int)
+                              .toDouble(),
+                          titleStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                          radius: 150,
+                        ),
+                      ],
+                    ),
                   ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
+                ),
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Indicator(
+                    color: Colors.blue,
+                    text: 'Question count',
+                    isSquare: false,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 200),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            'Numero parole paziente: ',
-                            style: GoogleFonts.rubik(
-                                color: const Color.fromARGB(255, 24, 24, 23),
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15),
-                          )),
-                      Text(
-                        '${pensieroRallentatoEntity.nWordsPatient}',
-                        style: GoogleFonts.rubik(
-                            color: const Color.fromARGB(255, 24, 24, 23),
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15),
-                      ),
-                    ],
+                  Indicator(
+                    color: Color.fromRGBO(191, 223, 225, 1),
+                    text: 'Parole Dottore',
+                    isSquare: false,
                   ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 200),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            'Pausa tra parole (Average): ',
-                            style: GoogleFonts.rubik(
-                                color: const Color.fromARGB(255, 24, 24, 23),
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15),
-                          )),
-                      Text(
-                        '${pensieroRallentatoEntity.pauseBetweenWords}',
-                        style: GoogleFonts.rubik(
-                            color: const Color.fromARGB(255, 24, 24, 23),
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            'Response Time (Average): ',
-                            style: GoogleFonts.rubik(
-                                color: const Color.fromARGB(255, 24, 24, 23),
-                                decoration: TextDecoration.none,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15),
-                          )),
-                      Text(
-                        '${pensieroRallentatoEntity.responseTime}',
-                        style: GoogleFonts.rubik(
-                            color: const Color.fromARGB(255, 24, 24, 23),
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 0.2,
-                    endIndent: 30,
-                    indent: 30,
+                  Indicator(
+                    color: Color.fromARGB(255, 18, 73, 118),
+                    text: 'Parole Paziente',
+                    isSquare: false,
                   ),
                 ],
               ),
-            ),
+              SizedBox(height: MediaQuery.of(context).size.height / 25),
+              Container(
+                height: MediaQuery.of(context).size.height / 3.3,
+                width: MediaQuery.of(context).size.width / 1.25,
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(191, 223, 225, 1),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height / 50),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Numero di domande chieste dal bot: ',
+                              style: GoogleFonts.rubik(
+                                  color: const Color.fromARGB(255, 24, 24, 23),
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15),
+                            ),
+                          ),
+                          Text(
+                            '${pensieroRallentatoEntity.questionCount}',
+                            style: GoogleFonts.rubik(
+                                color: const Color.fromARGB(255, 24, 24, 23),
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15),
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        color: Colors.black,
+                        thickness: 0.2,
+                        endIndent: 30,
+                        indent: 30,
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 200),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                'Numero parole dottore: ',
+                                style: GoogleFonts.rubik(
+                                    color:
+                                        const Color.fromARGB(255, 24, 24, 23),
+                                    decoration: TextDecoration.none,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15),
+                              )),
+                          Text(
+                            '${pensieroRallentatoEntity.nWordsDoctor}',
+                            style: GoogleFonts.rubik(
+                                color: const Color.fromARGB(255, 24, 24, 23),
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15),
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        color: Colors.black,
+                        thickness: 0.2,
+                        endIndent: 30,
+                        indent: 30,
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 200),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                'Numero parole paziente: ',
+                                style: GoogleFonts.rubik(
+                                    color:
+                                        const Color.fromARGB(255, 24, 24, 23),
+                                    decoration: TextDecoration.none,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15),
+                              )),
+                          Text(
+                            '${pensieroRallentatoEntity.nWordsPatient}',
+                            style: GoogleFonts.rubik(
+                                color: const Color.fromARGB(255, 24, 24, 23),
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15),
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        color: Colors.black,
+                        thickness: 0.2,
+                        endIndent: 30,
+                        indent: 30,
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 200),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                'Pausa tra parole (Average): ',
+                                style: GoogleFonts.rubik(
+                                    color:
+                                        const Color.fromARGB(255, 24, 24, 23),
+                                    decoration: TextDecoration.none,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15),
+                              )),
+                          Text(
+                            '${pensieroRallentatoEntity.pauseBetweenWords}',
+                            style: GoogleFonts.rubik(
+                                color: const Color.fromARGB(255, 24, 24, 23),
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15),
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        color: Colors.black,
+                        thickness: 0.2,
+                        endIndent: 30,
+                        indent: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                'Response Time (Average): ',
+                                style: GoogleFonts.rubik(
+                                    color:
+                                        const Color.fromARGB(255, 24, 24, 23),
+                                    decoration: TextDecoration.none,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 15),
+                              )),
+                          Text(
+                            '${pensieroRallentatoEntity.responseTime}',
+                            style: GoogleFonts.rubik(
+                                color: const Color.fromARGB(255, 24, 24, 23),
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15),
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        color: Colors.black,
+                        thickness: 0.2,
+                        endIndent: 30,
+                        indent: 30,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
 
