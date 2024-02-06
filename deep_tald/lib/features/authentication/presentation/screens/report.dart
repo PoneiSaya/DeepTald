@@ -61,8 +61,31 @@ class _Report extends State<ReportPage> {
 
     reportController.findReportsByUserId(uidPaziente);
     return !isDataInitialized
-        ? const Center(
-            child: CircularProgressIndicator(),
+        ? Center(
+            child: //Circula progress indicator con sfondo bianco
+                Stack(
+              children: [
+                Scaffold(),
+                //CircularProgressIndicator(), con testo "Caricamento..."
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            const Color.fromARGB(255, 24, 24, 23)),
+                      ),
+                      Text("Caricamento Reports...",
+                          style: GoogleFonts.rubik(
+                              color: Color.fromARGB(255, 24, 24, 23),
+                              decoration: TextDecoration.none,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 24)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           )
         : Scaffold(
             backgroundColor: const Color.fromARGB(255, 245, 246, 250),
