@@ -46,7 +46,7 @@ class _GestionePazientiPageState extends State<SelezionaPazientiIAPage> {
 
           SizedBox(height: MediaQuery.of(context).size.height / 25),
           //bottone
-         
+
           SingleChildScrollView(
               child: FutureBuilder(
                   future: buildListPazienti(),
@@ -69,9 +69,10 @@ class _GestionePazientiPageState extends State<SelezionaPazientiIAPage> {
                   })),
           const Spacer(), //non e una soluzione ma e tardi
           Container(
+            margin: EdgeInsets.only(left: 20.0, right: 20.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14.0),
-              color: const Color.fromARGB(166, 203, 207, 209),
+              color: Color.fromARGB(166, 222, 227, 229),
               border: Border.all(
                 color: Colors.black, // Colore del bordo (nero)
                 width: 1.0, // Larghezza del bordo in pixel
@@ -89,6 +90,9 @@ class _GestionePazientiPageState extends State<SelezionaPazientiIAPage> {
                     ),
                     border: InputBorder.none),
                 onChanged: (value) => {setState(() {})}),
+          ),
+          const SizedBox(
+            height: 20,
           )
         ],
       ),

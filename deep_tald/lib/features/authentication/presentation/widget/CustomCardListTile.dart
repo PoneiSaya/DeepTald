@@ -18,6 +18,7 @@ class CustomCardListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: const Color(0xfff5f6fa),
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -31,7 +32,7 @@ class CustomCardListTile extends StatelessWidget {
             // Testo sulla sinistra
             Text(
               this._testo,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
 
             // Parte destra della card
@@ -42,7 +43,7 @@ class CustomCardListTile extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.blue,
+                    color: Color(0xFF599BFF),
                   ),
                   child: Text(
                     _score.toString(),
@@ -64,12 +65,15 @@ class CustomCardListTile extends StatelessWidget {
                   onPressed: () {
                     // Apri una modal al centro dello schermo
                     showModalBottomSheet(
+                      backgroundColor: const Color(0xfff5f6fa),
                       context: context,
                       isScrollControlled: true,
                       builder: (BuildContext context) {
                         return Center(
                           child: Container(
                             padding: const EdgeInsets.all(16),
+                            decoration:
+                                const BoxDecoration(color: Color(0xfff5f6fa)),
                             child: reportAssociato,
                           ),
                         );
@@ -95,7 +99,7 @@ class CustomCardListTile extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          contentPadding: EdgeInsets.all(
+                          contentPadding: const EdgeInsets.all(
                               0), // Rimuovi i padding predefiniti
                           content: Container(
                             height: MediaQuery.of(context).size.height * 0.7,
@@ -118,7 +122,7 @@ class CustomCardListTile extends StatelessWidget {
                       },
                     );
                   },
-                  child: Icon(Icons.info),
+                  child: const Icon(Icons.info),
                 ),
               ],
             ),

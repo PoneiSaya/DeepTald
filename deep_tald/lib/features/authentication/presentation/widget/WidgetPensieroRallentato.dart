@@ -23,7 +23,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+        backgroundColor: const Color(0xfff5f6fa),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +33,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
-                  color: Colors.blue,
+                  color: Color(0xFF599BFF),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20),
@@ -70,7 +70,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.blue,
+                            color: Color(0xFF599BFF),
                           ),
                           child: Text(
                             pensieroRallentatoEntity.getScore.toString(),
@@ -90,7 +90,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
                     PieChartData(
                       sections: [
                         PieChartSectionData(
-                          color: Colors.blue,
+                          color: const Color(0xFF599BFF),
                           value: (pensieroRallentatoEntity.questionCount as int)
                               .toDouble(),
                           titleStyle: const TextStyle(
@@ -128,7 +128,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Indicator(
-                    color: Colors.blue,
+                    color: Color(0xFF599BFF),
                     text: 'Question count',
                     isSquare: false,
                   ),

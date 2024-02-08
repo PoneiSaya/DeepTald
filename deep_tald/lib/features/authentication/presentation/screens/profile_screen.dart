@@ -39,7 +39,7 @@ class ProfileScreenState extends State<ProfileScreen> {
     String password = u?.getPassword ?? "...";
 
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+        backgroundColor: const Color(0xfff5f6fa),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -46,7 +46,7 @@ class CardDeepTald extends StatelessWidget {
                           color: const Color.fromARGB(255, 24, 24, 23),
                           decoration: TextDecoration.none,
                           fontWeight: FontWeight.w600,
-                          fontSize: MediaQuery.of(context).size.height / 50),
+                          fontSize: 20),
                     ),
                   ),
                   Padding(

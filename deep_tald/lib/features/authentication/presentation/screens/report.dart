@@ -65,19 +65,18 @@ class _Report extends State<ReportPage> {
             child: //Circula progress indicator con sfondo bianco
                 Stack(
               children: [
-                Scaffold(),
                 //CircularProgressIndicator(), con testo "Caricamento..."
                 Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(
+                      const CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(
-                            const Color.fromARGB(255, 24, 24, 23)),
+                            Color.fromARGB(255, 24, 24, 23)),
                       ),
                       Text("Caricamento Reports...",
                           style: GoogleFonts.rubik(
-                              color: Color.fromARGB(255, 24, 24, 23),
+                              color: const Color.fromARGB(255, 24, 24, 23),
                               decoration: TextDecoration.none,
                               fontWeight: FontWeight.w600,
                               fontSize: 24)),
@@ -90,7 +89,7 @@ class _Report extends State<ReportPage> {
         : Scaffold(
             backgroundColor: const Color.fromARGB(255, 245, 246, 250),
             body: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: //padding sopra e a sinistra
@@ -198,39 +197,46 @@ class _Report extends State<ReportPage> {
                     ],
                   ),
                 ),
-                Expanded(
-                  flex: 0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14.0),
-                      color: const Color.fromARGB(166, 203, 207, 209),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
+                Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF599BFF),
+                        foregroundColor: Colors.white,
+                        fixedSize: const Size(259, 65)),
+                    child: Text(
+                      "Ricerca per Data",
+                      style: GoogleFonts.rubik(
+                          color: Colors.white,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
                     ),
-                    child: TextField(
-                      controller: ricercaController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search),
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {},
-                        ),
-                        labelText: visualizzaMedici
-                            ? "Cerca Medico con Codice Fiscale"
-                            : "Cerca Paziente con Codice Fiscale",
-                        labelStyle: const TextStyle(
-                          color: Colors.black,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                      onChanged: (value) {
-                        setState(() {});
-                      },
-                    ),
+                    onPressed: () async {
+                      final DateTime? dataQuery = await showDatePicker(
+                          initialEntryMode: DatePickerEntryMode.calendarOnly,
+                          context: context,
+                          firstDate: DateTime(2024, 1),
+                          lastDate: DateTime.now());
+
+                      var listaReports = await reportController
+                          .findReportsByUserIdAndDate(uidPaziente, dataQuery!);
+
+                      setState(() {
+                        reports = listaReports;
+
+                        Future.delayed(Duration(seconds: 1), () {
+                          setState(() {
+                            _data = generateItems(reports);
+                            isDataInitialized = true;
+                          });
+                        });
+                      });
+                    },
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                )
               ],
             ),
           );

@@ -18,6 +18,7 @@ class WidgetPerseveranza extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff5f6fa),
       body: SingleChildScrollView(
           child: Center(
         child: Column(
@@ -80,7 +81,7 @@ class WidgetPerseveranza extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.blueGrey,
+                color: const Color.fromRGBO(191, 223, 225, 1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -88,7 +89,7 @@ class WidgetPerseveranza extends StatelessWidget {
                   const Text(
                     'Risultato',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.w400,
                       fontSize: 24,
@@ -100,7 +101,7 @@ class WidgetPerseveranza extends StatelessWidget {
                   Text(
                     perseveranzaEntity.resultString,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.w400,
                       fontSize: 14,

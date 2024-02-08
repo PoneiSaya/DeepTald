@@ -26,15 +26,16 @@ class _MedicoScreenState extends State<MedicoScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 245, 246, 250),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: //padding sopra e a sinistra
                   EdgeInsets.only(
                       left: 30, top: MediaQuery.of(context).size.height / 13),
               child: Text(
-                'Ciao Dr. $nome $cognome!  \u{1F44B} ',
+                'Ciao Dr. $cognome!  \u{1F44B} ',
                 style: GoogleFonts.rubik(
                     color: const Color.fromARGB(255, 24, 24, 23),
                     decoration: TextDecoration.none,

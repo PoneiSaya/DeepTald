@@ -26,7 +26,7 @@ class LogorreaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+        backgroundColor: const Color(0xfff5f6fa),
         body: SingleChildScrollView(
           child: Column(
             children: [

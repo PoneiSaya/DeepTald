@@ -95,13 +95,13 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
                                 String idPaziente = await medicoController
                                     .getIdPaziente(testoInserito);
 
-                                if(idPaziente != "") {
-                                //associa paziente a medico
-                                medicoController.associaPaziente(
-                                    idMedico, idPaziente);
-                                // ignore: use_build_context_synchronously
+                                if (idPaziente != "") {
+                                  //associa paziente a medico
+                                  medicoController.associaPaziente(
+                                      idMedico, idPaziente);
+                                  // ignore: use_build_context_synchronously
                                 }
-                                
+
                                 Navigator.of(context).pop();
                               },
                             ),
@@ -114,7 +114,7 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
                         borderRadius: BorderRadius.circular(14.0)),
                     backgroundColor: Colors.black),
                 child: const Text(
-                  'Aggiungi Paziente tramite email',
+                  'Aggiungi Paziente',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
@@ -145,9 +145,10 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
                   })),
           const Spacer(), //non e una soluzione ma e tardi
           Container(
+            margin: EdgeInsets.only(left: 20.0, right: 20.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14.0),
-              color: const Color.fromARGB(166, 203, 207, 209),
+              color: Color.fromARGB(166, 222, 227, 229),
               border: Border.all(
                 color: Colors.black, // Colore del bordo (nero)
                 width: 1.0, // Larghezza del bordo in pixel
@@ -165,6 +166,9 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
                     ),
                     border: InputBorder.none),
                 onChanged: (value) => {setState(() {})}),
+          ),
+          const SizedBox(
+            height: 20,
           )
         ],
       ),

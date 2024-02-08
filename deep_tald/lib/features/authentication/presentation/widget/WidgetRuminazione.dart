@@ -24,6 +24,7 @@ class RuminazioneWidget extends StatelessWidget {
         '\nString Sentiment: ${ruminazioneEntity.resultStringSentiment}';
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 245, 246, 250),
       body: SingleChildScrollView(
           child: Center(
         child: Column(
@@ -34,7 +35,7 @@ class RuminazioneWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: const BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xFF599BFF),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
@@ -43,7 +44,7 @@ class RuminazioneWidget extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Rumnazione',
+                'Ruminazione',
                 style: GoogleFonts.rubik(
                     color: Colors.white,
                     decoration: TextDecoration.none,
@@ -60,7 +61,7 @@ class RuminazioneWidget extends StatelessWidget {
                   Text(
                     'Score: ',
                     style: GoogleFonts.rubik(
-                        color: const Color.fromARGB(255, 24, 24, 23),
+                        color: const Color.fromARGB(255, 0, 0, 0),
                         decoration: TextDecoration.none,
                         fontWeight: FontWeight.w400,
                         fontSize: 24),
@@ -69,7 +70,7 @@ class RuminazioneWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.blue,
+                      color: Color(0xFF599BFF),
                     ),
                     child: Text(
                       ruminazioneEntity.getScore.toString(),
@@ -85,7 +86,7 @@ class RuminazioneWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.blueGrey,
+                color: const Color.fromRGBO(191, 223, 225, 1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -93,7 +94,7 @@ class RuminazioneWidget extends StatelessWidget {
                   const Text(
                     'Topic',
                     style: TextStyle(
-                      color: Colors.white70,
+                      color: Colors.black,
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.w900,
                       fontSize: 20,
@@ -102,7 +103,7 @@ class RuminazioneWidget extends StatelessWidget {
                   Text(
                     topic,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
@@ -116,7 +117,7 @@ class RuminazioneWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.blueGrey,
+                color: const Color.fromRGBO(191, 223, 225, 1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -125,7 +126,7 @@ class RuminazioneWidget extends StatelessWidget {
                   const Text(
                     'Risultati',
                     style: TextStyle(
-                      color: Colors.white70,
+                      color: Colors.black,
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.w900,
                       fontSize: 20,
@@ -134,7 +135,7 @@ class RuminazioneWidget extends StatelessWidget {
                   Text(
                     result,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
@@ -143,9 +144,7 @@ class RuminazioneWidget extends StatelessWidget {
                 ],
               ),
             ),
-            //Text(topic),
-            //Text(result),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
@@ -159,7 +158,7 @@ class RuminazioneWidget extends StatelessWidget {
                   print("sassi");
                 }
               },
-              child: Text(
+              child: const Text(
                 'Genera PDF',
                 style: TextStyle(color: Colors.white),
               ),

@@ -128,9 +128,10 @@ class _GestioneUtentiPageState extends State<GestioneUtentiPage> {
                   })),
           const Spacer(), //non e una soluzione ma e tardi
           Container(
+            margin: EdgeInsets.only(left: 20.0, right: 20.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14.0),
-              color: const Color.fromARGB(166, 203, 207, 209),
+              color: Color.fromARGB(166, 222, 227, 229),
               border: Border.all(
                 color: Colors.black, // Colore del bordo (nero)
                 width: 1.0, // Larghezza del bordo in pixel
@@ -142,14 +143,15 @@ class _GestioneUtentiPageState extends State<GestioneUtentiPage> {
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: IconButton(
                         icon: const Icon(Icons.clear), onPressed: _clearText),
-                    labelText: visualizzaMedici
-                        ? "Cerca Medico con Codice Fiscale"
-                        : "Cerca Paziente con Codice Fiscale",
+                    labelText: "Cerca Paziente con Codice Fiscale",
                     labelStyle: const TextStyle(
                       color: Colors.black,
                     ),
                     border: InputBorder.none),
                 onChanged: (value) => {setState(() {})}),
+          ),
+          const SizedBox(
+            height: 20,
           )
         ],
       ),
