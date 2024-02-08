@@ -25,6 +25,7 @@ class _PazienteScreenState extends State<PazienteScreen> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+          backgroundColor: const Color.fromARGB(255, 245, 246, 250),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
