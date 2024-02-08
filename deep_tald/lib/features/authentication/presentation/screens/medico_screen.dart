@@ -45,14 +45,14 @@ class _MedicoScreenState extends State<MedicoScreen> {
             Expanded(
               child: ListView(
                 children: [
-                  /*CardDeepTald(
+                  CardDeepTald(
                     'assets/images/mindfullness.png',
                     'Usa IA!',
                     'Inizia',
                     () {
-                      Get.toNamed(Routes.getMedicoIa());
+                      Get.toNamed(Routes.getSelezionaPazientiIAPage());
                     },
-                  ),*/
+                  ),
                   CardDeepTald(
                     'assets/images/grafico.png',
                     'Monitora i pazienti!',
