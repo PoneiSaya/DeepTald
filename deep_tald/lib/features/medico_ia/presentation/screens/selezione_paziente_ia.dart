@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class GestionePazientiPage extends StatefulWidget {
-  const GestionePazientiPage({super.key});
+class SelezionaPazientiIAPage extends StatefulWidget {
+  const SelezionaPazientiIAPage({super.key});
 
   @override
-  State<GestionePazientiPage> createState() => _GestionePazientiPageState();
+  State<SelezionaPazientiIAPage> createState() => _GestionePazientiPageState();
 }
 
-class _GestionePazientiPageState extends State<GestionePazientiPage> {
+class _GestionePazientiPageState extends State<SelezionaPazientiIAPage> {
   String testoInserito = "";
   AuthController authController = Get.find();
   AdminController adminController = Get.put(AdminController());
@@ -35,7 +35,7 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
                 EdgeInsets.only(
                     left: 30, top: MediaQuery.of(context).size.height / 9),
             child: Text(
-              'Gestione Pazienti',
+              'Seleziona Paziente Da Analizzare',
               style: GoogleFonts.rubik(
                   color: const Color.fromARGB(255, 24, 24, 23),
                   decoration: TextDecoration.none,
@@ -46,83 +46,7 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
 
           SizedBox(height: MediaQuery.of(context).size.height / 25),
           //bottone
-          Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height / 15,
-              child: ElevatedButton(
-                onPressed: () {
-                  //apri una modale
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Aggiungi Paziente'),
-                          content: SingleChildScrollView(
-                            child: ListBody(
-                              children: <Widget>[
-                                const Text(
-                                    'Inserisci l\'email del paziente che vuoi aggiungere!'),
-                                //widget per inserire il testo
-                                TextField(
-                                  onChanged: (value) => {
-                                    testoInserito = value,
-                                  },
-                                  //variabile che contiene il testo inserito
-                                  //controller: emailController,
-
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'E-mail'),
-                                )
-                              ],
-                            ),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text('Annulla'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                            TextButton(
-                              child: const Text('Aggiungi'),
-                              onPressed: () async {
-                                String idMedico =
-                                    await medicoController.getIdMedico(
-                                        // ignore: invalid_use_of_protected_member
-                                        authController.utente!.getEmail);
-                                String idPaziente = await medicoController
-                                    .getIdPaziente(testoInserito);
-
-                                if(idPaziente != "") {
-                                //associa paziente a medico
-                                medicoController.associaPaziente(
-                                    idMedico, idPaziente);
-                                // ignore: use_build_context_synchronously
-                                }
-                                
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      });
-                },
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14.0)),
-                    backgroundColor: Colors.black),
-                child: const Text(
-                  'Aggiungi Paziente tramite email',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18),
-                ),
-              ),
-            ),
-          ),
+         
           SingleChildScrollView(
               child: FutureBuilder(
                   future: buildListPazienti(),
@@ -200,7 +124,7 @@ class _GestionePazientiPageState extends State<GestionePazientiPage> {
                       cognome: elencoPazienti[index].getCognome,
                       ruolo: elencoPazienti[index].getRuolo,
                       uid: elencoPazienti[index].getUid,
-                      analizza: false,
+                      analizza: true,
                     );
                   });
             } else {

@@ -104,34 +104,24 @@ class _GestioneUtentiPageState extends State<GestioneUtentiPage> {
                           cognome: result.getCognome,
                           ruolo: result.getRuolo,
                           uid: result.getUid,
+                          analizza: false,
                         );
                       } else {
                         return Column(children: [
                           UserCard(
-                              nome: "Michele",
-                              cognome: "Mattiello",
-                              ruolo: "ruolo",
-                              uid: "uid"),
+                            nome: "Michele",
+                            cognome: "Mattiello",
+                            ruolo: "ruolo",
+                            uid: "uid",
+                            analizza: false,
+                          ),
                           UserCard(
-                              nome: "Michele",
-                              cognome: "Mattiello",
-                              ruolo: "ruolo",
-                              uid: "uid"),
-                          UserCard(
-                              nome: "Michele",
-                              cognome: "Mattiello",
-                              ruolo: "ruolo",
-                              uid: "uid"),
-                          UserCard(
-                              nome: "Michele",
-                              cognome: "Mattiello",
-                              ruolo: "ruolo",
-                              uid: "uid"),
-                          UserCard(
-                              nome: "Michele",
-                              cognome: "Mattiello",
-                              ruolo: "ruolo",
-                              uid: "uid"),
+                            nome: "Michele",
+                            cognome: "Mattiello",
+                            ruolo: "ruolo",
+                            uid: "uid",
+                            analizza: false,
+                          )
                         ]);
                       }
                     }
@@ -159,11 +149,7 @@ class _GestioneUtentiPageState extends State<GestioneUtentiPage> {
                       color: Colors.black,
                     ),
                     border: InputBorder.none),
-                onChanged: (value) => {
-                      setState(() {
-                        ;
-                      })
-                    }),
+                onChanged: (value) => {setState(() {})}),
           )
         ],
       ),

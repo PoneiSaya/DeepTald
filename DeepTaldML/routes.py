@@ -658,6 +658,32 @@ def start_conversation():
     tts.save(f'./audio/{id}/domanda_0.mp3')
 
     return domanda
+@app.route("/usa_ia", methods=["POST"])
+def usa_ia():
+    print("prova")
+    id = request.form.get('id')
+    #ricevi audio come multipart
+    file = request.files['audio']
+    
+    #salva il file
+    #create folder
+    if not os.path.isdir(f"./audio/{id}") :
+        os.mkdir(f"./audio/{id}")
+        
+    file.save(f"./audio/{id}/risultato.mp3")
+
+    result = start_transcription_inner(f"./audio/{id}/risultato.mp3")
+
+    risultato_rallentato_json = pensiero_rallentato_inner()
+    risultato_logorrea_json = compute_logorrea_inner()
+    risultato_ruminazione_json = compute_ruminazione_inner()
+    risultato_perseveranza_json = compute_perseveranza_inner()
+    tutti_risultati = {"dataVisita": datetime.datetime.now(), "risultato_perseveranza": risultato_perseveranza_json, "risultato_ruminazione": risultato_ruminazione_json, "risultato_rallentato" : risultato_rallentato_json, "risultato_logorrea" : risultato_logorrea_json, "uid_paziente" : id}
+    # metti nel db nella tabella report il risultato di pensiero rallentato
+    report_ref.document().set(tutti_risultati)
+    # metti nel db nella tabella report il risultato di logorrea
+    
+    return jsonify(compute_logorrea_inner())
 
 
 @app.route("/terminate_conversation", methods=["POST"])
@@ -737,4 +763,4 @@ def terminate_conversation():
 
 
 if __name__ == "__main__":
-    app.run(host='192.168.1.3', port = 9099, debug=True)
+    app.run(host='172.19.185.66', port = 9099, debug=True)

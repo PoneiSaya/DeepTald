@@ -1,4 +1,6 @@
 import 'package:deep_tald/features/authentication/controllers/admin_controller.dart';
+import 'package:deep_tald/features/medico_ia/presentation/screens/usa_ia_page.dart';
+import 'package:deep_tald/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,13 +9,15 @@ class UserCard extends StatefulWidget {
   late String nome, cognome;
   late String ruolo;
   late String uid;
+  late bool analizza;
 
   UserCard(
       {super.key,
       required this.nome,
       required this.cognome,
       required this.ruolo,
-      required this.uid});
+      required this.uid,
+      required this.analizza});
 
   @override
   UserCardState createState() => UserCardState();
@@ -61,15 +65,29 @@ class UserCardState extends State<UserCard> {
                   ),
                 ),
                 const Spacer(),
-                IconButton(
-                  iconSize: 35,
-                  padding:
-                      const EdgeInsets.only(right: 10, top: 10, bottom: 10),
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    adminController.eliminaOggetto(widget.uid, widget.ruolo);
-                  },
-                ),
+                //se analizza e true allora mostro il bottone
+                if (widget.analizza)
+                  IconButton(
+                    iconSize: 35,
+                    padding:
+                        const EdgeInsets.only(right: 10, top: 10, bottom: 10),
+                    icon: const Icon(Icons.analytics),
+                    onPressed: () {
+                      //passagli  l'uid e il nome
+                      Get.toNamed(Routes.getMedicoIa(),
+                          arguments: [widget.uid, widget.nome]);
+                    },
+                  )
+                else
+                  IconButton(
+                    iconSize: 35,
+                    padding:
+                        const EdgeInsets.only(right: 10, top: 10, bottom: 10),
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      adminController.eliminaOggetto(widget.uid, widget.ruolo);
+                    },
+                  ),
               ],
             ),
           ],
