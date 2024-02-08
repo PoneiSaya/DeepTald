@@ -67,7 +67,7 @@ class Routes {
     GetPage(page: () => const UsaIaScreen(), name: medicoIa),
     GetPage(page: () => const GestionePazientiPage(), name: gestionePazienti),
     GetPage(page: () => const MonitoraPazientiPage(), name: monitoraPazienti),
-    GetPage(page: () => const ReportPage(), name: report),
+    GetPage(page: () => ReportPage(), name: report),
     GetPage(page: () => const SelezionaPazientiIAPage(), name: selezionaPazientiIAPage),
     //ad ogni pagina corrisponde un GetPage
   ];
