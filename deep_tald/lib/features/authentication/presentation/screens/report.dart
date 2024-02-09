@@ -133,6 +133,22 @@ class _Report extends State<ReportPage> {
                           },
                           key: null,
                           children: _data.map<ExpansionPanel>((Item item) {
+                            var scoreLogorrea =
+                                item.report.logorreaObj.getScore < 0
+                                    ? 0
+                                    : item.report.logorreaObj.getScore;
+                            var scorePerseveranza =
+                                item.report.perseveranceObj.getScore < 0
+                                    ? 0
+                                    : item.report.perseveranceObj.getScore;
+                            var scoreRuminazione =
+                                item.report.ruminazioneObj.getScore < 0
+                                    ? 0
+                                    : item.report.ruminazioneObj.getScore;
+                            var scorePensieroRallentato =
+                                item.report.slowedThinkingObj.getScore < 0
+                                    ? 0
+                                    : item.report.slowedThinkingObj.getScore;
                             return ExpansionPanel(
                                 headerBuilder:
                                     (BuildContext context, bool isExpanded) {
@@ -160,7 +176,6 @@ class _Report extends State<ReportPage> {
                                         ],
                                       ),
                                     ),
-
                                     tileColor: Colors
                                         .transparent, // Per evitare il colore di sfondo predefinito
                                     shape: RoundedRectangleBorder(
@@ -171,23 +186,21 @@ class _Report extends State<ReportPage> {
                                 body: Column(children: [
                                   CustomCardListTile(
                                     "Perseveranza",
-                                    item.report.perseveranceObj.getScore,
+                                    scorePerseveranza,
                                     WidgetPerseveranza(
                                         item.report.perseveranceObj),
                                   ),
                                   CustomCardListTile(
                                       "Ruminazione",
-                                      item.report.ruminazioneObj.getScore,
+                                      scoreRuminazione,
                                       RuminazioneWidget(
                                           item.report.ruminazioneObj)),
                                   CustomCardListTile(
                                       "Pensiero\nRallentato",
-                                      item.report.slowedThinkingObj.getScore,
+                                      scorePensieroRallentato,
                                       PensieroRallentatoWidget(
                                           item.report.slowedThinkingObj)),
-                                  CustomCardListTile(
-                                      "Logorrea",
-                                      item.report.logorreaObj.getScore,
+                                  CustomCardListTile("Logorrea", scoreLogorrea,
                                       LogorreaWidget(item.report.logorreaObj)),
                                 ]),
                                 isExpanded: !item.isExpanded);
