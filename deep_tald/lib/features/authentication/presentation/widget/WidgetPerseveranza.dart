@@ -17,6 +17,9 @@ class WidgetPerseveranza extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String perseveranzaScore = perseveranzaEntity.getScore < 0
+        ? "0"
+        : perseveranzaEntity.getScore.toString();
     return Scaffold(
       backgroundColor: const Color(0xfff5f6fa),
       body: SingleChildScrollView(
@@ -67,7 +70,7 @@ class WidgetPerseveranza extends StatelessWidget {
                       color: Colors.blue,
                     ),
                     child: Text(
-                      perseveranzaEntity.getScore.toString(),
+                      perseveranzaScore,
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

@@ -37,7 +37,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
 
   void iniziaConversazione() async {
     //fare la richiesta
-    var urlChatbot = Uri.parse("http://172.19.192.40:9099/start_conversation");
+    var urlChatbot = Uri.parse("http://192.168.183.1:9099/start_conversation");
     var request = http.MultipartRequest('POST', urlChatbot);
 
     Map<String, String> data = {
@@ -84,13 +84,15 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       ),
     );
     //Qui si richiama LLAMA per ottenere la risposta
+    print("oooooooooooooooo");
     creaMessaggio(message);
+    print("messaggio creato");
   }
 
   /// Qui si deve richiamare LLAMA per generare una domanda
   void creaMessaggio(String path) async {
     //fare la richiesta
-    var urlChatbot = Uri.parse("http://172.19.192.40:9099/make_message");
+    var urlChatbot = Uri.parse("http://192.168.183.1:9099/make_message");
     var request = http.MultipartRequest('POST', urlChatbot);
     String testoLLAMA = "";
 
@@ -124,7 +126,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       });
 
       var urlTermina =
-          Uri.parse("http://172.19.192.40:9099/terminate_conversation");
+          Uri.parse("http://192.168.183.1:9099/terminate_conversation");
       var request = http.MultipartRequest('POST', urlTermina);
 
       Map<String, String> data = {
@@ -134,6 +136,9 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
 
       try {
         request.fields.addAll(data);
+        Navigator.of(context, rootNavigator: true).pop();
+        Get.snackbar("Conversazione terminata",
+            "La conversazione è stata inviata al tuo medico!");
         var response = await request.send();
 
         if (response.statusCode == 200) {
@@ -160,95 +165,85 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   }
 
   Widget build(BuildContext context) {
-    return isLoading == true
-        ? Scaffold(
-            backgroundColor: Colors.red,
-            body: Container(child: const Text("Sto caricando")),
-          )
-        : Scaffold(
-            body: ChatView(
-                featureActiveConfig: const FeatureActiveConfig(
-                    enableReactionPopup: false,
-                    enableSwipeToReply: false,
-                    enableSwipeToSeeTime: false,
-                    enableOtherUserProfileAvatar: false,
-                    enableReplySnackBar: false,
-                    enableDoubleTapToLike: false,
-                    enableTextField: true),
-                currentUser: this.utente,
-                chatController: chatController,
-                onSendTap: onSendTap,
-                chatViewState: ChatViewState.hasMessages,
-                sendMessageConfig: const SendMessageConfiguration(
-                  //replyMessageColor: Colors.black,
-                  allowRecordingVoice: true,
-                  enableCameraImagePicker: false,
-                  replyMessageColor: Colors.black,
-                  enableGalleryImagePicker: false,
-                  defaultSendButtonColor: Colors.black,
-                  replyDialogColor: Colors.black,
-                  replyTitleColor: Color.fromARGB(255, 223, 55, 55),
-                  textFieldBackgroundColor: Color.fromARGB(255, 245, 246, 250),
+    return Scaffold(
+        body: ChatView(
+            featureActiveConfig: const FeatureActiveConfig(
+                enableReactionPopup: false,
+                enableSwipeToReply: false,
+                enableSwipeToSeeTime: false,
+                enableOtherUserProfileAvatar: false,
+                enableReplySnackBar: false,
+                enableDoubleTapToLike: false,
+                enableTextField: true),
+            currentUser: this.utente,
+            chatController: chatController,
+            onSendTap: onSendTap,
+            chatViewState: ChatViewState.hasMessages,
+            sendMessageConfig: const SendMessageConfiguration(
+              //replyMessageColor: Colors.black,
+              allowRecordingVoice: true,
+              enableCameraImagePicker: false,
+              replyMessageColor: Colors.black,
+              enableGalleryImagePicker: false,
+              defaultSendButtonColor: Colors.black,
+              replyDialogColor: Colors.black,
+              replyTitleColor: Color.fromARGB(255, 223, 55, 55),
+              textFieldBackgroundColor: Color.fromARGB(255, 245, 246, 250),
 
-                  closeIconColor: Colors.black,
-                  textFieldConfig: TextFieldConfiguration(
-                    textInputType: TextInputType.text,
-                    hintText: "",
+              closeIconColor: Colors.black,
+              textFieldConfig: TextFieldConfiguration(
+                textInputType: TextInputType.text,
+                hintText: "",
 
-                    // compositionThresholdTime: Duration(seconds: 1),
-                    textStyle:
-                        TextStyle(color: Color.fromARGB(255, 203, 203, 203)),
-                  ),
-                  micIconColor: Colors.black,
+                // compositionThresholdTime: Duration(seconds: 1),
+                textStyle: TextStyle(color: Color.fromARGB(255, 203, 203, 203)),
+              ),
+              micIconColor: Colors.black,
 
-                  voiceRecordingConfiguration: VoiceRecordingConfiguration(
-                    backgroundColor: Colors.orange,
-                    recorderIconColor: Colors.black,
-                    waveStyle: WaveStyle(
-                      showMiddleLine: false,
-                      waveColor: Colors.white,
-                      extendWaveform: true,
-                    ),
+              voiceRecordingConfiguration: VoiceRecordingConfiguration(
+                backgroundColor: Colors.orange,
+                recorderIconColor: Colors.black,
+                waveStyle: WaveStyle(
+                  showMiddleLine: false,
+                  waveColor: Colors.white,
+                  extendWaveform: true,
+                ),
+              ),
+            ),
+            messageConfig: MessageConfiguration(
+              messageReactionConfig: MessageReactionConfiguration(
+                backgroundColor: const Color.fromARGB(255, 245, 246, 250),
+                //borderColor: theme.messageReactionBackGroundColor,
+                reactedUserCountTextStyle: const TextStyle(color: Colors.black),
+                reactionCountTextStyle: const TextStyle(color: Colors.black),
+                reactionsBottomSheetConfig: ReactionsBottomSheetConfiguration(
+                  //backgroundColor: theme.backgroundColor,
+                  reactedUserTextStyle: const TextStyle(color: Colors.amber),
+                  reactionWidgetDecoration: BoxDecoration(
+                    color: Colors.black,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0, 20),
+                        blurRadius: 40,
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                messageConfig: MessageConfiguration(
-                  messageReactionConfig: MessageReactionConfiguration(
-                    backgroundColor: const Color.fromARGB(255, 245, 246, 250),
-                    //borderColor: theme.messageReactionBackGroundColor,
-                    reactedUserCountTextStyle:
-                        const TextStyle(color: Colors.black),
-                    reactionCountTextStyle:
-                        const TextStyle(color: Colors.black),
-                    reactionsBottomSheetConfig:
-                        ReactionsBottomSheetConfiguration(
-                      //backgroundColor: theme.backgroundColor,
-                      reactedUserTextStyle:
-                          const TextStyle(color: Colors.amber),
-                      reactionWidgetDecoration: BoxDecoration(
-                        color: Colors.black,
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            offset: Offset(0, 20),
-                            blurRadius: 40,
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                  imageMessageConfig: ImageMessageConfiguration(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 15),
-                    shareIconConfig: ShareIconConfiguration(
-                      defaultIconBackgroundColor: Colors.orange,
-                      defaultIconColor: Colors.orange,
-                    ),
-                  ),
+              ),
+              imageMessageConfig: ImageMessageConfiguration(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                shareIconConfig: ShareIconConfiguration(
+                  defaultIconBackgroundColor: Colors.orange,
+                  defaultIconColor: Colors.orange,
                 ),
-                chatBubbleConfig: const ChatBubbleConfiguration(
-                  inComingChatBubbleConfig: ChatBubble(color: Colors.blue),
-                  outgoingChatBubbleConfig: ChatBubble(color: Colors.blue),
-                )));
+              ),
+            ),
+            chatBubbleConfig: const ChatBubbleConfiguration(
+              inComingChatBubbleConfig: ChatBubble(color: Colors.blue),
+              outgoingChatBubbleConfig: ChatBubble(color: Colors.blue),
+            )));
   }
 }

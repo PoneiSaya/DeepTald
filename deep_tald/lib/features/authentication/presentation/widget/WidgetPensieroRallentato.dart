@@ -22,6 +22,9 @@ class PensieroRallentatoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String pensieroRallentatoScore = pensieroRallentatoEntity.getScore < 0
+        ? "0"
+        : pensieroRallentatoEntity.getScore.toString();
     return Scaffold(
         backgroundColor: const Color(0xfff5f6fa),
         body: SingleChildScrollView(
@@ -73,7 +76,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
                             color: Color(0xFF599BFF),
                           ),
                           child: Text(
-                            pensieroRallentatoEntity.getScore.toString(),
+                            pensieroRallentatoScore,
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

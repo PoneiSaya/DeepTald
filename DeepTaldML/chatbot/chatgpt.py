@@ -32,7 +32,7 @@ def creaDomanda():
     
     data = {
         "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": "Scrivi qualcosa per iniziare una conversazione, come una domanda."}],
+        "messages": [{"role": "user", "content": "Scrivi qualcosa per iniziare una conversazione, come una domanda, può essere su qualsiasi cosa."}],
         "temperature": 0.7
     }
     
