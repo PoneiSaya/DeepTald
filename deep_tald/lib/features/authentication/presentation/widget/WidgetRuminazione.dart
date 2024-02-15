@@ -16,7 +16,7 @@ class RuminazioneWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String score = 'Score Finale: ${ruminazioneEntity.getScore}';
+    String score = '${ruminazioneEntity.getScore < 0 ? 0 : ruminazioneEntity.getScore}';
     String counter =
         'Numero di domande chieste dal bot: ${ruminazioneEntity.counter}';
     String topic = '${ruminazioneEntity.resultStringTopic}';
@@ -73,7 +73,7 @@ class RuminazioneWidget extends StatelessWidget {
                       color: Color(0xFF599BFF),
                     ),
                     child: Text(
-                      ruminazioneEntity.getScore.toString(),
+                      score,
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

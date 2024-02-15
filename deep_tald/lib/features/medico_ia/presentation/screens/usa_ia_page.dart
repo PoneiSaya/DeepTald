@@ -211,7 +211,7 @@ class _UsaIaScreenState extends State<UsaIaScreen> {
                         onPressed: () async {
                           //manda richiesta http con l'audio e l'uid del paziente al server
                           var url =
-                              Uri.parse("http://192.168.183.1:9099/usa_ia");
+                              Uri.parse("http://172.19.148.166:9099/usa_ia");
                           var request = http.MultipartRequest('POST', url);
 
                           var file =

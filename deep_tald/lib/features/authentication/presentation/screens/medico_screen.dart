@@ -48,7 +48,7 @@ class _MedicoScreenState extends State<MedicoScreen> {
                 children: [
                   CardDeepTald(
                     'assets/images/mindfullness.png',
-                    'Usa IA!',
+                    'Intervista!',
                     'Inizia',
                     () {
                       Get.toNamed(Routes.getSelezionaPazientiIAPage());

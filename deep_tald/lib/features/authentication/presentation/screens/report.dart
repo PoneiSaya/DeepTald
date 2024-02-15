@@ -72,11 +72,11 @@ class _Report extends State<ReportPage> {
                     children: [
                       const CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(
-                            Color.fromARGB(255, 24, 24, 23)),
+                            Color.fromARGB(255, 255, 255, 255)),
                       ),
                       Text("Caricamento Reports...",
                           style: GoogleFonts.rubik(
-                              color: const Color.fromARGB(255, 24, 24, 23),
+                              color: Color.fromARGB(255, 255, 255, 255),
                               decoration: TextDecoration.none,
                               fontWeight: FontWeight.w600,
                               fontSize: 24)),

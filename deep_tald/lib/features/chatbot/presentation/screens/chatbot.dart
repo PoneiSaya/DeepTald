@@ -15,7 +15,7 @@ List<Message> messagesList = List.empty(growable: true);
 
 class _ChatbotScreenState extends State<ChatbotScreen> {
   int counter = 1;
-  bool isLoading = false;
+  late bool isLoading;
 
   AuthController authController = Get.find();
   final ChatUser utente = ChatUser(id: '1', name: "Utente");
@@ -37,7 +37,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
 
   void iniziaConversazione() async {
     //fare la richiesta
-    var urlChatbot = Uri.parse("http://192.168.183.1:9099/start_conversation");
+    var urlChatbot = Uri.parse("http://172.19.148.166:9099/start_conversation");
     var request = http.MultipartRequest('POST', urlChatbot);
 
     Map<String, String> data = {
@@ -92,7 +92,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   /// Qui si deve richiamare LLAMA per generare una domanda
   void creaMessaggio(String path) async {
     //fare la richiesta
-    var urlChatbot = Uri.parse("http://192.168.183.1:9099/make_message");
+    var urlChatbot = Uri.parse("http://172.19.148.166:9099/make_message");
     var request = http.MultipartRequest('POST', urlChatbot);
     String testoLLAMA = "";
 
@@ -100,7 +100,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     request.files.add(file);
 
     Map<String, String> data = {
-      'id': authController.utente!.getId,
+      'id': authController.auth.currentUser!.uid,
       'counter': counter.toString(),
     };
 
@@ -122,15 +122,15 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     counter++;
     if (counter == 4) {
       setState(() {
-        isLoading = true;
+        //isLoading = true;
       });
 
       var urlTermina =
-          Uri.parse("http://192.168.183.1:9099/terminate_conversation");
+          Uri.parse("http://172.19.148.166:9099/terminate_conversation");
       var request = http.MultipartRequest('POST', urlTermina);
 
       Map<String, String> data = {
-        'id': authController.utente!.getId,
+        'id': authController.auth.currentUser!.uid,
         'counter': counter.toString(),
       };
 
@@ -144,7 +144,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
         if (response.statusCode == 200) {
           testoLLAMA = await response.stream.bytesToString();
           setState(() {
-            isLoading = false;
+            //isLoading = false;
           });
           chatController.initialMessageList.clear();
           chatController.addMessage(Message(

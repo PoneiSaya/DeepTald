@@ -48,14 +48,8 @@ class _PazienteScreenState extends State<PazienteScreen> {
                   () {
                 Get.toNamed(Routes.chatbot);
               }),
-              CardDeepTald(
-                'assets/images/gestire.png',
-                'Andamento!',
-                'Controlla',
-                () {
-                  // ...
-                },
-              ),
+              
+              
             ],
           ),
         ));

@@ -92,16 +92,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
                   child: PieChart(
                     PieChartData(
                       sections: [
-                        PieChartSectionData(
-                          color: const Color(0xFF599BFF),
-                          value: (pensieroRallentatoEntity.questionCount as int)
-                              .toDouble(),
-                          titleStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                          radius: 150,
-                        ),
+                        
                         PieChartSectionData(
                           color: const Color.fromARGB(255, 53, 139, 145),
                           value: (pensieroRallentatoEntity.nWordsDoctor as int)
@@ -130,11 +121,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Indicator(
-                    color: Color(0xFF599BFF),
-                    text: 'Question count',
-                    isSquare: false,
-                  ),
+                 
                   Indicator(
                     color: Color.fromRGBO(191, 223, 225, 1),
                     text: 'Parole Dottore',
@@ -150,7 +137,7 @@ class PensieroRallentatoWidget extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height / 25),
               Container(
                 height: MediaQuery.of(context).size.height / 3.3,
-                width: MediaQuery.of(context).size.width / 1.25,
+                width: MediaQuery.of(context).size.width / 1.00,
                 decoration: const BoxDecoration(
                   color: Color.fromRGBO(191, 223, 225, 1),
                   borderRadius: BorderRadius.only(
